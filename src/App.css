@@ -1,0 +1,79 @@
+/* Global App Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  line-height: 1.6;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+/* Fonts are loaded from local FONTS folder */
+
+/* Clash Display font - fallback to system fonts if not available */
+@font-face {
+  font-family: 'Clash Display';
+  src: local('Clash Display'), local('ClashDisplay');
+  font-display: swap;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A286B9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4C2E76;
+}
+
+/* Ant Design customizations */
+.ant-btn {
+  transition: all 0.3s ease;
+}
+
+.ant-btn:hover {
+  transform: translateY(-2px);
+}
+
+.ant-form-item-label > label {
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+.ant-input,
+.ant-input-affix-wrapper {
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+/* Focus states */
+.ant-input:focus,
+.ant-input-focused {
+  box-shadow: 0 0 0 2px rgba(162, 134, 185, 0.2);
+}
+
+/* Message positioning */
+.ant-message {
+  z-index: 9999;
+}
