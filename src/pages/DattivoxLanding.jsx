@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message, Space } from 'antd';
-import { PhoneOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import { Form, Input, Button, message, Space, Select } from 'antd';
+import { PhoneOutlined, ArrowRightOutlined, CalendarOutlined, QuestionCircleOutlined, ClockCircleOutlined, GlobalOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
 import OctoplanDemo from '../../Demo/OctoplanDemo';
+import { useTranslation } from '../hooks/useTranslation';
 import './DattivoxLanding.css';
 
 const { TextArea } = Input;
 
 // Configuration constants
-const TEST_PHONE_NUMBER = import.meta.env.VITE_TEST_PHONE || '+32 2 123 45 67';
+const TEST_PHONE_NUMBER = import.meta.env.VITE_TEST_PHONE || '+32 2 620 61 49';
 const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'hello@dattico.com';
 
 const DattivoxLanding = () => {
   const [form] = Form.useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t, language, setLanguage } = useTranslation();
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -38,21 +40,59 @@ const DattivoxLanding = () => {
       });
 
       if (response.ok) {
-        message.success('Message sent successfully! We\'ll get back to you soon.');
+        message.success(t('contact.successMessage'));
         form.resetFields();
       } else {
         throw new Error('Failed to send message');
       }
     } catch (error) {
       console.error('Contact form error:', error);
-      message.error('Failed to send message. Please try again.');
+      message.error(t('contact.errorMessage'));
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const features = [
+    {
+      title: t('features.feature1.title'),
+      description: t('features.feature1.description')
+    },
+    {
+      title: t('features.feature2.title'),
+      description: t('features.feature2.description')
+    },
+    {
+      title: t('features.feature3.title'),
+      description: t('features.feature3.description')
+    },
+    {
+      title: t('features.feature4.title'),
+      description: t('features.feature4.description')
+    },
+    {
+      title: t('features.feature5.title'),
+      description: t('features.feature5.description')
+    },
+    {
+      title: t('features.feature6.title'),
+      description: t('features.feature6.description')
+    }
+  ];
+
   return (
     <div className="dattivox-landing">
+      <div className="language-selector">
+        <Select
+          value={language}
+          onChange={setLanguage}
+          suffixIcon={<GlobalOutlined />}
+          options={[
+            { value: 'en', label: 'EN' },
+            { value: 'fr', label: 'FR' }
+          ]}
+        />
+      </div>
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-background">
@@ -105,7 +145,7 @@ const DattivoxLanding = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Dattivox — Your 24/7 Virtual Secretary for Calls
+              {t('hero.title')}
             </motion.h1>
             
             <motion.p 
@@ -114,20 +154,42 @@ const DattivoxLanding = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Dattivox handles phone calls day and night.
-              It answers, understands the caller's request, and executes workflows —
-              everything a real secretary would do, 24/7 and without delays.
+              {t('hero.subtitle')}
             </motion.p>
 
-            <motion.a 
-              href={`tel:${TEST_PHONE_NUMBER}`}
-              className="test-number"
+            <motion.div 
+              className="test-showcase"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <PhoneOutlined /> Test number: {TEST_PHONE_NUMBER}
-            </motion.a>
+              <div className="showcase-header">
+                <span className="showcase-badge">{t('hero.liveDemo')}</span>
+                <h3>{t('hero.trySecretary')}</h3>
+              </div>
+              <div className="showcase-description">
+                {t('hero.showcaseDescription')}
+              </div>
+              <a href={`tel:${TEST_PHONE_NUMBER}`} className="test-number">
+                <PhoneOutlined /> {TEST_PHONE_NUMBER}
+                <br />
+                <span className="call-action">{t('hero.tapToCall')}</span>
+              </a>
+              <div className="showcase-features">
+                <div className="feature-item">
+                  <CalendarOutlined className="feature-icon" />
+                  <span>{t('showcase.bookAppointments')}</span>
+                </div>
+                <div className="feature-item">
+                  <QuestionCircleOutlined className="feature-icon" />
+                  <span>{t('showcase.askQuestions')}</span>
+                </div>
+                <div className="feature-item">
+                  <ClockCircleOutlined className="feature-icon" />
+                  <span>{t('showcase.available247')}</span>
+                </div>
+              </div>
+            </motion.div>
 
             <motion.div 
               className="hero-buttons"
@@ -135,20 +197,20 @@ const DattivoxLanding = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <Button 
+              {/* <Button 
                 type="primary" 
                 size="large"
                 className="cta-primary"
                 onClick={() => scrollToSection('demo-section')}
               >
                 Try the Voice Demo <ArrowRightOutlined />
-              </Button>
+              </Button> */}
               <Button 
                 size="large"
                 className="cta-secondary"
                 onClick={() => scrollToSection('contact-section')}
               >
-                Contact Us
+                {t('hero.contactUs')}
               </Button>
             </motion.div>
           </motion.div>
@@ -156,11 +218,11 @@ const DattivoxLanding = () => {
       </section>
 
       {/* Demo Section */}
-      <section id="demo-section" className="demo-section">
+      {/* <section id="demo-section" className="demo-section">
         <div className="section-container">
           <OctoplanDemo />
         </div>
-      </section>
+      </section> */}
 
       {/* Features Section */}
       <section className="features-section">
@@ -172,36 +234,11 @@ const DattivoxLanding = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2>Your 24/7 Virtual Secretary</h2>
+            <h2>{t('features.title')}</h2>
           </motion.div>
 
           <div className="features-grid">
-            {[
-              {
-                title: "A 24/7 virtual secretary for phone calls",
-                description: "Never miss a call again with round-the-clock availability"
-              },
-              {
-                title: "Handles calls instantly, with no waiting time",
-                description: "Immediate response to every caller, ensuring professional service"
-              },
-              {
-                title: "Understands requests and completes tasks",
-                description: "Intelligent processing of caller needs and automated task execution"
-              },
-              {
-                title: "Books appointments and routes information",
-                description: "Seamless scheduling and information management for your business"
-              },
-              {
-                title: "Connects with your existing systems",
-                description: "Easy integration with your current business tools and workflows"
-              },
-              {
-                title: "Works in multiple languages for European markets",
-                description: "Multilingual support to serve your diverse customer base"
-              }
-            ].map((feature, index) => (
+            {features.map((feature, index) => (
               <motion.div
                 key={index}
                 className="feature-card"
@@ -229,9 +266,9 @@ const DattivoxLanding = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2>Get Your 24/7 Virtual Secretary</h2>
+            <h2>{t('contact.title')}</h2>
             <p>
-              Want a 24/7 virtual secretary for your business? Tell us about your use case and we'll reach out with next steps.
+              {t('contact.subtitle')}
             </p>
           </motion.div>
 
@@ -250,45 +287,45 @@ const DattivoxLanding = () => {
             >
               <Form.Item
                 name="name"
-                label="Name"
-                rules={[{ required: true, message: 'Please enter your name' }]}
+                label={t('contact.name')}
+                rules={[{ required: true, message: t('contact.nameRequired') }]}
               >
-                <Input size="large" placeholder="Your name" />
+                <Input size="large" placeholder={t('contact.namePlaceholder')} />
               </Form.Item>
 
               <Form.Item
                 name="email"
-                label="Email"
+                label={t('contact.email')}
                 rules={[
-                  { required: true, message: 'Please enter your email' },
-                  { type: 'email', message: 'Please enter a valid email' }
+                  { required: true, message: t('contact.emailRequired') },
+                  { type: 'email', message: t('contact.emailInvalid') }
                 ]}
               >
-                <Input size="large" placeholder="your@email.com" />
+                <Input size="large" placeholder={t('contact.emailPlaceholder')} />
               </Form.Item>
 
               <Form.Item
                 name="company"
-                label="Company"
+                label={t('contact.company')}
               >
-                <Input size="large" placeholder="Your company (optional)" />
+                <Input size="large" placeholder={t('contact.companyPlaceholder')} />
               </Form.Item>
 
               <Form.Item
                 name="phone"
-                label="Phone"
+                label={t('contact.phone')}
               >
-                <Input size="large" placeholder="Your phone number (optional)" />
+                <Input size="large" placeholder={t('contact.phonePlaceholder')} />
               </Form.Item>
 
               <Form.Item
                 name="message"
-                label="Message"
-                rules={[{ required: true, message: 'Please enter your message' }]}
+                label={t('contact.message')}
+                rules={[{ required: true, message: t('contact.messageRequired') }]}
               >
                 <TextArea 
                   rows={4} 
-                  placeholder="Tell us about your use case and how a 24/7 virtual secretary could help your business"
+                  placeholder={t('contact.messagePlaceholder')}
                 />
               </Form.Item>
 
@@ -301,7 +338,7 @@ const DattivoxLanding = () => {
                   className="submit-button"
                   block
                 >
-                  Send message
+                  {t('contact.sendMessage')}
                 </Button>
               </Form.Item>
             </Form>
@@ -314,21 +351,21 @@ const DattivoxLanding = () => {
         <div className="footer-content">
           <div className="footer-links">
             <a href="/terms" target="_blank" rel="noopener noreferrer">
-              Terms of Use
+              {t('footer.terms')}
             </a>
             <a href="/privacy" target="_blank" rel="noopener noreferrer">
-              Privacy Policy
+              {t('footer.privacy')}
             </a>
           </div>
           <p className="footer-copyright">
-            © 2024 Dattivox. All rights reserved.
+            {t('footer.copyright')}
           </p>
           <div className="footer-company">
             <div className="footer-logo">
               <img src="/Dattivox - logo.svg" alt="Dattivox" className="footer-logo-img" />
             </div>
             <div className="company-info">
-              <span>Made by Dattico</span>
+              <span>{t('footer.madeBy')}</span>
               <p>Rue des Pères Blancs 4, 1040 Bruxelles</p>
               <p>+32 2 882 17 45</p>
             </div>

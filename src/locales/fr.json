@@ -1,0 +1,70 @@
+{
+  "hero": {
+    "title": "Votre Secrétaire Virtuelle 24h/24 pour les Appels",
+    "subtitle": "Dattivox gère les appels téléphoniques jour et nuit. Il répond, comprend la demande de l'appelant et exécute les workflows — tout ce qu'une vraie secrétaire ferait, 24h/24 et sans délais.",
+    "liveDemo": "Démo en Direct",
+    "trySecretary": "Essayez Notre Secrétaire Virtuelle",
+    "showcaseDescription": "Appelez maintenant pour réserver un rendez-vous de rénovation de passeport ou poser des questions sur nos services",
+    "tapToCall": "Appuyez pour appeler",
+    "contactUs": "Nous Contacter"
+  },
+  "showcase": {
+    "bookAppointments": "Réserver des rendez-vous",
+    "askQuestions": "Poser des questions",
+    "available247": "Disponible 24h/24"
+  },
+  "features": {
+    "title": "Votre Secrétaire Virtuelle 24h/24",
+    "feature1": {
+      "title": "Une secrétaire virtuelle 24h/24 pour les appels téléphoniques",
+      "description": "Ne ratez plus jamais un appel grâce à une disponibilité 24h/24"
+    },
+    "feature2": {
+      "title": "Gère les appels instantanément, sans temps d'attente",
+      "description": "Réponse immédiate à chaque appelant, garantissant un service professionnel"
+    },
+    "feature3": {
+      "title": "Comprend les demandes et accomplit les tâches",
+      "description": "Traitement intelligent des besoins des appelants et exécution automatisée des tâches"
+    },
+    "feature4": {
+      "title": "Réserve des rendez-vous et achemine les informations",
+      "description": "Planification transparente et gestion des informations pour votre entreprise"
+    },
+    "feature5": {
+      "title": "Se connecte à vos systèmes existants",
+      "description": "Intégration facile avec vos outils et workflows d'entreprise actuels"
+    },
+    "feature6": {
+      "title": "Fonctionne en plusieurs langues pour les marchés européens",
+      "description": "Support multilingue pour servir votre clientèle diversifiée"
+    }
+  },
+  "contact": {
+    "title": "Obtenez Votre Secrétaire Virtuelle 24h/24",
+    "subtitle": "Vous voulez une secrétaire virtuelle 24h/24 pour votre entreprise ? Parlez-nous de votre cas d'usage et nous vous recontacterons avec les prochaines étapes.",
+    "name": "Nom",
+    "email": "Email",
+    "company": "Entreprise",
+    "phone": "Téléphone",
+    "message": "Message",
+    "namePlaceholder": "Votre nom",
+    "emailPlaceholder": "votre@email.com",
+    "companyPlaceholder": "Votre entreprise (optionnel)",
+    "phonePlaceholder": "Votre numéro de téléphone (optionnel)",
+    "messagePlaceholder": "Parlez-nous de votre cas d'usage et comment une secrétaire virtuelle 24h/24 pourrait aider votre entreprise",
+    "sendMessage": "Envoyer le message",
+    "nameRequired": "Veuillez entrer votre nom",
+    "emailRequired": "Veuillez entrer votre email",
+    "emailInvalid": "Veuillez entrer un email valide",
+    "messageRequired": "Veuillez entrer votre message",
+    "successMessage": "Message envoyé avec succès ! Nous vous recontacterons bientôt.",
+    "errorMessage": "Échec de l'envoi du message. Veuillez réessayer."
+  },
+  "footer": {
+    "terms": "Conditions d'Utilisation",
+    "privacy": "Politique de Confidentialité",
+    "copyright": "© 2024 Dattivox. Tous droits réservés.",
+    "madeBy": "Créé par Dattico"
+  }
+}

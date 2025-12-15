@@ -5,6 +5,27 @@
   font-family: 'Montserrat', system-ui, sans-serif;
 }
 
+.language-selector {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.language-selector .ant-select {
+  min-width: 80px;
+}
+
+.language-selector .ant-select-selector {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+.language-selector .ant-select-arrow {
+  color: white !important;
+}
+
 /* Hero Section */
 .hero-section {
   position: relative;
@@ -82,32 +103,117 @@
   line-height: 1.6;
 }
 
-.test-number {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(0.5rem);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1rem;
-  padding: 1.5rem 2rem;
+.test-showcase {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  padding: 2rem;
   margin: 0 auto 2rem auto;
-  color: white;
-  font-size: 1.3rem;
+  max-width: 500px;
+  text-align: center;
+}
+
+.showcase-header {
+  margin-bottom: 1rem;
+}
+
+.showcase-badge {
+  background: rgba(0, 212, 170, 0.2);
+  color: #00D4AA;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.showcase-header h3 {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.showcase-description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.test-number {
+  background: rgba(255, 255, 255, 0.9);
+  color: #4C2E76;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  width: 100%;
-  max-width: 400px;
+  margin: 0 auto 1.5rem auto;
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+  position: relative;
 }
 
 .test-number:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  color: white;
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+  color: #4C2E76;
+}
+
+.call-action {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.showcase-features {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.feature-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .test-showcase {
+    padding: 1.5rem;
+    margin: 0 1rem 2rem 1rem;
+  }
+  
+  .showcase-features {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .feature-item {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
 .hero-buttons {

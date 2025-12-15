@@ -1,0 +1,70 @@
+{
+  "hero": {
+    "title": "Your 24/7 Virtual Secretary for Calls",
+    "subtitle": "Dattivox handles phone calls day and night. It answers, understands the caller's request, and executes workflows — everything a real secretary would do, 24/7 and without delays.",
+    "liveDemo": "Live Demo",
+    "trySecretary": "Try Our Virtual Secretary",
+    "showcaseDescription": "Call now to book a passport renovation appointment or ask questions about our services",
+    "tapToCall": "Tap to call",
+    "contactUs": "Contact Us"
+  },
+  "showcase": {
+    "bookAppointments": "Book appointments",
+    "askQuestions": "Ask questions",
+    "available247": "Available 24/7"
+  },
+  "features": {
+    "title": "Your 24/7 Virtual Secretary",
+    "feature1": {
+      "title": "A 24/7 virtual secretary for phone calls",
+      "description": "Never miss a call again with round-the-clock availability"
+    },
+    "feature2": {
+      "title": "Handles calls instantly, with no waiting time",
+      "description": "Immediate response to every caller, ensuring professional service"
+    },
+    "feature3": {
+      "title": "Understands requests and completes tasks",
+      "description": "Intelligent processing of caller needs and automated task execution"
+    },
+    "feature4": {
+      "title": "Books appointments and routes information",
+      "description": "Seamless scheduling and information management for your business"
+    },
+    "feature5": {
+      "title": "Connects with your existing systems",
+      "description": "Easy integration with your current business tools and workflows"
+    },
+    "feature6": {
+      "title": "Works in multiple languages for European markets",
+      "description": "Multilingual support to serve your diverse customer base"
+    }
+  },
+  "contact": {
+    "title": "Get Your 24/7 Virtual Secretary",
+    "subtitle": "Want a 24/7 virtual secretary for your business? Tell us about your use case and we'll reach out with next steps.",
+    "name": "Name",
+    "email": "Email",
+    "company": "Company",
+    "phone": "Phone",
+    "message": "Message",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "companyPlaceholder": "Your company (optional)",
+    "phonePlaceholder": "Your phone number (optional)",
+    "messagePlaceholder": "Tell us about your use case and how a 24/7 virtual secretary could help your business",
+    "sendMessage": "Send message",
+    "nameRequired": "Please enter your name",
+    "emailRequired": "Please enter your email",
+    "emailInvalid": "Please enter a valid email",
+    "messageRequired": "Please enter your message",
+    "successMessage": "Message sent successfully! We'll get back to you soon.",
+    "errorMessage": "Failed to send message. Please try again."
+  },
+  "footer": {
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy",
+    "copyright": "© 2024 Dattivox. All rights reserved.",
+    "madeBy": "Made by Dattico"
+  }
+}
