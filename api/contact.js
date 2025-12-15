@@ -1,7 +1,7 @@
 // Serverless function for handling contact form submissions
 // Compatible with Vercel, Netlify, and other platforms
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -127,6 +127,9 @@ async function sendEmail(emailContent) {
     return;
   }
 
-  // If no email service is configured, throw an error
-  throw new Error('No email service configured');
+  // If no email service is configured, log the email (development fallback)
+  console.log('📧 Email would be sent:', emailContent);
+  console.log('⚠️  No email service configured - email logged only');
 }
+
+export default handler;
