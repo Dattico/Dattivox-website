@@ -145,7 +145,7 @@ const DattivoxLanding = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              {t('hero.title')}
+              <span itemProp="name">{t('hero.title')}</span>
             </motion.h1>
             
             <motion.p 
@@ -153,6 +153,7 @@ const DattivoxLanding = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
+              itemProp="description"
             >
               {t('hero.subtitle')}
             </motion.p>
@@ -170,7 +171,7 @@ const DattivoxLanding = () => {
               <div className="showcase-description">
                 {t('hero.showcaseDescription')}
               </div>
-              <a href={`tel:${TEST_PHONE_NUMBER}`} className="test-number">
+              <a href={`tel:${TEST_PHONE_NUMBER}`} className="test-number" itemProp="telephone">
                 <PhoneOutlined /> {TEST_PHONE_NUMBER}
                 <br />
                 <span className="call-action">{t('hero.tapToCall')}</span>
