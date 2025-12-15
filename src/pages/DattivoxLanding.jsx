@@ -175,6 +175,8 @@ const DattivoxLanding = () => {
                 <PhoneOutlined /> {TEST_PHONE_NUMBER}
                 <br />
                 <span className="call-action">{t('hero.tapToCall')}</span>
+                <br />
+                <span className="free-call-notice">{t('hero.freeCall')}</span>
               </a>
               <div className="showcase-features">
                 <div className="feature-item">

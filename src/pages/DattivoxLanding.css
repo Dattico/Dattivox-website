@@ -177,6 +177,17 @@
   opacity: 0.8;
 }
 
+.free-call-notice {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #00D4AA;
+  background: rgba(0, 212, 170, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  margin-top: 0.3rem;
+  display: inline-block;
+}
+
 .showcase-features {
   display: flex;
   justify-content: space-around;
