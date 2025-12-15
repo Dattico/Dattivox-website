@@ -319,7 +319,7 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1000px;
   margin: 0 auto;
@@ -352,10 +352,95 @@
   line-height: 1.6;
 }
 
+/* About Section */
+.about-section {
+  padding: 5rem 0;
+  background: hsl(60, 14%, 98%);
+}
+
+.about-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-main {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-description {
+  font-size: 1.25rem;
+  color: hsl(0, 0%, 40%);
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.about-card {
+  background: white;
+  border: 2px solid hsl(60, 14%, 95%);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.about-card:hover {
+  border-color: hsl(270, 28%, 62%);
+  box-shadow: 0 20px 60px -10px hsl(270 44% 32% / 0.15);
+}
+
+.about-card h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: hsl(270, 44%, 32%);
+  margin-bottom: 1rem;
+}
+
+.about-card p {
+  color: hsl(0, 0%, 40%);
+  line-height: 1.6;
+}
+
+.about-location {
+  text-align: center;
+  background: white;
+  border: 2px solid hsl(270, 28%, 62%);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.about-location h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: hsl(270, 44%, 32%);
+  margin-bottom: 0.5rem;
+}
+
+.about-location p {
+  color: hsl(0, 0%, 40%);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: hsl(0, 0%, 50%);
+  margin-top: 0.5rem;
+}
+
 /* Contact Section */
 .contact-section {
   padding: 5rem 0;
-  background: hsl(60, 14%, 98%);
+  background: white;
 }
 
 .contact-form-container {
@@ -445,6 +530,16 @@
   margin-bottom: 0.5rem;
 }
 
+.dattico-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.dattico-link:hover {
+  color: hsl(213, 35%, 73%);
+}
+
 .company-info p {
   font-size: 0.8rem;
   opacity: 0.8;
@@ -464,6 +559,15 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .language-selector {
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .logo {
+    height: 120px;
+  }
+  
   .hero-title {
     font-size: 2.5rem;
   }
@@ -481,14 +585,30 @@
   .cta-secondary {
     width: 100%;
     max-width: 300px;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
   }
   
   .section-header h2 {
     font-size: 2.5rem;
   }
   
+  .section-header p {
+    font-size: 1.1rem;
+  }
+  
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .about-description {
+    font-size: 1.1rem;
   }
   
   .contact-form-container {
@@ -503,16 +623,54 @@
 }
 
 @media (max-width: 480px) {
+  .hero-section {
+    padding: 1rem 0;
+  }
+  
+  .logo {
+    height: 100px;
+  }
+  
   .hero-title {
     font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .test-number {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
   }
   
   .section-header h2 {
     font-size: 2rem;
   }
   
+  .section-header p {
+    font-size: 1rem;
+  }
+  
   .hero-content,
   .section-container {
     padding: 0 1rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-card,
+  .about-card {
+    padding: 1.5rem;
+  }
+  
+  .contact-form-container {
+    padding: 1.5rem;
   }
 }

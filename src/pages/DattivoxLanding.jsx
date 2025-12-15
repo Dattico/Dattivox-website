@@ -259,6 +259,69 @@ const DattivoxLanding = () => {
         </div>
       </section>
 
+      {/* About Section */}
+      <section className="about-section">
+        <div className="section-container">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2>{t('about.title')}</h2>
+            <p className="section-subtitle">{t('about.subtitle')}</p>
+          </motion.div>
+
+          <div className="about-content">
+            <motion.div
+              className="about-main"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <p className="about-description">{t('about.description')}</p>
+            </motion.div>
+
+            <div className="about-grid">
+              <motion.div
+                className="about-card"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                <h3>{t('about.mission')}</h3>
+                <p>{t('about.missionText')}</p>
+              </motion.div>
+
+              <motion.div
+                className="about-card"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <h3>{t('about.expertise')}</h3>
+                <p>{t('about.expertiseText')}</p>
+              </motion.div>
+            </div>
+
+            <motion.div
+              className="about-location"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <h4>{t('about.location')}</h4>
+              <p>{t('about.locationText')}</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact-section" className="contact-section">
         <div className="section-container">
@@ -368,7 +431,9 @@ const DattivoxLanding = () => {
               <img src="/Dattivox - logo.svg" alt="Dattivox" className="footer-logo-img" />
             </div>
             <div className="company-info">
-              <span>{t('footer.madeBy')}</span>
+              <a href="https://dattico.com" target="_blank" rel="noopener noreferrer" className="dattico-link">
+                <span>{t('footer.madeBy')}</span>
+              </a>
               <p>Rue des Pères Blancs 4, 1040 Bruxelles</p>
               <p>+32 2 882 17 45</p>
             </div>

@@ -41,6 +41,17 @@
       "description": "Support multilingue pour servir votre clientèle diversifiée"
     }
   },
+  "about": {
+    "title": "À Propos",
+    "subtitle": "L'équipe derrière Dattivox",
+    "description": "On est une entreprise d'IA basée à Bruxelles, spécialisée dans les solutions d'IA conversationnelle pour les entreprises. Nous créons des assistants virtuels intelligents qui comprennent, répondent et agissent — rendant la communication d'entreprise fluide et disponible 24h/24.",
+    "mission": "Notre Mission",
+    "missionText": "Révolutionner la communication d'entreprise en rendant les assistants virtuels alimentés par l'IA accessibles à toutes les entreprises, quelle que soit leur taille ou leur expertise technique.",
+    "expertise": "Notre Expertise",
+    "expertiseText": "Avec une expertise approfondie en traitement du langage naturel, IA vocale et automatisation d'entreprise, nous créons des solutions qui ne se contentent pas de répondre aux appels — elles comprennent le contexte, exécutent des tâches et s'intègrent parfaitement aux workflows d'entreprise existants.",
+    "location": "Basé à Bruxelles, Belgique",
+    "locationText": "Au service des entreprises à travers l'Europe avec des solutions d'IA multilingues"
+  },
   "contact": {
     "title": "Obtenez Votre Secrétaire Virtuelle 24h/24",
     "subtitle": "Vous voulez une secrétaire virtuelle 24h/24 pour votre entreprise ? Parlez-nous de votre cas d'usage et nous vous recontacterons avec les prochaines étapes.",
@@ -66,6 +77,7 @@
     "terms": "Conditions d'Utilisation",
     "privacy": "Politique de Confidentialité",
     "copyright": "© 2024 Dattivox. Tous droits réservés.",
-    "madeBy": "Créé par Dattico"
+    "madeBy": "Créé par Dattico",
+    "aboutUs": "À Propos"
   }
 }

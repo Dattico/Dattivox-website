@@ -41,6 +41,17 @@
       "description": "Multilingual support to serve your diverse customer base"
     }
   },
+  "about": {
+    "title": "About Us",
+    "subtitle": "The team behind Dattivox",
+    "description": "We are a Brussels-based AI company specializing in conversational AI solutions for businesses. We build intelligent virtual assistants that understand, respond, and act — making business communication seamless and available 24/7.",
+    "mission": "Our Mission",
+    "missionText": "To revolutionize business communication by making AI-powered virtual assistants accessible to every company, regardless of size or technical expertise.",
+    "expertise": "Our Expertise",
+    "expertiseText": "With deep expertise in natural language processing, voice AI, and business automation, we create solutions that don't just answer calls — they understand context, execute tasks, and integrate seamlessly with existing business workflows.",
+    "location": "Based in Brussels, Belgium",
+    "locationText": "Serving businesses across Europe with multilingual AI solutions"
+  },
   "contact": {
     "title": "Get Your 24/7 Virtual Secretary",
     "subtitle": "Want a 24/7 virtual secretary for your business? Tell us about your use case and we'll reach out with next steps.",
@@ -66,6 +77,7 @@
     "terms": "Terms of Use",
     "privacy": "Privacy Policy",
     "copyright": "© 2024 Dattivox. All rights reserved.",
-    "madeBy": "Made by Dattico"
+    "madeBy": "Made by Dattico",
+    "aboutUs": "About Us"
   }
 }
