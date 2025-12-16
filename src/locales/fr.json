@@ -1,12 +1,12 @@
 {
   "hero": {
     "title": "Votre Secrétaire Virtuelle 24h/24 pour les Appels",
-    "subtitle": "Dattivox gère les appels téléphoniques jour et nuit. Il répond, comprend la demande de l'appelant et exécute les workflows — tout ce qu'une vraie secrétaire ferait, 24h/24 et sans délais.",
+    "subtitle": "Dattivox gère les appels téléphoniques jour et nuit. Il répond, comprend la demande de l'appelant et exécute les workflows, tout ce qu'une vraie secrétaire ferait, 24h/24 et sans délais.",
     "liveDemo": "Démo en Direct",
     "trySecretary": "Essayez Notre Secrétaire Virtuelle",
     "showcaseDescription": "Appelez maintenant pour réserver un rendez-vous de rénovation de passeport ou poser des questions sur nos services",
     "tapToCall": "Appuyez pour appeler",
-    "freeCall": "Appel test gratuit - aucun frais ne s'applique",
+    "freeCall": "Appel test gratuit",
     "contactUs": "Nous Contacter"
   },
   "showcase": {

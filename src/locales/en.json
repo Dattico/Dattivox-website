@@ -1,12 +1,12 @@
 {
   "hero": {
     "title": "Your 24/7 Virtual Secretary for Calls",
-    "subtitle": "Dattivox handles phone calls day and night. It answers, understands the caller's request, and executes workflows — everything a real secretary would do, 24/7 and without delays.",
+    "subtitle": "Dattivox handles phone calls day and night. It answers, understands the caller's request, and executes workflows, everything a real secretary would do, 24/7 and without delays.",
     "liveDemo": "Live Demo",
     "trySecretary": "Try Our Virtual Secretary",
     "showcaseDescription": "Call now to book a passport renovation appointment or ask questions about our services",
     "tapToCall": "Tap to call",
-    "freeCall": "Free test call - no charges apply",
+    "freeCall": "Free test call",
     "contactUs": "Contact Us"
   },
   "showcase": {
