@@ -28,7 +28,7 @@ const DattivoxLanding = () => {
     setIsSubmitting(true);
     try {
       // Call API endpoint to send email
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/.netlify/functions/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
