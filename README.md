@@ -69,12 +69,24 @@ The contact form supports multiple email services. Configure one of the followin
 SENDGRID_API_KEY=your_sendgrid_api_key
 ```
 
-#### Option 2: AWS SES
+#### Option 2: AWS SES (Recommandé)
 ```env
-AWS_ACCESS_KEY_ID=your_aws_access_key
-AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+# AWS SES Configuration
+AWS_ACCESS_KEY_ID=your_aws_access_key_id
+AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
 AWS_REGION=eu-central-1
+
+# Email Configuration (comme Callie - variables séparées pour flexibilité)
+DATTIVOX_FROM_EMAIL=info@dattico.com
+DATTIVOX_REPLY_TO=info@dattico.com
+DATTIVOX_CONTACT_EMAIL=info@dattico.com
+
+# Server Configuration
+PORT=3001
+NODE_ENV=development
 ```
+
+**Note** : Les trois variables d'email peuvent avoir la même valeur, mais sont séparées pour plus de flexibilité (comme dans Callie). L'adresse `DATTIVOX_FROM_EMAIL` doit être vérifiée dans AWS SES.
 
 #### Option 3: SMTP (Gmail, etc.)
 ```env

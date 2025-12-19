@@ -44,8 +44,6 @@ const OctoplanDemo = () => {
     startListening();
   };
 
-<<<<<<< Updated upstream
-=======
   const startDiscussion = async () => {
     let socket;
     let mediaStream;
@@ -456,7 +454,6 @@ const OctoplanDemo = () => {
     }
   }
 
->>>>>>> Stashed changes
   // Initialize speech recognition
   useEffect(() => {
     // Load voices for speech synthesis
@@ -984,7 +981,7 @@ const OctoplanDemo = () => {
                       style={{ height: '80px', marginBottom: '10px', filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))' }}
                     />
                     <p className="demo-subtitle">Experience your 24/7 virtual secretary</p>
-                    <button className="start-button" onClick={startDemo}>
+                    <button className="start-button" onClick={startDiscussion}>
                       <PhoneOutlined /> Start Voice Demo
                     </button>
                   </>

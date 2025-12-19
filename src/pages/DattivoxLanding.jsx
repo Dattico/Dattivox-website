@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Form, Input, Button, message, Space, Select } from 'antd';
 import { PhoneOutlined, ArrowRightOutlined, CalendarOutlined, QuestionCircleOutlined, ClockCircleOutlined, GlobalOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
+import { generateClient } from 'aws-amplify/api';
 import OctoplanDemo from '../../Demo/OctoplanDemo';
 import { useTranslation } from '../hooks/useTranslation';
 import './DattivoxLanding.css';
+
+const client = generateClient();
 
 const { TextArea } = Input;
 
@@ -27,23 +30,21 @@ const DattivoxLanding = () => {
   const handleContactSubmit = async (values) => {
     setIsSubmitting(true);
     try {
-      // Call API endpoint to send email
-      const response = await fetch('/.netlify/functions/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...values,
-          to: CONTACT_EMAIL,
-        }),
+      // Call GraphQL mutation to send email (via Lambda like Octoplan)
+      const result = await client.mutations.sendContactEmail({
+        name: values.name,
+        email: values.email,
+        company: values.company,
+        phone: values.phone,
+        message: values.message,
+        to: CONTACT_EMAIL,
       });
 
-      if (response.ok) {
+      if (result.data) {
         message.success(t('contact.successMessage'));
         form.resetFields();
       } else {
-        throw new Error('Failed to send message');
+        throw new Error(result.errors?.[0]?.message || 'Failed to send message');
       }
     } catch (error) {
       console.error('Contact form error:', error);
@@ -221,11 +222,11 @@ const DattivoxLanding = () => {
       </section>
 
       {/* Demo Section */}
-      {/* <section id="demo-section" className="demo-section">
+      { <section id="demo-section" className="demo-section">
         <div className="section-container">
           <OctoplanDemo />
         </div>
-      </section> */}
+      </section> }
 
       {/* Features Section */}
       <section className="features-section">
