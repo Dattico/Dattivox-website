@@ -44,8 +44,6 @@ const OctoplanDemo = () => {
     startListening();
   };
 
-<<<<<<< Updated upstream
-=======
   const startDiscussion = async () => {
     let socket;
     let mediaStream;
@@ -54,13 +52,13 @@ const OctoplanDemo = () => {
     let mediaRecorder;
     let audioChunkCount = 0;
     let totalBytesSent = 0;
-    
+
     // ✅ Queue audio pour jouer les chunks séquentiellement
     let audioQueue = [];
     let isPlayingAudio = false;
     let nextPlayTime = 0;
     let currentAudioNode = null; // Référence au node audio en cours pour pouvoir l'arrêter
-    
+
     // ✅ Fonction pour arrêter la lecture audio (interruption)
     const stopAudioPlayback = () => {
       if (currentAudioNode) {
@@ -79,7 +77,7 @@ const OctoplanDemo = () => {
       nextPlayTime = 0;
       console.log('🛑 [CLIENT] Audio playback stopped (user interruption)');
     };
-    
+
     // ✅ Fonction pour calculer le volume RMS (détection de voix)
     const calculateRMS = (audioData) => {
       let sum = 0;
@@ -88,11 +86,10 @@ const OctoplanDemo = () => {
       }
       return Math.sqrt(sum / audioData.length);
     };
-    
-    
+
     try {
       console.log('🎬 [CLIENT] Starting audio setup...');
-      
+
       // 1. Ask politely for mic access
       console.log('🎤 [CLIENT] Requesting microphone access...');
       mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -114,23 +111,23 @@ const OctoplanDemo = () => {
       console.log('📹 [CLIENT] Creating ScriptProcessorNode for PCM capture...');
       const bufferSize = 4096; // Taille du buffer
       processor = audioContext.createScriptProcessor(bufferSize, 1, 1);
-      
+
       processor.onaudioprocess = (e) => {
         if (socket && socket.readyState === WebSocket.OPEN) {
           // Récupérer les données audio (Float32Array, valeurs entre -1 et 1)
           const inputData = e.inputBuffer.getChannelData(0);
-          
+
           // ✅ Détecter si l'utilisateur parle (interruption)
           if (isPlayingAudio) {
             const rms = calculateRMS(inputData);
             const voiceThreshold = 0.01; // Seuil de détection de voix (ajustable)
-            
+
             if (rms > voiceThreshold) {
               console.log('🎤 [CLIENT] User voice detected (RMS:', rms.toFixed(4), '), interrupting audio');
               stopAudioPlayback();
             }
           }
-          
+
           // Convertir Float32 (-1 à 1) en Int16 PCM (16-bit)
           const pcmData = new Int16Array(inputData.length);
           for (let i = 0; i < inputData.length; i++) {
@@ -138,11 +135,11 @@ const OctoplanDemo = () => {
             const s = Math.max(-1, Math.min(1, inputData[i]));
             pcmData[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
           }
-          
+
           // Envoyer le PCM directement au serveur
           audioChunkCount++;
           totalBytesSent += pcmData.byteLength;
-          
+
           try {
             socket.send(pcmData.buffer);
             // Réduire les logs pour éviter le spam
@@ -160,24 +157,22 @@ const OctoplanDemo = () => {
           }
         }
       };
-      
+
       // Connecter le processor
       source.connect(processor);
       processor.connect(audioContext.destination);
-      
+
       console.log('✅ [CLIENT] ScriptProcessorNode created and connected');
       console.log('📊 [CLIENT] Buffer size:', bufferSize, 'samples');
 
       // 4. WebSocket connection
       // TEST DIRECT EC2: Testez avec ws:// (sans SSL)
       // const wsUrl = "ws://35.158.76.206:3000/demo";
-      
       // PRODUCTION: Utilisez le load balancer avec wss://
       const wsUrl = "wss://flavien-twilio-webhook.octoplan.ai/demo";
-      
       // Pour tester directement l'EC2 avec SSL (si vous avez un certificat)
       // const wsUrl = "wss://35.158.76.206:3000/demo";
-      
+
       console.log('🔌 [CLIENT] Connecting to WebSocket:', wsUrl);
       socket = new WebSocket(wsUrl);
 
@@ -209,11 +204,11 @@ const OctoplanDemo = () => {
           readyState: socket.readyState,
           messageHandlerSet: messageHandlerSet
         });
-        
+
         if (typeof event.data === 'string' && event.data === 'CONNECTION_ESTABLISHED') {
           console.log('✅ [CLIENT] Server confirmed connection! Handshake completed.');
           console.log('📊 [CLIENT] Current readyState:', socket.readyState);
-          
+
           // Si onopen n'a pas encore été appelé mais on reçoit un message,
           // la connexion est fonctionnelle, onopen devrait être appelé bientôt
           if (socket.readyState === WebSocket.CONNECTING) {
@@ -222,7 +217,7 @@ const OctoplanDemo = () => {
             console.log('✅ [CLIENT] Connection is OPEN! onopen should be called soon.');
           }
         }
-        
+
         // Si le handler principal n'est pas encore défini, on ne fait rien d'autre
         // Il sera défini dans onopen
         if (!messageHandlerSet) {
@@ -253,11 +248,11 @@ const OctoplanDemo = () => {
         console.log('📊 [CLIENT] WebSocket protocol:', socket.protocol);
         console.log('📊 [CLIENT] WebSocket extensions:', socket.extensions);
         console.log('📊 [CLIENT] WebSocket bufferedAmount:', socket.bufferedAmount);
-        
+
         // Le serveur configure automatiquement les événements d'initialisation
         // On n'a pas besoin de les envoyer depuis le client
         console.log('⏳ [CLIENT] Waiting for server to configure session...');
-        
+
         // La capture PCM est déjà active via ScriptProcessorNode
         // Pas besoin de démarrer quoi que ce soit, le processor envoie automatiquement
         console.log('✅ [CLIENT] PCM capture is active via ScriptProcessorNode');
@@ -274,16 +269,16 @@ const OctoplanDemo = () => {
         isPlayingAudio = true;
         const audioBuffer = audioQueue.shift(); // Prendre le premier élément de la queue
 
-          const playNode = audioContext.createBufferSource();
+        const playNode = audioContext.createBufferSource();
         playNode.buffer = audioBuffer;
-        
+
         // ✅ Stocker la référence au node audio pour pouvoir l'arrêter
         currentAudioNode = playNode;
-        
+
         // Créer un GainNode pour contrôler le volume
         const gainNode = audioContext.createGain();
         gainNode.gain.value = 1.0; // Volume à 100%
-        
+
         playNode.connect(gainNode);
         gainNode.connect(audioContext.destination);
 
@@ -315,7 +310,7 @@ const OctoplanDemo = () => {
         console.log('📊 [CLIENT] Message type:', typeof event.data);
         console.log('📊 [CLIENT] Is Blob:', event.data instanceof Blob);
         console.log('📊 [CLIENT] Is ArrayBuffer:', event.data instanceof ArrayBuffer);
-        
+
         // Vérifier si c'est un message de test texte
         if (typeof event.data === 'string' || (event.data instanceof Blob && event.data.size < 100)) {
           const text = typeof event.data === 'string' ? event.data : await event.data.text();
@@ -325,7 +320,7 @@ const OctoplanDemo = () => {
           }
           return; // Ne pas traiter les messages de test comme de l'audio
         }
-        
+
         // Le serveur envoie directement du binaire (PCM audio)
         try {
           let arrayBuf;
@@ -341,27 +336,27 @@ const OctoplanDemo = () => {
             console.log('📊 [CLIENT] Message content (first 100 chars):', String(event.data).substring(0, 100));
             return;
           }
-          
+
           console.log('🎵 [CLIENT] Processing PCM audio data, size:', arrayBuf.byteLength);
-          
+
           // Le serveur envoie du PCM 16-bit (Int16Array)
           // Il faut créer un AudioBuffer directement depuis le PCM
           // PCM 16-bit = 2 bytes par sample, little-endian
           const pcmData = new Int16Array(arrayBuf);
           const bedrockSampleRate = 16000; // Bedrock génère à 16kHz (configuré côté serveur)
           const numberOfChannels = 1; // Mono
-          
+
           // ✅ IMPORTANT : Utiliser le sample rate réel de l'AudioContext
           // Si le navigateur ne supporte pas 16000 Hz, l'AudioContext utilisera un autre sample rate
           const actualSampleRate = audioContext.sampleRate;
           console.log('📊 [CLIENT] AudioContext sampleRate:', actualSampleRate, 'Hz');
           console.log('📊 [CLIENT] Bedrock sampleRate:', bedrockSampleRate, 'Hz');
-          
+
           // Si les sample rates diffèrent, on doit faire une conversion
           // Pour l'instant, utilisons le sample rate de Bedrock (16000 Hz)
           // Le navigateur fera la conversion automatiquement si nécessaire
           const targetSampleRate = bedrockSampleRate;
-          
+
           console.log('📊 [CLIENT] PCM data:', {
             samples: pcmData.length,
             bedrockSampleRate: bedrockSampleRate,
@@ -370,14 +365,14 @@ const OctoplanDemo = () => {
             channels: numberOfChannels,
             duration: (pcmData.length / bedrockSampleRate).toFixed(2) + 's'
           });
-          
+
           // Créer un AudioBuffer depuis le PCM avec le sample rate de Bedrock
           const audioBuffer = audioContext.createBuffer(
             numberOfChannels,
             pcmData.length,
             targetSampleRate
           );
-          
+
           // Convertir Int16 PCM (-32768 à 32767) en Float32 (-1.0 à 1.0)
           // ✅ CORRECTION : Utiliser 32767.0 pour la division (pas 32768.0)
           // Car la valeur max positive est 32767, pas 32768
@@ -386,14 +381,14 @@ const OctoplanDemo = () => {
             // Clamper la valeur entre -1.0 et 1.0
             channelData[i] = Math.max(-1.0, Math.min(1.0, pcmData[i] / 32767.0));
           }
-          
+
           console.log('✅ [CLIENT] AudioBuffer created from PCM:', {
             duration: audioBuffer.duration.toFixed(2) + 's',
             sampleRate: audioBuffer.sampleRate,
             numberOfChannels: audioBuffer.numberOfChannels,
             length: audioBuffer.length
           });
-          
+
           // ✅ Ajouter à la queue et jouer séquentiellement
           audioQueue.push(audioBuffer);
           playAudioQueue();
@@ -406,7 +401,7 @@ const OctoplanDemo = () => {
           });
         }
       };
-      
+
       socket.onerror = (error) => {
         console.error('❌ [CLIENT] WebSocket error occurred');
         console.error('❌ [CLIENT] Error object:', error);
@@ -428,7 +423,7 @@ const OctoplanDemo = () => {
           }[error.target.readyState]);
         }
       };
-      
+
       socket.onclose = (event) => {
         console.log('🔌 [CLIENT] WebSocket closed', {
           code: event.code,
@@ -440,13 +435,13 @@ const OctoplanDemo = () => {
           totalChunksSent: audioChunkCount,
           totalBytesSent: totalBytesSent
         });
-        
+
         // Nettoyer le processor
         if (processor) {
           processor.disconnect();
           console.log('🔌 [CLIENT] ScriptProcessorNode disconnected');
         }
-        
+
         // ✅ Nettoyer la queue audio
         stopAudioPlayback(); // Arrêter la lecture et nettoyer
         console.log('🔌 [CLIENT] Audio queue cleared');
@@ -455,8 +450,6 @@ const OctoplanDemo = () => {
       console.error('Audio setup failed:', error);
     }
   }
-
->>>>>>> Stashed changes
   // Initialize speech recognition
   useEffect(() => {
     // Load voices for speech synthesis
@@ -984,7 +977,7 @@ const OctoplanDemo = () => {
                       style={{ height: '80px', marginBottom: '10px', filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))' }}
                     />
                     <p className="demo-subtitle">Experience your 24/7 virtual secretary</p>
-                    <button className="start-button" onClick={startDemo}>
+                    <button className="start-button" onClick={startDiscussion}>
                       <PhoneOutlined /> Start Voice Demo
                     </button>
                   </>

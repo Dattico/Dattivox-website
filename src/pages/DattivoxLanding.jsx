@@ -221,11 +221,11 @@ const DattivoxLanding = () => {
       </section>
 
       {/* Demo Section */}
-      {/* <section id="demo-section" className="demo-section">
+      <section id="demo-section" className="demo-section">
         <div className="section-container">
           <OctoplanDemo />
         </div>
-      </section> */}
+      </section>
 
       {/* Features Section */}
       <section className="features-section">
