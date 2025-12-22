@@ -1,10 +1,12 @@
 version: 1
+# Backend is automatically detected and deployed by Amplify Hosting
+# amplify_outputs.json is generated automatically during the build
 backend:
   phases:
     build:
       commands:
-        - '# Skip Amplify CLI if no backend resources'
-        - echo "No backend resources to build"
+        - '# Backend will be automatically deployed by Amplify Hosting'
+        - '# amplify_outputs.json will be generated automatically'
 frontend:
   phases:
     preBuild:
