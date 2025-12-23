@@ -31,10 +31,39 @@ const OctoplanDemo = () => {
   const isSpeakingRef = useRef(false);
   const waitMusicRef = useRef(null);
   const selectedVoiceRef = useRef(null);
+  const restartTimeoutRef = useRef(null);
+  
+  // Refs pour startDiscussion (WebSocket)
+  const socketRef = useRef(null);
+  const mediaStreamRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const processorRef = useRef(null);
+  const currentAudioNodeRef = useRef(null);
+  const audioQueueRef = useRef([]);
+  const isPlayingAudioRef = useRef(false);
 
 
 
   const startDemo = () => {
+    // Si une instance est déjà en cours, arrêter d'abord
+    if (!isIdleRef.current) {
+      console.log('Stopping existing demo before starting new one...');
+      // Annuler tout redémarrage en attente
+      if (restartTimeoutRef.current) {
+        clearTimeout(restartTimeoutRef.current);
+      }
+      stopDemo();
+      // Attendre un peu pour que l'arrêt soit complet
+      restartTimeoutRef.current = setTimeout(() => {
+        restartTimeoutRef.current = null;
+        startDemoInternal();
+      }, 300);
+      return;
+    }
+    startDemoInternal();
+  };
+
+  const startDemoInternal = () => {
     if ('Notification' in window && Notification.permission === 'default') {
       Notification.requestPermission();
     }
@@ -44,7 +73,76 @@ const OctoplanDemo = () => {
     startListening();
   };
 
+  // Fonction pour arrêter proprement startDiscussion
+  const stopDiscussion = () => {
+    console.log('🛑 [CLIENT] Stopping discussion...');
+    
+    // Fermer le WebSocket
+    if (socketRef.current) {
+      try {
+        if (socketRef.current.readyState === WebSocket.OPEN || socketRef.current.readyState === WebSocket.CONNECTING) {
+          socketRef.current.close();
+        }
+      } catch (e) {
+        console.error('Error closing socket:', e);
+      }
+      socketRef.current = null;
+    }
+    
+    // Arrêter le mediaStream
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach(track => {
+        track.stop();
+      });
+      mediaStreamRef.current = null;
+    }
+    
+    // Arrêter l'audio en cours
+    if (currentAudioNodeRef.current) {
+      try {
+        currentAudioNodeRef.current.stop();
+        currentAudioNodeRef.current.disconnect();
+      } catch (e) {
+        console.log('Audio node already stopped');
+      }
+      currentAudioNodeRef.current = null;
+    }
+    
+    // Nettoyer le processor
+    if (processorRef.current) {
+      try {
+        processorRef.current.disconnect();
+      } catch (e) {
+        console.log('Processor already disconnected');
+      }
+      processorRef.current = null;
+    }
+    
+    // Fermer l'audioContext
+    if (audioContextRef.current) {
+      audioContextRef.current.close().catch(e => console.log('AudioContext close error:', e));
+      audioContextRef.current = null;
+    }
+    
+    // Vider la queue audio
+    audioQueueRef.current = [];
+    isPlayingAudioRef.current = false;
+    
+    setIsIdle(true);
+    isIdleRef.current = true;
+    setIsListening(false);
+    console.log('✅ [CLIENT] Discussion stopped');
+  };
+
   const startDiscussion = async () => {
+    // Si une instance est déjà en cours, arrêter d'abord
+    if (!isIdleRef.current) {
+      console.log('🔄 [CLIENT] Stopping existing discussion before starting new one...');
+      stopDiscussion();
+      // Attendre un peu pour que l'arrêt soit complet
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+    
     let socket;
     let mediaStream;
     let processor;
@@ -57,26 +155,26 @@ const OctoplanDemo = () => {
     let audioQueue = [];
     let isPlayingAudio = false;
     let nextPlayTime = 0;
-    let currentAudioNode = null; // Référence au node audio en cours pour pouvoir l'arrêter
+    let currentAudioNode = null; // Référence locale au node audio en cours
 
-    // ✅ Fonction pour arrêter la lecture audio (interruption)
-    const stopAudioPlayback = () => {
-      if (currentAudioNode) {
-        try {
-          currentAudioNode.stop();
-          currentAudioNode.disconnect();
-          currentAudioNode = null;
-        } catch (error) {
-          // Le node peut déjà être arrêté, ignorer l'erreur
-          console.log('⚠️ [CLIENT] Audio node already stopped');
+      // ✅ Fonction pour arrêter la lecture audio (interruption)
+      const stopAudioPlayback = () => {
+        if (currentAudioNodeRef.current) {
+          try {
+            currentAudioNodeRef.current.stop();
+            currentAudioNodeRef.current.disconnect();
+            currentAudioNodeRef.current = null;
+          } catch (error) {
+            // Le node peut déjà être arrêté, ignorer l'erreur
+            console.log('⚠️ [CLIENT] Audio node already stopped');
+          }
         }
-      }
-      // Vider la queue
-      audioQueue = [];
-      isPlayingAudio = false;
-      nextPlayTime = 0;
-      console.log('🛑 [CLIENT] Audio playback stopped (user interruption)');
-    };
+        // Vider la queue
+        audioQueueRef.current = [];
+        isPlayingAudioRef.current = false;
+        nextPlayTime = 0;
+        console.log('🛑 [CLIENT] Audio playback stopped (user interruption)');
+      };
 
     // ✅ Fonction pour calculer le volume RMS (détection de voix)
     const calculateRMS = (audioData) => {
@@ -93,6 +191,7 @@ const OctoplanDemo = () => {
       // 1. Ask politely for mic access
       console.log('🎤 [CLIENT] Requesting microphone access...');
       mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaStreamRef.current = mediaStream; // Stocker dans ref
       console.log('✅ [CLIENT] Microphone access granted');
       console.log('📊 [CLIENT] MediaStream tracks:', mediaStream.getTracks().map(t => ({
         kind: t.kind,
@@ -103,6 +202,7 @@ const OctoplanDemo = () => {
       // 2. AudioContext setup
       console.log('🔊 [CLIENT] Creating AudioContext...');
       audioContext = new AudioContext({ sampleRate: 16000 }); // 16kHz pour Bedrock
+      audioContextRef.current = audioContext; // Stocker dans ref
       console.log('✅ [CLIENT] AudioContext created, sampleRate:', audioContext.sampleRate);
       const source = audioContext.createMediaStreamSource(mediaStream);
 
@@ -111,6 +211,7 @@ const OctoplanDemo = () => {
       console.log('📹 [CLIENT] Creating ScriptProcessorNode for PCM capture...');
       const bufferSize = 4096; // Taille du buffer
       processor = audioContext.createScriptProcessor(bufferSize, 1, 1);
+      processorRef.current = processor; // Stocker dans ref
 
       processor.onaudioprocess = (e) => {
         if (socket && socket.readyState === WebSocket.OPEN) {
@@ -118,7 +219,7 @@ const OctoplanDemo = () => {
           const inputData = e.inputBuffer.getChannelData(0);
 
           // ✅ Détecter si l'utilisateur parle (interruption)
-          if (isPlayingAudio) {
+          if (isPlayingAudioRef.current) {
             const rms = calculateRMS(inputData);
             const voiceThreshold = 0.01; // Seuil de détection de voix (ajustable)
 
@@ -169,12 +270,18 @@ const OctoplanDemo = () => {
       // TEST DIRECT EC2: Testez avec ws:// (sans SSL)
       // const wsUrl = "ws://35.158.76.206:3000/demo";
       // PRODUCTION: Utilisez le load balancer avec wss://
-      const wsUrl = "wss://twilio-webhook.octoplan.ai/demo";
+      const wsUrl = "wss://flavien-twilio-webhook.octoplan.ai/demo";
       // Pour tester directement l'EC2 avec SSL (si vous avez un certificat)
       // const wsUrl = "wss://35.158.76.206:3000/demo";
 
       console.log('🔌 [CLIENT] Connecting to WebSocket:', wsUrl);
       socket = new WebSocket(wsUrl);
+      socketRef.current = socket; // Stocker dans ref
+      
+      // Mettre à jour l'état
+      setIsIdle(false);
+      isIdleRef.current = false;
+      setIsListening(true);
 
       // Log immédiatement après création
       console.log('📊 [CLIENT] WebSocket created, initial readyState:', socket.readyState);
@@ -262,18 +369,18 @@ const OctoplanDemo = () => {
       // ✅ Fonction pour jouer la queue audio séquentiellement
       const playAudioQueue = () => {
         // Si on est déjà en train de jouer ou si la queue est vide, ne rien faire
-        if (isPlayingAudio || audioQueue.length === 0) {
+        if (isPlayingAudioRef.current || audioQueueRef.current.length === 0) {
           return;
         }
 
-        isPlayingAudio = true;
-        const audioBuffer = audioQueue.shift(); // Prendre le premier élément de la queue
+        isPlayingAudioRef.current = true;
+        const audioBuffer = audioQueueRef.current.shift(); // Prendre le premier élément de la queue
 
         const playNode = audioContext.createBufferSource();
         playNode.buffer = audioBuffer;
 
         // ✅ Stocker la référence au node audio pour pouvoir l'arrêter
-        currentAudioNode = playNode;
+        currentAudioNodeRef.current = playNode;
 
         // Créer un GainNode pour contrôler le volume
         const gainNode = audioContext.createGain();
@@ -294,11 +401,11 @@ const OctoplanDemo = () => {
 
         // Quand ce chunk est terminé, jouer le suivant
         playNode.onended = () => {
-          isPlayingAudio = false;
-          currentAudioNode = null; // ✅ Nettoyer la référence
-          console.log('✅ [CLIENT] Audio chunk finished, queue length:', audioQueue.length);
+          isPlayingAudioRef.current = false;
+          currentAudioNodeRef.current = null; // ✅ Nettoyer la référence
+          console.log('✅ [CLIENT] Audio chunk finished, queue length:', audioQueueRef.current.length);
           // Jouer le chunk suivant s'il y en a un
-          if (audioQueue.length > 0) {
+          if (audioQueueRef.current.length > 0) {
             playAudioQueue();
           }
         };
@@ -390,7 +497,7 @@ const OctoplanDemo = () => {
           });
 
           // ✅ Ajouter à la queue et jouer séquentiellement
-          audioQueue.push(audioBuffer);
+          audioQueueRef.current.push(audioBuffer);
           playAudioQueue();
         } catch (error) {
           console.error('❌ [CLIENT] Error processing server message:', error);
@@ -443,7 +550,15 @@ const OctoplanDemo = () => {
         }
 
         // ✅ Nettoyer la queue audio
-        stopAudioPlayback(); // Arrêter la lecture et nettoyer
+        if (currentAudioNodeRef.current) {
+          try {
+            currentAudioNodeRef.current.stop();
+            currentAudioNodeRef.current.disconnect();
+          } catch (e) {}
+          currentAudioNodeRef.current = null;
+        }
+        audioQueueRef.current = [];
+        isPlayingAudioRef.current = false;
         console.log('🔌 [CLIENT] Audio queue cleared');
       };
     } catch (error) {
@@ -925,6 +1040,12 @@ const OctoplanDemo = () => {
 
   const stopDemo = () => {
     console.log('Stopping demo...');
+    
+    // Arrêter aussi startDiscussion si elle est active
+    if (socketRef.current || mediaStreamRef.current) {
+      stopDiscussion();
+    }
+    
     setIsIdle(true);
     isIdleRef.current = true;
     setIsListening(false);
@@ -946,6 +1067,12 @@ const OctoplanDemo = () => {
     
     if (idleTimeoutRef.current) {
       clearTimeout(idleTimeoutRef.current);
+    }
+    
+    // Annuler tout redémarrage en attente
+    if (restartTimeoutRef.current) {
+      clearTimeout(restartTimeoutRef.current);
+      restartTimeoutRef.current = null;
     }
     
     if ('speechSynthesis' in window) {
