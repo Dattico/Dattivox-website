@@ -180,14 +180,6 @@ const DattivoxLanding = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <motion.div
-              className="hero-logo"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-            >
-              <img src="/Dattivox - logo.svg" alt="Dattivox" className="logo" />
-            </motion.div>
             
             <motion.h1 
               className="hero-title"
@@ -217,7 +209,7 @@ const DattivoxLanding = () => {
               <Button 
                 size="large"
                 className="cta-secondary"
-                onClick={() => scrollToSection('demo-section')}
+                onClick={() => setShowDemoModal(true)}
               >
                 Try Demo <ArrowRightOutlined />
               </Button>
