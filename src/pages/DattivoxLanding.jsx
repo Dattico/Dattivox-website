@@ -16,8 +16,8 @@ const DattivoxLanding = () => {
   const [form] = Form.useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDemoModal, setShowDemoModal] = useState(false);
-  const [demoPhase, setDemoPhase] = useState('intro'); // 'intro', 'demo', 'ended'
   const [isVoiceActive, setIsVoiceActive] = useState(false);
+  const [voiceInterval, setVoiceInterval] = useState(null);
   const { t, language, setLanguage } = useTranslation();
 
   const scrollToSection = (sectionId) => {
@@ -84,30 +84,29 @@ const DattivoxLanding = () => {
   ];
 
   const startDemo = () => {
-    setDemoPhase('demo');
     setIsVoiceActive(true);
-    // Simulate voice activity detection
-    const voiceInterval = setInterval(() => {
+    const interval = setInterval(() => {
       setIsVoiceActive(prev => !prev);
     }, 1500);
-    
-    // Auto-stop demo after 30 seconds for demo purposes
-    setTimeout(() => {
-      clearInterval(voiceInterval);
-      setDemoPhase('ended');
-      setIsVoiceActive(false);
-    }, 30000);
+    setVoiceInterval(interval);
   };
 
   const stopDemo = () => {
-    setDemoPhase('ended');
     setIsVoiceActive(false);
+    if (voiceInterval) {
+      clearInterval(voiceInterval);
+      setVoiceInterval(null);
+    }
   };
 
   const closeDemoModal = () => {
+    stopDemo();
     setShowDemoModal(false);
-    setDemoPhase('intro');
-    setIsVoiceActive(false);
+  };
+
+  const openDemoModal = () => {
+    setShowDemoModal(true);
+    setTimeout(startDemo, 500);
   };
 
   return (
@@ -115,6 +114,11 @@ const DattivoxLanding = () => {
       <header className="top-header">
         <div className="header-content">
           <div className="header-logo">
+            <div className="kLogoMark" aria-hidden>
+              <span className="kBars">
+                <i /><i /><i /><i />
+              </span>
+            </div>
             <img src="/Dattivox - logo.svg" alt="Dattivox" className="header-logo-img" />
           </div>
           <div className="header-actions">
@@ -124,6 +128,13 @@ const DattivoxLanding = () => {
               size="large"
             >
               Try Demo
+            </Button>
+            <Button 
+              className="header-contact-btn"
+              onClick={() => scrollToSection('contact-section')}
+              size="large"
+            >
+              Contact Us
             </Button>
             <a href={`tel:${TEST_PHONE_NUMBER}`} className="header-phone-btn">
               <PhoneOutlined /> Try Demo Call
@@ -174,54 +185,52 @@ const DattivoxLanding = () => {
         </div>
 
         <div className="hero-content">
-          <motion.div
-            className="hero-text"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            
-            <motion.h1 
-              className="hero-title"
-              initial={{ opacity: 0, y: 30 }}
+          <div className="kHeroLeft">
+            <motion.div
+              className="hero-text"
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <span itemProp="name">{t('hero.title')}</span>
-            </motion.h1>
-            
-            <motion.p 
-              className="hero-subtitle"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              itemProp="description"
-            >
-              {t('hero.subtitle')}
-            </motion.p>
+              
+              <motion.h1 
+                className="hero-title"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span itemProp="name">{t('hero.title')}</span>
+              </motion.h1>
+              
+              <motion.p 
+                className="hero-subtitle"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                itemProp="description"
+              >
+                {t('hero.subtitle')}
+              </motion.p>
 
-            <motion.div 
-              className="hero-buttons"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <Button 
-                size="large"
-                className="cta-secondary"
-                onClick={() => setShowDemoModal(true)}
+              <motion.div 
+                className="hero-buttons"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
               >
-                Try Demo <ArrowRightOutlined />
-              </Button>
-              <Button 
-                size="large"
-                className="cta-secondary"
-                onClick={() => scrollToSection('contact-section')}
-              >
-                {t('hero.contactUs')}
-              </Button>
+                <Button 
+                  size="large"
+                  className="cta-primary-large"
+                  onClick={openDemoModal}
+                >
+                  Try Demo <ArrowRightOutlined />
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
+          <div className="kHeroRight">
+            <div className="kCallPulse" />
+          </div>
         </div>
       </section>
 
@@ -413,14 +422,6 @@ const DattivoxLanding = () => {
       {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
-          <div className="footer-links">
-            <a href="/terms" target="_blank" rel="noopener noreferrer">
-              {t('footer.terms')}
-            </a>
-            <a href="/privacy" target="_blank" rel="noopener noreferrer">
-              {t('footer.privacy')}
-            </a>
-          </div>
           <p className="footer-copyright">
             {t('footer.copyright')}
           </p>
@@ -447,157 +448,39 @@ const DattivoxLanding = () => {
               ×
             </button>
             
-            {demoPhase === 'intro' && (
-              <motion.div 
-                className="demo-intro"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <div className="demo-intro-image">
-                  <img src="/Passport-guichet.png" alt="Passport Office" />
-                </div>
-                <div className="demo-intro-content">
-                  <div className="story-header">
-                    <div className="story-icon">📋</div>
-                    <h3>The Passport Renewal Story</h3>
-                  </div>
-                  <div className="story-steps">
-                    <div className="story-step">
-                      <div className="step-number">1</div>
-                      <div className="step-content">
-                        <h4>Customer calls after hours</h4>
-                        <p>"I need to renew my passport urgently for a business trip"</p>
-                      </div>
-                    </div>
-                    <div className="story-step">
-                      <div className="step-number">2</div>
-                      <div className="step-content">
-                        <h4>AI understands & responds</h4>
-                        <p>Explains the process, required documents, and available time slots</p>
-                      </div>
-                    </div>
-                    <div className="story-step">
-                      <div className="step-number">3</div>
-                      <div className="step-content">
-                        <h4>Books appointment instantly</h4>
-                        <p>Schedules the appointment and sends confirmation details</p>
-                      </div>
-                    </div>
-                  </div>
-                  <Button 
-                    className="start-demo-btn"
-                    size="large"
-                    onClick={startDemo}
-                  >
-                    Start Demo
-                  </Button>
-                </div>
-              </motion.div>
-            )}
+            <div className="demo-active">
 
-            {demoPhase === 'demo' && (
-              <motion.div 
-                className="demo-active"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-              >
-                <motion.div 
-                  className="demo-text-overlay"
-                  initial={{ opacity: 1 }}
-                  animate={{ opacity: 0.3 }}
-                  transition={{ duration: 2, delay: 1 }}
+              
+              <div className="demo-text-overlay">
+                <h3>AI Voice Demo</h3>
+                
+                <div className="demo-content-row">
+                  <img src="/Passport-guichet.png" alt="Passport Renewal" className="demo-image" />
+                  <p>You are calling to renew your passport. Ask information about it and book an appointment."</p>
+                </div>
+              </div>
+              
+              <div className="demo-voice-visualization">
+                <div 
+                  className={`voice-wave ${isVoiceActive ? 'active' : ''}`}
+                />
+                <div 
+                  className={`voice-wave voice-wave-2 ${isVoiceActive ? 'active' : ''}`}
+                />
+                <div 
+                  className={`voice-wave voice-wave-3 ${isVoiceActive ? 'active' : ''}`}
+                />
+              </div>
+              
+              <div className="demo-controls">
+                <Button 
+                  className={voiceInterval ? "stop-demo-btn" : "start-demo-btn"}
+                  onClick={voiceInterval ? stopDemo : startDemo}
                 >
-                  <h3>AI is now speaking...</h3>
-                  <p>"Hello! I can help you with your passport renewal. Let me check available appointments for you."</p>
-                </motion.div>
-                
-                <div className="demo-voice-visualization">
-                  <motion.div 
-                    className="voice-wave"
-                    animate={{
-                      scaleX: isVoiceActive ? [1, 1.5, 1] : 1,
-                      opacity: isVoiceActive ? [0.7, 1, 0.7] : 0.3
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                  <motion.div 
-                    className="voice-wave voice-wave-2"
-                    animate={{
-                      scaleX: isVoiceActive ? [1, 1.8, 1] : 1,
-                      opacity: isVoiceActive ? [0.5, 0.8, 0.5] : 0.2
-                    }}
-                    transition={{
-                      duration: 1.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.3
-                    }}
-                  />
-                  <motion.div 
-                    className="voice-wave voice-wave-3"
-                    animate={{
-                      scaleX: isVoiceActive ? [1, 1.3, 1] : 1,
-                      opacity: isVoiceActive ? [0.6, 0.9, 0.6] : 0.25
-                    }}
-                    transition={{
-                      duration: 1.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.6
-                    }}
-                  />
-                </div>
-                
-                <div className="demo-controls">
-                  <Button 
-                    className="stop-demo-btn"
-                    onClick={stopDemo}
-                    danger
-                  >
-                    Stop Demo
-                  </Button>
-                </div>
-              </motion.div>
-            )}
-
-            {demoPhase === 'ended' && (
-              <motion.div 
-                className="demo-ended"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="demo-success">
-                  <span className="success-icon">✅</span>
-                  <h3>Demo Complete!</h3>
-                  <p>You've just seen how Dattivox handles customer calls 24/7. Ready to try it for your business?</p>
-                  <div className="demo-actions">
-                    <Button 
-                      className="restart-demo-btn"
-                      onClick={() => setDemoPhase('intro')}
-                    >
-                      Try Again
-                    </Button>
-                    <Button 
-                      className="contact-btn"
-                      type="primary"
-                      onClick={() => {
-                        closeDemoModal();
-                        scrollToSection('contact-section');
-                      }}
-                    >
-                      Contact Us
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
+                  {voiceInterval ? 'Stop Demo' : 'Start Demo'}
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       )}
