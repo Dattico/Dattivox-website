@@ -95,11 +95,6 @@ const DattivoxLanding = () => {
       <header className="top-header">
         <div className="header-content">
           <div className="header-logo">
-            <div className="kLogoMark" aria-hidden>
-              <span className="kBars">
-                <i /><i /><i /><i />
-              </span>
-            </div>
             <img src="/Dattivox - logo.svg" alt="Dattivox" className="header-logo-img" />
           </div>
           <div className="header-actions">
