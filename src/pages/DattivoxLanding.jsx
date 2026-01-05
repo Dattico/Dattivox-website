@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Form, Input, Button, message, Space, Select } from 'antd';
 import { PhoneOutlined, ArrowRightOutlined, CalendarOutlined, QuestionCircleOutlined, ClockCircleOutlined, GlobalOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
@@ -15,6 +15,8 @@ const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'hello@dattico.com';
 const DattivoxLanding = () => {
   const [form] = Form.useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showDemoModal, setShowDemoModal] = useState(false);
+  const octoplanDemoRef = useRef(null);
   const { t, language, setLanguage } = useTranslation();
 
   const scrollToSection = (sectionId) => {
@@ -22,6 +24,14 @@ const DattivoxLanding = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const closeDemoModal = () => {
+    // Arrêter la discussion si elle est en cours
+    if (octoplanDemoRef.current) {
+      octoplanDemoRef.current.stopDiscussion();
+    }
+    setShowDemoModal(false);
   };
 
   const handleContactSubmit = async (values) => {
@@ -200,14 +210,13 @@ const DattivoxLanding = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              {/* <Button 
-                type="primary" 
+              <Button 
                 size="large"
-                className="cta-primary"
-                onClick={() => scrollToSection('demo-section')}
+                className="cta-primary-large"
+                onClick={() => setShowDemoModal(true)}
               >
-                Try the Voice Demo <ArrowRightOutlined />
-              </Button> */}
+                Try Demo <ArrowRightOutlined />
+              </Button>
               <Button 
                 size="large"
                 className="cta-secondary"
@@ -217,13 +226,6 @@ const DattivoxLanding = () => {
               </Button>
             </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Demo Section */}
-      <section id="demo-section" className="demo-section">
-        <div className="section-container">
-          <OctoplanDemo />
         </div>
       </section>
 
@@ -440,6 +442,18 @@ const DattivoxLanding = () => {
           </div>
         </div>
       </footer>
+
+      {/* Demo Modal */}
+      {showDemoModal && (
+        <div className="demo-modal-overlay" onClick={closeDemoModal}>
+          <div className="demo-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="demo-modal-close" onClick={closeDemoModal}>
+              ×
+            </button>
+            <OctoplanDemo ref={octoplanDemoRef} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

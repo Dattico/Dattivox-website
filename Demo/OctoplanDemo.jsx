@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import { Button, Card, Typography, Space, message } from 'antd';
 import { PhoneOutlined, AudioOutlined, StopOutlined } from '@ant-design/icons';
 import LoadingComponent from '/src/components/LoadingComponent';
@@ -10,7 +10,7 @@ import './OctoplanDemo.css';
 
 const { Title, Text, Paragraph } = Typography;
 
-const OctoplanDemo = () => {
+const OctoplanDemo = forwardRef((props, ref) => {
   const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
   const { language } = useLanguage();
   const t = getTranslation(language) || {};
@@ -1086,74 +1086,83 @@ const OctoplanDemo = () => {
   };
 
 
+  // Exposer startDiscussion et stopDiscussion via ref
+  useImperativeHandle(ref, () => ({
+    startDiscussion: startDiscussion,
+    stopDiscussion: stopDiscussion
+  }));
+
 
 
 
   return (
-    <div className="octoplan-demo">
-      <div className="demo-container">
-        <Card className="demo-card">
-          <Space direction="vertical" size="large" style={{ width: '100%', textAlign: 'center' }}>
-            <div className="glass-container">
-              <div className="demo-ui">
-                {isIdle ? (
-                  <>
-                    <img 
-                      src="/Dattivox - logo.svg" 
-                      alt="Dattivox" 
-                      style={{ height: '80px', marginBottom: '10px', filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))' }}
-                    />
-                    <p className="demo-subtitle">Experience your 24/7 virtual secretary</p>
-                    <button className="start-button" onClick={startDiscussion}>
-                      <PhoneOutlined /> Start Voice Demo
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <div className="status-indicator">
-                      {isProcessing ? 'Processing...' : 'Listening'}
-                    </div>
-                    
-                    <div className="voice-visualizer">
-                      {[...Array(12)].map((_, i) => (
-                        <div 
-                          key={i}
-                          className={`voice-bar ${(isListening || isProcessing) ? 'active' : ''}`}
-                          style={{
-                            height: `${20 + Math.sin((Date.now() / 200) + i) * 15}px`,
-                            animationDelay: `${i * 0.1}s`
-                          }}
-                        />
-                      ))}
-                    </div>
-                    
-                    <button className="stop-button" onClick={stopDemo}>
-                      <StopOutlined /> End Call
-                    </button>
-                    
-                    {transcript && (
-                      <div className="transcript">
-                        <strong>You:</strong> {transcript}
-                      </div>
-                    )}
-                    {botResponse && (
-                      <div className="bot-response">
-                        <strong>Dattivox:</strong> {botResponse}
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
+    <div className="demo-active">
+      {isIdle ? (
+        <>
+          <div className="demo-text-overlay">
+            <h3>AI Voice Demo</h3>
+            <div className="demo-content-row">
+              <img src="/Passport-guichet.png" alt="Passport Renewal" className="demo-image" />
+              <p>You are calling to renew your passport. Ask information about it and book an appointment.</p>
             </div>
-
-
-
-
-          </Space>
-        </Card>
-      </div>
+          </div>
+          
+          <div className="demo-controls">
+            <Button 
+              className="start-demo-btn"
+              onClick={startDiscussion}
+              size="large"
+            >
+              <PhoneOutlined /> Start Voice Demo
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="demo-text-overlay">
+            <h3>AI Voice Demo</h3>
+            <div className="demo-content-row">
+              <img src="/Passport-guichet.png" alt="Passport Renewal" className="demo-image" />
+              <p>You are calling to renew your passport. Ask information about it and book an appointment.</p>
+            </div>
+          </div>
+          
+          <div className="demo-voice-visualization">
+            <div 
+              className={`voice-wave ${(isListening || isProcessing) ? 'active' : ''}`}
+            />
+            <div 
+              className={`voice-wave voice-wave-2 ${(isListening || isProcessing) ? 'active' : ''}`}
+            />
+            <div 
+              className={`voice-wave voice-wave-3 ${(isListening || isProcessing) ? 'active' : ''}`}
+            />
+          </div>
+          
+          <div className="demo-controls">
+            <Button 
+              className="stop-demo-btn"
+              onClick={stopDemo}
+              size="large"
+            >
+              <StopOutlined /> End Call
+            </Button>
+          </div>
+          
+          {transcript && (
+            <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.5)', borderRadius: '1rem', color: '#4C2E76' }}>
+              <strong>You:</strong> {transcript}
+            </div>
+          )}
+          {botResponse && (
+            <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.5)', borderRadius: '1rem', color: '#4C2E76' }}>
+              <strong>Dattivox:</strong> {botResponse}
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
-};
+});
 
 export default OctoplanDemo;
