@@ -716,7 +716,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
     
     if (!bedrockRef.current) {
       console.error('Bedrock client not initialized');
-      return 'Hello! I\'m having trouble connecting right now. How can I help you with your appointment today?';
+      return 'Hello! I\'m having trouble connecting right now. How can I help you with your dental appointment today?';
     }
     
     const now = new Date();
@@ -724,7 +724,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
     const currentTime = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
     const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' });
     
-    const instruction = `You are an appointment assistant for ACME. Your job is to help users create, move, or cancel appointments by having a friendly, natural conversation.
+    const instruction = `You are an appointment assistant for Smiles By Maria, a dental clinic. Your job is to help patients create, move, or cancel dental appointments by having a friendly, natural conversation.
 
 **RULE: You must always respond in full, friendly conversational language — never describe actions. Speak directly to the user. You must answer in english only.**
 
@@ -733,15 +733,19 @@ const OctoplanDemo = forwardRef((props, ref) => {
 - Current time is ${currentTime}
 - Use this information to calculate dates when user says "tomorrow", "next week", "Monday", etc.
 
-### Services Available at ACME
-- Medical check-up (15 minutes)
-- Radio (10 minutes)
+### Services Available at Smiles By Maria
+- Dental consultation (30 minutes)
+- Dental cleaning (45 minutes)
+- Teeth whitening (60 minutes)
+- Root canal treatment (90 minutes)
+- Dental crown (60 minutes)
+- Emergency dental care (30 minutes)
 
 ### Conversation Flow
 - User already heard the introduction, continue the conversation naturally
-- Ask what service they need if not mentioned
+- Ask what dental service they need if not mentioned
 - Collect: service, date, time
-- Maintain a friendly conversation
+- Maintain a friendly, professional conversation appropriate for a dental clinic
 
 ### Creating appointments
 - Collect: service, date (dd/mm/yyyy), time (hh:mm:ss), duration (in minutes based on service)
@@ -823,7 +827,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
       return response.output.message.content[0].text;
     } catch (error) {
       console.error('Bedrock error:', error);
-      return 'Hello! I\'m your appointment assistant. How can I help you today - would you like to create, move, or cancel an appointment?';
+      return 'Hello! I\'m your dental appointment assistant at Smiles By Maria. How can I help you today - would you like to create, move, or cancel a dental appointment?';
     }
   };
 
@@ -1027,7 +1031,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
       console.log('Recognition started successfully');
       
       // Play introduction message
-      const intro = "Hello! Welcome to Dattivox. I'm your 24/7 virtual secretary. I can help you with appointments, answer questions, and handle your business needs. How can I help you today?";
+      const intro = "Hello! Welcome to Smiles By Maria dental clinic. I'm your virtual assistant. I can help you book dental appointments, answer questions about our services, and assist with your dental care needs. How can I help you today?";
       setBotResponse(intro);
       await speakText(intro);
     } catch (error) {
@@ -1102,8 +1106,8 @@ const OctoplanDemo = forwardRef((props, ref) => {
           <div className="demo-text-overlay">
             <h3>AI Voice Demo</h3>
             <div className="demo-content-row">
-              <img src="/Passport-guichet.png" alt="Passport Renewal" className="demo-image" />
-              <p>You are calling to renew your passport. Ask information about it and book an appointment.</p>
+              <img src="/smilebymaria.webp" alt="Smiles By Maria" className="demo-image" />
+              <p>You are calling Smiles By Maria dental clinic. Ask information about our services and book a dental appointment.</p>
             </div>
           </div>
           
@@ -1122,8 +1126,8 @@ const OctoplanDemo = forwardRef((props, ref) => {
           <div className="demo-text-overlay">
             <h3>AI Voice Demo</h3>
             <div className="demo-content-row">
-              <img src="/Passport-guichet.png" alt="Passport Renewal" className="demo-image" />
-              <p>You are calling to renew your passport. Ask information about it and book an appointment.</p>
+              <img src="/smiles-by-maria-logo.png" alt="Smiles By Maria" className="demo-image" />
+              <p>You are calling Smiles By Maria dental clinic. Ask information about our services and book a dental appointment.</p>
             </div>
           </div>
           
