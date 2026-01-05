@@ -270,7 +270,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
       // TEST DIRECT EC2: Testez avec ws:// (sans SSL)
       // const wsUrl = "ws://35.158.76.206:3000/demo";
       // PRODUCTION: Utilisez le load balancer avec wss://
-      const wsUrl = "wss://flavien-twilio-webhook.octoplan.ai/demo";
+      const wsUrl = "wss://twilio-webhook.octoplan.ai/demo";
       // Pour tester directement l'EC2 avec SSL (si vous avez un certificat)
       // const wsUrl = "wss://35.158.76.206:3000/demo";
 
