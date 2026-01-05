@@ -20,6 +20,7 @@ const OctoplanDemo = () => {
   const [botResponse, setBotResponse] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('en'); // Langue pour le WebSocket
   
   const recognitionRef = useRef(null);
   const idleTimeoutRef = useRef(null);
@@ -41,6 +42,7 @@ const OctoplanDemo = () => {
   const currentAudioNodeRef = useRef(null);
   const audioQueueRef = useRef([]);
   const isPlayingAudioRef = useRef(false);
+  const selectedLanguageRef = useRef('en'); // Ref pour accéder à la langue depuis startDiscussion
 
 
 
@@ -132,6 +134,19 @@ const OctoplanDemo = () => {
     isIdleRef.current = true;
     setIsListening(false);
     console.log('✅ [CLIENT] Discussion stopped');
+  };
+
+  // Fonction pour changer la langue et l'envoyer au serveur
+  const handleLanguageChange = (lang) => {
+    setSelectedLanguage(lang);
+    selectedLanguageRef.current = lang;
+    console.log(`🌍 Language changed to: ${lang}`);
+    
+    // Si le WebSocket est déjà ouvert, envoyer le message de langue
+    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+      socketRef.current.send(lang);
+      console.log(`📤 Sent language change to server: ${lang}`);
+    }
   };
 
   const startDiscussion = async () => {
@@ -356,6 +371,11 @@ const OctoplanDemo = () => {
         console.log('📊 [CLIENT] WebSocket extensions:', socket.extensions);
         console.log('📊 [CLIENT] WebSocket bufferedAmount:', socket.bufferedAmount);
 
+        // ✅ ENVOYER LA LANGUE DÈS QUE LA CONNEXION EST OUVERTE
+        const langToSend = selectedLanguageRef.current || 'en';
+        socket.send(langToSend);
+        console.log(`📤 [CLIENT] Sent initial language to server: ${langToSend}`);
+
         // Le serveur configure automatiquement les événements d'initialisation
         // On n'a pas besoin de les envoyer depuis le client
         console.log('⏳ [CLIENT] Waiting for server to configure session...');
@@ -364,6 +384,11 @@ const OctoplanDemo = () => {
         // Pas besoin de démarrer quoi que ce soit, le processor envoie automatiquement
         console.log('✅ [CLIENT] PCM capture is active via ScriptProcessorNode');
         console.log('🎤 [CLIENT] Audio is being captured and sent as PCM 16-bit');
+        
+        // Mettre à jour l'état
+        setIsIdle(false);
+        isIdleRef.current = false;
+        setIsListening(true);
       };
 
       // ✅ Fonction pour jouer la queue audio séquentiellement
@@ -1104,6 +1129,81 @@ const OctoplanDemo = () => {
                       style={{ height: '80px', marginBottom: '10px', filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))' }}
                     />
                     <p className="demo-subtitle">Experience your 24/7 virtual secretary</p>
+                    
+                    {/* ✅ BOUTONS DE SÉLECTION DE LANGUE */}
+                    <div style={{ 
+                      marginBottom: '20px', 
+                      display: 'flex', 
+                      gap: '10px', 
+                      justifyContent: 'center',
+                      flexWrap: 'wrap'
+                    }}>
+                      <button
+                        onClick={() => handleLanguageChange('en')}
+                        style={{
+                          padding: '8px 16px',
+                          borderRadius: '8px',
+                          border: selectedLanguage === 'en' ? '2px solid #1890ff' : '1px solid #d9d9d9',
+                          background: selectedLanguage === 'en' ? '#e6f7ff' : 'white',
+                          cursor: 'pointer',
+                          fontSize: '14px',
+                          fontWeight: selectedLanguage === 'en' ? 'bold' : 'normal',
+                          transition: 'all 0.3s',
+                          color: selectedLanguage === 'en' ? '#1890ff' : '#333'
+                        }}
+                      >
+                        🇬🇧 English
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange('fr')}
+                        style={{
+                          padding: '8px 16px',
+                          borderRadius: '8px',
+                          border: selectedLanguage === 'fr' ? '2px solid #1890ff' : '1px solid #d9d9d9',
+                          background: selectedLanguage === 'fr' ? '#e6f7ff' : 'white',
+                          cursor: 'pointer',
+                          fontSize: '14px',
+                          fontWeight: selectedLanguage === 'fr' ? 'bold' : 'normal',
+                          transition: 'all 0.3s',
+                          color: selectedLanguage === 'fr' ? '#1890ff' : '#333'
+                        }}
+                      >
+                        🇫🇷 Français
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange('nl')}
+                        style={{
+                          padding: '8px 16px',
+                          borderRadius: '8px',
+                          border: selectedLanguage === 'nl' ? '2px solid #1890ff' : '1px solid #d9d9d9',
+                          background: selectedLanguage === 'nl' ? '#e6f7ff' : 'white',
+                          cursor: 'pointer',
+                          fontSize: '14px',
+                          fontWeight: selectedLanguage === 'nl' ? 'bold' : 'normal',
+                          transition: 'all 0.3s',
+                          color: selectedLanguage === 'nl' ? '#1890ff' : '#333'
+                        }}
+                      >
+                        🇳🇱 Nederlands
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange('de')}
+                        style={{
+                          padding: '8px 16px',
+                          borderRadius: '8px',
+                          border: selectedLanguage === 'de' ? '2px solid #1890ff' : '1px solid #d9d9d9',
+                          background: selectedLanguage === 'de' ? '#e6f7ff' : 'white',
+                          cursor: 'pointer',
+                          fontSize: '14px',
+                          fontWeight: selectedLanguage === 'de' ? 'bold' : 'normal',
+                          transition: 'all 0.3s',
+                          color: selectedLanguage === 'de' ? '#1890ff' : '#333'
+                        }}
+                      >
+                        🇩🇪 Deutsch
+                      </button>
+                    </div>
+                    
                     <button className="start-button" onClick={startDiscussion}>
                       <PhoneOutlined /> Start Voice Demo
                     </button>
