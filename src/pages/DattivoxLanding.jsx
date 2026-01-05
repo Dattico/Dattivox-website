@@ -92,17 +92,49 @@ const DattivoxLanding = () => {
 
   return (
     <div className="dattivox-landing">
-      <div className="language-selector">
-        <Select
-          value={language}
-          onChange={setLanguage}
-          suffixIcon={<GlobalOutlined />}
-          options={[
-            { value: 'en', label: 'EN' },
-            { value: 'fr', label: 'FR' }
-          ]}
-        />
-      </div>
+      <header className="top-header">
+        <div className="header-content">
+          <div className="header-logo">
+            <div className="kLogoMark" aria-hidden>
+              <span className="kBars">
+                <i /><i /><i /><i />
+              </span>
+            </div>
+            <img src="/Dattivox - logo.svg" alt="Dattivox" className="header-logo-img" />
+          </div>
+          <div className="header-actions">
+            <Button 
+              className="header-demo-btn"
+              onClick={() => setShowDemoModal(true)}
+              size="large"
+            >
+              Try Demo
+            </Button>
+            <Button 
+              className="header-contact-btn"
+              onClick={() => scrollToSection('contact-section')}
+              size="large"
+            >
+              Contact Us
+            </Button>
+            <a href={`tel:${TEST_PHONE_NUMBER}`} className="header-phone-btn">
+              <PhoneOutlined /> Try Demo Call
+            </a>
+
+            <Select
+              value={language}
+              onChange={setLanguage}
+              suffixIcon={<GlobalOutlined />}
+              className="header-language"
+              options={[
+                { value: 'en', label: 'EN' },
+                { value: 'fr', label: 'FR' }
+              ]}
+            />
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-background">
@@ -134,98 +166,51 @@ const DattivoxLanding = () => {
         </div>
 
         <div className="hero-content">
-          <motion.div
-            className="hero-text"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
+          <div className="kHeroLeft">
             <motion.div
-              className="hero-logo"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-            >
-              <img src="/Dattivox - logo.svg" alt="Dattivox" className="logo" />
-            </motion.div>
-            
-            <motion.h1 
-              className="hero-title"
-              initial={{ opacity: 0, y: 30 }}
+              className="hero-text"
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <span itemProp="name">{t('hero.title')}</span>
-            </motion.h1>
-            
-            <motion.p 
-              className="hero-subtitle"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              itemProp="description"
-            >
-              {t('hero.subtitle')}
-            </motion.p>
-
-            <motion.div 
-              className="test-showcase"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <div className="showcase-header">
-                <span className="showcase-badge">{t('hero.liveDemo')}</span>
-                <h3>{t('hero.trySecretary')}</h3>
-              </div>
-              <div className="showcase-description">
-                {t('hero.showcaseDescription')}
-              </div>
-              <a href={`tel:${TEST_PHONE_NUMBER}`} className="test-number" itemProp="telephone">
-                <PhoneOutlined /> {TEST_PHONE_NUMBER}
-                <br />
-                <span className="call-action">{t('hero.tapToCall')}</span>
-                <br />
-                <span className="free-call-notice">{t('hero.freeCall')}</span>
-              </a>
-              <div className="showcase-features">
-                <div className="feature-item">
-                  <CalendarOutlined className="feature-icon" />
-                  <span>{t('showcase.bookAppointments')}</span>
-                </div>
-                <div className="feature-item">
-                  <QuestionCircleOutlined className="feature-icon" />
-                  <span>{t('showcase.askQuestions')}</span>
-                </div>
-                <div className="feature-item">
-                  <ClockCircleOutlined className="feature-icon" />
-                  <span>{t('showcase.available247')}</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="hero-buttons"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <Button 
-                size="large"
-                className="cta-primary-large"
-                onClick={() => setShowDemoModal(true)}
+              <motion.h1 
+                className="hero-title"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               >
-                Try Demo <ArrowRightOutlined />
-              </Button>
-              <Button 
-                size="large"
-                className="cta-secondary"
-                onClick={() => scrollToSection('contact-section')}
+                <span itemProp="name">{t('hero.title')}</span>
+              </motion.h1>
+              
+              <motion.p 
+                className="hero-subtitle"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                itemProp="description"
               >
-                {t('hero.contactUs')}
-              </Button>
+                {t('hero.subtitle')}
+              </motion.p>
+
+              <motion.div 
+                className="hero-buttons"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                <Button 
+                  size="large"
+                  className="cta-primary-large"
+                  onClick={() => setShowDemoModal(true)}
+                >
+                  Try Demo <ArrowRightOutlined />
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
+          <div className="kHeroRight">
+            <div className="kCallPulse" />
+          </div>
         </div>
       </section>
 
