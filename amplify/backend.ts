@@ -1,11 +1,13 @@
 import { defineBackend } from '@aws-amplify/backend';
 import { data } from './data/resource';
 import { sendContactEmail } from './function/sendContactEmail/resource';
+import { health } from './function/health/resource';
 import { PolicyStatement, Effect } from 'aws-cdk-lib/aws-iam';
 
 export const backend = defineBackend({
   data,
   sendContactEmail,
+  health,
 });
 
 // Configure sendContactEmail Lambda permissions

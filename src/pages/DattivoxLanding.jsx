@@ -51,6 +51,7 @@ const DattivoxLanding = () => {
           message: values.message,
           to: CONTACT_EMAIL,
         },
+        authMode: 'apiKey', // Explicitly use API key authentication
       });
 
       if (result.data?.sendContactEmail?.success) {

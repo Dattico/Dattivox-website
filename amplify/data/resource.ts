@@ -7,6 +7,13 @@ const schema = a.schema({
     messageId: a.string(),
   }),
   
+  // Query type required by AppSync - simple health check
+  health: a
+    .query()
+    .returns(a.string())
+    .authorization((allow) => [allow.publicApiKey()])
+    .handler(a.handler.function('health')),
+  
   sendContactEmail: a
     .mutation()
     .arguments({

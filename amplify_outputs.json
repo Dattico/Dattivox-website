@@ -1,10 +1,101 @@
 {
-  "version": "1",
   "data": {
-    "aws_project_region": "eu-central-1",
-    "aws_appsync_graphqlEndpoint": "",
-    "aws_appsync_apiKey": "",
-    "aws_appsync_authenticationType": "API_KEY"
-  }
+    "url": "https://jwcppdlrb5dfbk5zprf56mgo6y.appsync-api.eu-central-1.amazonaws.com/graphql",
+    "aws_region": "eu-central-1",
+    "api_key": "da2-hlyxpzxnxva2jb5js7ozfpkdme",
+    "default_authorization_type": "API_KEY",
+    "authorization_types": [
+      "AWS_IAM"
+    ],
+    "model_introspection": {
+      "version": 1,
+      "models": {},
+      "enums": {},
+      "nonModels": {
+        "ContactEmailResponse": {
+          "name": "ContactEmailResponse",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": true,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "messageId": {
+              "name": "messageId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        }
+      },
+      "queries": {
+        "health": {
+          "name": "health",
+          "isArray": false,
+          "type": "String",
+          "isRequired": false
+        }
+      },
+      "mutations": {
+        "sendContactEmail": {
+          "name": "sendContactEmail",
+          "isArray": false,
+          "type": {
+            "nonModel": "ContactEmailResponse"
+          },
+          "isRequired": false,
+          "arguments": {
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "company": {
+              "name": "company",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "phone": {
+              "name": "phone",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "to": {
+              "name": "to",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "version": "1.4"
 }
-
