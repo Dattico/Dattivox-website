@@ -1,6 +1,12 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
 const schema = a.schema({
+  ContactEmailResponse: a.customType({
+    success: a.boolean().required(),
+    message: a.string().required(),
+    messageId: a.string(),
+  }),
+  
   sendContactEmail: a
     .mutation()
     .arguments({
@@ -14,7 +20,7 @@ const schema = a.schema({
     // Public access (no authentication required for contact form)
     .authorization((allow) => [allow.publicApiKey()])
     .handler(a.handler.function('sendContactEmail'))
-    .returns(a.json()),
+    .returns(a.ref('ContactEmailResponse')),
 });
 
 export type Schema = ClientSchema<typeof schema>;

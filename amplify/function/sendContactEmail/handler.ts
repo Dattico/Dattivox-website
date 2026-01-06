@@ -26,8 +26,8 @@ export const handler: Handler = async (event: any) => {
   try {
     console.log("Contact form event received", JSON.stringify(event, null, 2));
     
-    // GraphQL passes arguments in event.arguments
-    const { name, email, company, phone, message, to } = event.arguments || event;
+    // GraphQL passes arguments in event.arguments (like Callie)
+    const { name, email, company, phone, message, to } = event.arguments;
     
     // Validate required fields
     if (!name || !email || !message) {
@@ -117,16 +117,20 @@ Timestamp: ${new Date().toISOString()}
     
     console.log("SES Response:", JSON.stringify(result, null, 2));
 
+    // Return directly for GraphQL (matches ContactEmailResponse type)
     return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: "Email sent successfully",
-        messageId: result.MessageId,
-      }),
+      success: true,
+      message: "Email sent successfully",
+      messageId: result.MessageId || 'sent',
     };
   } catch (error) {
     console.error("Error sending contact email:", error);
-    throw error;
+    // Return error response instead of throwing (like Callie example)
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "Error while sending email",
+      messageId: null,
+    };
   }
 };
 
