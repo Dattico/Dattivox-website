@@ -430,7 +430,7 @@ const DattivoxLanding = () => {
             <button className="demo-modal-close" onClick={closeDemoModal}>
               ×
             </button>
-            <OctoplanDemo ref={octoplanDemoRef} />
+            <OctoplanDemo ref={octoplanDemoRef} language={language} />
           </div>
         </div>
       )}
