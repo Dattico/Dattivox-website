@@ -28,12 +28,7 @@ const DattivoxLanding = () => {
   const handleContactSubmit = async (values) => {
     setIsSubmitting(true);
     try {
-      // Wait for Amplify to be configured before generating client
-      if (window.__amplifyConfigPromise) {
-        await window.__amplifyConfigPromise;
-      }
-      
-      // Generate client when needed (after Amplify is configured)
+      // Generate client (Amplify is configured in main.jsx)
       const client = generateClient();
       
       // Call GraphQL mutation to send email (via Lambda like Octoplan)

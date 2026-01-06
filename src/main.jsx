@@ -3,32 +3,19 @@ import ReactDOM from 'react-dom/client';
 import { Amplify } from 'aws-amplify';
 import App from './App.jsx';
 
-// Configure Amplify with backend outputs
+// Configure Amplify with backend outputs (like Octoplan/Callie)
 // In Amplify Hosting: automatically generated during build
 // In local dev: run 'npm run sandbox' to generate it
-let amplifyConfigured = false;
-const amplifyConfigPromise = (async () => {
-  try {
-    // Load at runtime, not at build time (prevents build errors)
-    const response = await fetch('/amplify_outputs.json');
-    if (response.ok) {
-      const outputs = await response.json();
-      Amplify.configure(outputs);
-      amplifyConfigured = true;
-    } else {
-      if (import.meta.env.DEV) {
-        console.warn('⚠️  amplify_outputs.json not found. Run "npm run sandbox" to generate it.');
-      }
-    }
-  } catch (error) {
-    if (import.meta.env.DEV) {
-      console.warn('⚠️  Could not load amplify_outputs.json:', error);
-    }
+try {
+  const outputs = await import(/* @vite-ignore */ '../amplify_outputs.json');
+  Amplify.configure(outputs.default || outputs);
+} catch (error) {
+  // Silently fail in production (file should always exist in Amplify Hosting)
+  // In development, check console for warnings
+  if (import.meta.env.DEV) {
+    console.warn('⚠️  amplify_outputs.json not found. Run "npm run sandbox" to generate it.');
   }
-})();
-
-// Export promise so components can wait for Amplify to be configured
-window.__amplifyConfigPromise = amplifyConfigPromise;
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
