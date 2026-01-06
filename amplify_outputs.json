@@ -1,0 +1,10 @@
+{
+  "version": "1",
+  "data": {
+    "aws_project_region": "eu-central-1",
+    "aws_appsync_graphqlEndpoint": "",
+    "aws_appsync_apiKey": "",
+    "aws_appsync_authenticationType": "API_KEY"
+  }
+}
+
