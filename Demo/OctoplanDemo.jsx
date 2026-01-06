@@ -12,7 +12,9 @@ const { Title, Text, Paragraph } = Typography;
 
 const OctoplanDemo = forwardRef((props, ref) => {
   const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
-  const { language } = useLanguage();
+  const { language: propLanguage } = props;
+  const { language: contextLanguage } = useLanguage();
+  const language = propLanguage || contextLanguage || 'en';
   const t = getTranslation(language) || {};
   const [isListening, setIsListening] = useState(false);
   const [isIdle, setIsIdle] = useState(true);
@@ -270,9 +272,10 @@ const OctoplanDemo = forwardRef((props, ref) => {
       // TEST DIRECT EC2: Testez avec ws:// (sans SSL)
       // const wsUrl = "ws://35.158.76.206:3000/demo";
       // PRODUCTION: Utilisez le load balancer avec wss://
-      const wsUrl = "wss://twilio-webhook.octoplan.ai/demo";
+      // ✅ Ajouter la langue dans l'URL pour que le serveur puisse utiliser la bonne voix et le bon prompt
+      const wsUrl = `wss://flavien-twilio-webhook.octoplan.ai/demo?lang=${language}`;
       // Pour tester directement l'EC2 avec SSL (si vous avez un certificat)
-      // const wsUrl = "wss://35.158.76.206:3000/demo";
+      // const wsUrl = `wss://35.158.76.206:3000/demo?lang=${language}`;
 
       console.log('🔌 [CLIENT] Connecting to WebSocket:', wsUrl);
       socket = new WebSocket(wsUrl);
