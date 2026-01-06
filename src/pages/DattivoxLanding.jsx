@@ -7,8 +7,6 @@ import OctoplanDemo from '../../Demo/OctoplanDemo';
 import { useTranslation } from '../hooks/useTranslation';
 import './DattivoxLanding.css';
 
-const client = generateClient();
-
 const { TextArea } = Input;
 
 // Configuration constants
@@ -30,6 +28,14 @@ const DattivoxLanding = () => {
   const handleContactSubmit = async (values) => {
     setIsSubmitting(true);
     try {
+      // Wait for Amplify to be configured before generating client
+      if (window.__amplifyConfigPromise) {
+        await window.__amplifyConfigPromise;
+      }
+      
+      // Generate client when needed (after Amplify is configured)
+      const client = generateClient();
+      
       // Call GraphQL mutation to send email (via Lambda like Octoplan)
       const result = await client.mutations.sendContactEmail({
         name: values.name,
