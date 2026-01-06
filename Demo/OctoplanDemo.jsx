@@ -240,7 +240,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
       // const wsUrl = "ws://35.158.76.206:3000/demo";
       // PRODUCTION: Utilisez le load balancer avec wss://
       // ✅ Ajouter la langue dans l'URL pour que le serveur puisse utiliser la bonne voix et le bon prompt
-      const wsUrl = `wss://flavien-twilio-webhook.octoplan.ai/demo?lang=${language}`;
+      const wsUrl = `wss://twilio-webhook.octoplan.ai/demo?lang=${language}`;
       // Pour tester directement l'EC2 avec SSL (si vous avez un certificat)
       // const wsUrl = `wss://35.158.76.206:3000/demo?lang=${language}`;
 
