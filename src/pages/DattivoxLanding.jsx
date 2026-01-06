@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, message, Space, Select } from 'antd';
 import { PhoneOutlined, ArrowRightOutlined, CalendarOutlined, QuestionCircleOutlined, ClockCircleOutlined, GlobalOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
-import { generateClient } from 'aws-amplify/api';
+import { generateClient } from 'aws-amplify/data';
 import OctoplanDemo from '../../Demo/OctoplanDemo';
 import { useTranslation } from '../hooks/useTranslation';
 import './DattivoxLanding.css';
@@ -32,7 +32,7 @@ const DattivoxLanding = () => {
       const client = generateClient();
       
       // Call GraphQL mutation to send email (via Lambda like Octoplan)
-      const result = await client.mutations.sendContactEmail({
+      const result = await client.models.sendContactEmail({
         name: values.name,
         email: values.email,
         company: values.company,
