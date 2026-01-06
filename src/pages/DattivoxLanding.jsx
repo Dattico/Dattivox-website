@@ -32,20 +32,32 @@ const DattivoxLanding = () => {
       const client = generateClient();
       
       // Call GraphQL mutation to send email (via Lambda like Octoplan)
-      const result = await client.models.sendContactEmail({
-        name: values.name,
-        email: values.email,
-        company: values.company,
-        phone: values.phone,
-        message: values.message,
-        to: CONTACT_EMAIL,
+      // Using graphql method for custom mutations in Amplify Gen 2
+      const result = await client.graphql({
+        query: `
+          mutation SendContactEmail($name: String!, $email: String!, $company: String, $phone: String, $message: String!, $to: String) {
+            sendContactEmail(name: $name, email: $email, company: $company, phone: $phone, message: $message, to: $to) {
+              success
+              message
+              messageId
+            }
+          }
+        `,
+        variables: {
+          name: values.name,
+          email: values.email,
+          company: values.company,
+          phone: values.phone,
+          message: values.message,
+          to: CONTACT_EMAIL,
+        },
       });
 
-      if (result.data) {
+      if (result.data?.sendContactEmail?.success) {
         message.success(t('contact.successMessage'));
         form.resetFields();
       } else {
-        throw new Error(result.errors?.[0]?.message || 'Failed to send message');
+        throw new Error(result.data?.sendContactEmail?.message || result.errors?.[0]?.message || 'Failed to send message');
       }
     } catch (error) {
       console.error('Contact form error:', error);
