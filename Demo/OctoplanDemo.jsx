@@ -12,7 +12,9 @@ const { Title, Text, Paragraph } = Typography;
 
 const OctoplanDemo = forwardRef((props, ref) => {
   const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
-  const { language } = useLanguage();
+  const { language: propLanguage } = props;
+  const { language: contextLanguage } = useLanguage();
+  const language = propLanguage || contextLanguage || 'en';
   const t = getTranslation(language) || {};
   const [isListening, setIsListening] = useState(false);
   const [isIdle, setIsIdle] = useState(true);
@@ -47,7 +49,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
   const startDemo = () => {
     // Si une instance est déjà en cours, arrêter d'abord
     if (!isIdleRef.current) {
-      console.log('Stopping existing demo before starting new one...');
       // Annuler tout redémarrage en attente
       if (restartTimeoutRef.current) {
         clearTimeout(restartTimeoutRef.current);
@@ -75,8 +76,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
 
   // Fonction pour arrêter proprement startDiscussion
   const stopDiscussion = () => {
-    console.log('🛑 [CLIENT] Stopping discussion...');
-    
     // Fermer le WebSocket
     if (socketRef.current) {
       try {
@@ -84,7 +83,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
           socketRef.current.close();
         }
       } catch (e) {
-        console.error('Error closing socket:', e);
+        // Error closing socket
       }
       socketRef.current = null;
     }
@@ -103,7 +102,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
         currentAudioNodeRef.current.stop();
         currentAudioNodeRef.current.disconnect();
       } catch (e) {
-        console.log('Audio node already stopped');
+        // Audio node already stopped
       }
       currentAudioNodeRef.current = null;
     }
@@ -113,14 +112,14 @@ const OctoplanDemo = forwardRef((props, ref) => {
       try {
         processorRef.current.disconnect();
       } catch (e) {
-        console.log('Processor already disconnected');
+        // Processor already disconnected
       }
       processorRef.current = null;
     }
     
     // Fermer l'audioContext
     if (audioContextRef.current) {
-      audioContextRef.current.close().catch(e => console.log('AudioContext close error:', e));
+      audioContextRef.current.close().catch(e => {});
       audioContextRef.current = null;
     }
     
@@ -131,13 +130,11 @@ const OctoplanDemo = forwardRef((props, ref) => {
     setIsIdle(true);
     isIdleRef.current = true;
     setIsListening(false);
-    console.log('✅ [CLIENT] Discussion stopped');
   };
 
   const startDiscussion = async () => {
     // Si une instance est déjà en cours, arrêter d'abord
     if (!isIdleRef.current) {
-      console.log('🔄 [CLIENT] Stopping existing discussion before starting new one...');
       stopDiscussion();
       // Attendre un peu pour que l'arrêt soit complet
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -166,14 +163,12 @@ const OctoplanDemo = forwardRef((props, ref) => {
             currentAudioNodeRef.current = null;
           } catch (error) {
             // Le node peut déjà être arrêté, ignorer l'erreur
-            console.log('⚠️ [CLIENT] Audio node already stopped');
           }
         }
         // Vider la queue
         audioQueueRef.current = [];
         isPlayingAudioRef.current = false;
         nextPlayTime = 0;
-        console.log('🛑 [CLIENT] Audio playback stopped (user interruption)');
       };
 
     // ✅ Fonction pour calculer le volume RMS (détection de voix)
@@ -186,29 +181,17 @@ const OctoplanDemo = forwardRef((props, ref) => {
     };
 
     try {
-      console.log('🎬 [CLIENT] Starting audio setup...');
-
       // 1. Ask politely for mic access
-      console.log('🎤 [CLIENT] Requesting microphone access...');
       mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaStreamRef.current = mediaStream; // Stocker dans ref
-      console.log('✅ [CLIENT] Microphone access granted');
-      console.log('📊 [CLIENT] MediaStream tracks:', mediaStream.getTracks().map(t => ({
-        kind: t.kind,
-        enabled: t.enabled,
-        readyState: t.readyState
-      })));
 
       // 2. AudioContext setup
-      console.log('🔊 [CLIENT] Creating AudioContext...');
       audioContext = new AudioContext({ sampleRate: 16000 }); // 16kHz pour Bedrock
       audioContextRef.current = audioContext; // Stocker dans ref
-      console.log('✅ [CLIENT] AudioContext created, sampleRate:', audioContext.sampleRate);
       const source = audioContext.createMediaStreamSource(mediaStream);
 
       // 3. Use ScriptProcessorNode to capture PCM 16-bit directly
       // (MediaRecorder génère du WebM, mais Bedrock a besoin de PCM)
-      console.log('📹 [CLIENT] Creating ScriptProcessorNode for PCM capture...');
       const bufferSize = 4096; // Taille du buffer
       processor = audioContext.createScriptProcessor(bufferSize, 1, 1);
       processorRef.current = processor; // Stocker dans ref
@@ -224,7 +207,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
             const voiceThreshold = 0.01; // Seuil de détection de voix (ajustable)
 
             if (rms > voiceThreshold) {
-              console.log('🎤 [CLIENT] User voice detected (RMS:', rms.toFixed(4), '), interrupting audio');
               stopAudioPlayback();
             }
           }
@@ -243,18 +225,8 @@ const OctoplanDemo = forwardRef((props, ref) => {
 
           try {
             socket.send(pcmData.buffer);
-            // Réduire les logs pour éviter le spam
-            if (audioChunkCount % 50 === 0) {
-              console.log(`📤 [CLIENT] Sent PCM chunk #${audioChunkCount}:`, {
-                size: pcmData.byteLength,
-                samples: pcmData.length,
-                sampleRate: audioContext.sampleRate,
-                totalChunks: audioChunkCount,
-                totalBytes: totalBytesSent
-              });
-            }
           } catch (error) {
-            console.error('❌ [CLIENT] Error sending PCM chunk:', error);
+            // Error sending PCM chunk
           }
         }
       };
@@ -263,18 +235,15 @@ const OctoplanDemo = forwardRef((props, ref) => {
       source.connect(processor);
       processor.connect(audioContext.destination);
 
-      console.log('✅ [CLIENT] ScriptProcessorNode created and connected');
-      console.log('📊 [CLIENT] Buffer size:', bufferSize, 'samples');
-
       // 4. WebSocket connection
       // TEST DIRECT EC2: Testez avec ws:// (sans SSL)
       // const wsUrl = "ws://35.158.76.206:3000/demo";
       // PRODUCTION: Utilisez le load balancer avec wss://
-      const wsUrl = "wss://flavien-twilio-webhook.octoplan.ai/demo";
+      // ✅ Ajouter la langue dans l'URL pour que le serveur puisse utiliser la bonne voix et le bon prompt
+      const wsUrl = `wss://twilio-webhook.octoplan.ai/demo?lang=${language}`;
       // Pour tester directement l'EC2 avec SSL (si vous avez un certificat)
-      // const wsUrl = "wss://35.158.76.206:3000/demo";
+      // const wsUrl = `wss://35.158.76.206:3000/demo?lang=${language}`;
 
-      console.log('🔌 [CLIENT] Connecting to WebSocket:', wsUrl);
       socket = new WebSocket(wsUrl);
       socketRef.current = socket; // Stocker dans ref
       
@@ -283,87 +252,35 @@ const OctoplanDemo = forwardRef((props, ref) => {
       isIdleRef.current = false;
       setIsListening(true);
 
-      // Log immédiatement après création
-      console.log('📊 [CLIENT] WebSocket created, initial readyState:', socket.readyState);
-      console.log('📊 [CLIENT] WebSocket URL:', socket.url);
-      console.log('📊 [CLIENT] WebSocket state meanings: 0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED');
-
-      // Vérifier l'état après un court délai
-      setTimeout(() => {
-        console.log('📊 [CLIENT] WebSocket state after 500ms:', socket.readyState);
-        if (socket.readyState === WebSocket.CONNECTING) {
-          console.log('⏳ [CLIENT] Still connecting...');
-        } else if (socket.readyState === WebSocket.OPEN) {
-          console.log('✅ [CLIENT] Connection opened!');
-        } else if (socket.readyState === WebSocket.CLOSED) {
-          console.log('❌ [CLIENT] Connection closed before opening');
-        }
-      }, 500);
-
       // 🔍 SOLUTION: Handler onmessage AVANT onopen pour détecter les messages de test
       // Certains serveurs envoient un message avant que onopen ne soit appelé
       // Ce handler sera remplacé par le handler principal dans onopen
       let messageHandlerSet = false;
       socket.onmessage = (event) => {
-        console.log('📥 [CLIENT] Received message (early handler):', {
-          data: typeof event.data === 'string' ? event.data : 'binary',
-          size: event.data instanceof Blob ? event.data.size : 'unknown',
-          readyState: socket.readyState,
-          messageHandlerSet: messageHandlerSet
-        });
-
         if (typeof event.data === 'string' && event.data === 'CONNECTION_ESTABLISHED') {
-          console.log('✅ [CLIENT] Server confirmed connection! Handshake completed.');
-          console.log('📊 [CLIENT] Current readyState:', socket.readyState);
-
-          // Si onopen n'a pas encore été appelé mais on reçoit un message,
-          // la connexion est fonctionnelle, onopen devrait être appelé bientôt
-          if (socket.readyState === WebSocket.CONNECTING) {
-            console.log('⏳ [CLIENT] Still in CONNECTING state, waiting for onopen...');
-          } else if (socket.readyState === WebSocket.OPEN) {
-            console.log('✅ [CLIENT] Connection is OPEN! onopen should be called soon.');
-          }
+          // Server confirmed connection
         }
 
         // Si le handler principal n'est pas encore défini, on ne fait rien d'autre
         // Il sera défini dans onopen
-        if (!messageHandlerSet) {
-          console.log('⏳ [CLIENT] Main message handler not set yet, waiting for onopen...');
-        }
       };
 
       // 🔍 SOLUTION: Timeout pour détecter si onopen n'est jamais appelé
       const connectionTimeout = setTimeout(() => {
         if (socket.readyState !== WebSocket.OPEN) {
-          console.error('❌ [CLIENT] Connection timeout! Handshake did not complete.');
-          console.error('❌ [CLIENT] Final state:', socket.readyState, {
-            0: 'CONNECTING',
-            1: 'OPEN',
-            2: 'CLOSING',
-            3: 'CLOSED'
-          }[socket.readyState]);
-          console.error('❌ [CLIENT] This indicates a problem with the WebSocket handshake.');
-          console.error('❌ [CLIENT] Possible causes: Load balancer timeout, proxy blocking, or server issue.');
+          // Connection timeout
         }
       }, 5000); // 5 secondes
 
       socket.onopen = () => {
         clearTimeout(connectionTimeout);
         messageHandlerSet = true; // Le handler principal va remplacer le handler temporaire
-        console.log('✅ [CLIENT] WebSocket connected successfully');
-        console.log('📊 [CLIENT] WebSocket readyState:', socket.readyState, '(OPEN = 1)');
-        console.log('📊 [CLIENT] WebSocket protocol:', socket.protocol);
-        console.log('📊 [CLIENT] WebSocket extensions:', socket.extensions);
-        console.log('📊 [CLIENT] WebSocket bufferedAmount:', socket.bufferedAmount);
 
         // Le serveur configure automatiquement les événements d'initialisation
         // On n'a pas besoin de les envoyer depuis le client
-        console.log('⏳ [CLIENT] Waiting for server to configure session...');
 
         // La capture PCM est déjà active via ScriptProcessorNode
         // Pas besoin de démarrer quoi que ce soit, le processor envoie automatiquement
-        console.log('✅ [CLIENT] PCM capture is active via ScriptProcessorNode');
-        console.log('🎤 [CLIENT] Audio is being captured and sent as PCM 16-bit');
       };
 
       // ✅ Fonction pour jouer la queue audio séquentiellement
@@ -394,7 +311,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
         const startTime = Math.max(currentTime, nextPlayTime);
 
         playNode.start(startTime);
-        console.log('🔊 [CLIENT] Playing audio chunk, duration:', audioBuffer.duration.toFixed(2) + 's', 'startTime:', startTime.toFixed(2));
 
         // Mettre à jour le temps de la prochaine lecture
         nextPlayTime = startTime + audioBuffer.duration;
@@ -403,7 +319,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
         playNode.onended = () => {
           isPlayingAudioRef.current = false;
           currentAudioNodeRef.current = null; // ✅ Nettoyer la référence
-          console.log('✅ [CLIENT] Audio chunk finished, queue length:', audioQueueRef.current.length);
           // Jouer le chunk suivant s'il y en a un
           if (audioQueueRef.current.length > 0) {
             playAudioQueue();
@@ -413,17 +328,11 @@ const OctoplanDemo = forwardRef((props, ref) => {
 
       // When server sends back audio (binary PCM) or test messages
       socket.onmessage = async (event) => {
-        console.log('📥 [CLIENT] Received message from server');
-        console.log('📊 [CLIENT] Message type:', typeof event.data);
-        console.log('📊 [CLIENT] Is Blob:', event.data instanceof Blob);
-        console.log('📊 [CLIENT] Is ArrayBuffer:', event.data instanceof ArrayBuffer);
-
         // Vérifier si c'est un message de test texte
         if (typeof event.data === 'string' || (event.data instanceof Blob && event.data.size < 100)) {
           const text = typeof event.data === 'string' ? event.data : await event.data.text();
-          console.log('✅ [CLIENT] Received text message from server:', text);
           if (text === 'CONNECTION_ESTABLISHED' || text === 'test') {
-            console.log('✅ [CLIENT] Server connection confirmed! WebSocket is working.');
+            // Server connection confirmed
           }
           return; // Ne pas traiter les messages de test comme de l'audio
         }
@@ -432,19 +341,12 @@ const OctoplanDemo = forwardRef((props, ref) => {
         try {
           let arrayBuf;
           if (event.data instanceof Blob) {
-            console.log('📊 [CLIENT] Converting Blob to ArrayBuffer, size:', event.data.size);
             arrayBuf = await event.data.arrayBuffer();
-            console.log('✅ [CLIENT] Blob converted, ArrayBuffer size:', arrayBuf.byteLength);
           } else if (event.data instanceof ArrayBuffer) {
             arrayBuf = event.data;
-            console.log('📊 [CLIENT] Received ArrayBuffer directly, size:', arrayBuf.byteLength);
           } else {
-            console.log('⚠️ [CLIENT] Received non-binary message:', typeof event.data);
-            console.log('📊 [CLIENT] Message content (first 100 chars):', String(event.data).substring(0, 100));
             return;
           }
-
-          console.log('🎵 [CLIENT] Processing PCM audio data, size:', arrayBuf.byteLength);
 
           // Le serveur envoie du PCM 16-bit (Int16Array)
           // Il faut créer un AudioBuffer directement depuis le PCM
@@ -456,22 +358,11 @@ const OctoplanDemo = forwardRef((props, ref) => {
           // ✅ IMPORTANT : Utiliser le sample rate réel de l'AudioContext
           // Si le navigateur ne supporte pas 16000 Hz, l'AudioContext utilisera un autre sample rate
           const actualSampleRate = audioContext.sampleRate;
-          console.log('📊 [CLIENT] AudioContext sampleRate:', actualSampleRate, 'Hz');
-          console.log('📊 [CLIENT] Bedrock sampleRate:', bedrockSampleRate, 'Hz');
 
           // Si les sample rates diffèrent, on doit faire une conversion
           // Pour l'instant, utilisons le sample rate de Bedrock (16000 Hz)
           // Le navigateur fera la conversion automatiquement si nécessaire
           const targetSampleRate = bedrockSampleRate;
-
-          console.log('📊 [CLIENT] PCM data:', {
-            samples: pcmData.length,
-            bedrockSampleRate: bedrockSampleRate,
-            audioContextSampleRate: actualSampleRate,
-            targetSampleRate: targetSampleRate,
-            channels: numberOfChannels,
-            duration: (pcmData.length / bedrockSampleRate).toFixed(2) + 's'
-          });
 
           // Créer un AudioBuffer depuis le PCM avec le sample rate de Bedrock
           const audioBuffer = audioContext.createBuffer(
@@ -489,64 +380,22 @@ const OctoplanDemo = forwardRef((props, ref) => {
             channelData[i] = Math.max(-1.0, Math.min(1.0, pcmData[i] / 32767.0));
           }
 
-          console.log('✅ [CLIENT] AudioBuffer created from PCM:', {
-            duration: audioBuffer.duration.toFixed(2) + 's',
-            sampleRate: audioBuffer.sampleRate,
-            numberOfChannels: audioBuffer.numberOfChannels,
-            length: audioBuffer.length
-          });
-
           // ✅ Ajouter à la queue et jouer séquentiellement
           audioQueueRef.current.push(audioBuffer);
           playAudioQueue();
         } catch (error) {
-          console.error('❌ [CLIENT] Error processing server message:', error);
-          console.error('❌ [CLIENT] Error details:', {
-            name: error.name,
-            message: error.message,
-            stack: error.stack
-          });
+          // Error processing server message
         }
       };
 
       socket.onerror = (error) => {
-        console.error('❌ [CLIENT] WebSocket error occurred');
-        console.error('❌ [CLIENT] Error object:', error);
-        console.error('❌ [CLIENT] Error type:', error.type);
-        console.error('❌ [CLIENT] Error target:', error.target);
-        console.error('❌ [CLIENT] WebSocket readyState on error:', socket.readyState);
-        console.error('❌ [CLIENT] WebSocket URL:', socket.url);
-        console.error('❌ [CLIENT] Attempted URL:', wsUrl);
-        if (error.target && error.target.url) {
-          console.error('❌ [CLIENT] Failed to connect to:', error.target.url);
-        }
-        // Afficher plus de détails si disponibles
-        if (error.target && error.target.readyState !== undefined) {
-          console.error('❌ [CLIENT] ReadyState:', error.target.readyState, {
-            0: 'CONNECTING',
-            1: 'OPEN',
-            2: 'CLOSING',
-            3: 'CLOSED'
-          }[error.target.readyState]);
-        }
+        // WebSocket error occurred
       };
 
       socket.onclose = (event) => {
-        console.log('🔌 [CLIENT] WebSocket closed', {
-          code: event.code,
-          reason: event.reason,
-          wasClean: event.wasClean,
-          timestamp: new Date().toISOString()
-        });
-        console.log('📊 [CLIENT] Final stats:', {
-          totalChunksSent: audioChunkCount,
-          totalBytesSent: totalBytesSent
-        });
-
         // Nettoyer le processor
         if (processor) {
           processor.disconnect();
-          console.log('🔌 [CLIENT] ScriptProcessorNode disconnected');
         }
 
         // ✅ Nettoyer la queue audio
@@ -559,10 +408,9 @@ const OctoplanDemo = forwardRef((props, ref) => {
         }
         audioQueueRef.current = [];
         isPlayingAudioRef.current = false;
-        console.log('🔌 [CLIENT] Audio queue cleared');
       };
     } catch (error) {
-      console.error('Audio setup failed:', error);
+      // Audio setup failed
     }
   }
   // Initialize speech recognition
@@ -584,8 +432,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
       recognitionRef.current.maxAlternatives = 1;
 
       recognitionRef.current.onresult = (event) => {
-        console.log('Speech recognition result received');
-        
         let interimTranscript = '';
         let finalTranscript = '';
         
@@ -599,7 +445,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
         
         // Interrupt bot if user starts speaking
         if ((interimTranscript || finalTranscript) && isSpeakingRef.current) {
-          console.log('User interrupted bot');
           if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
           }
@@ -607,39 +452,28 @@ const OctoplanDemo = forwardRef((props, ref) => {
           isSpeakingRef.current = false;
         }
         
-        console.log('Final transcript:', finalTranscript);
-        console.log('Interim transcript:', interimTranscript);
-        
         // Show live transcription
         setTranscript(finalTranscript + interimTranscript);
         
         if (finalTranscript) {
-          console.log('Calling handleUserMessage with:', finalTranscript);
           handleUserMessage(finalTranscript);
         }
       };
 
       recognitionRef.current.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
         if (event.error === 'not-allowed') {
           message.error(t.OctoplanDemo?.microphoneAccessDenied || 'Microphone access denied. Please allow microphone access and try again.');
           stopDemo();
-        } else if (event.error === 'aborted') {
-          console.log('Recognition aborted, likely due to stop');
-        } else {
-          console.log('Non-critical recognition error, will auto-restart');
         }
       };
 
       recognitionRef.current.onend = () => {
-        console.log('Recognition ended, isIdleRef:', isIdleRef.current);
         if (!isIdleRef.current) {
           // Restart if we're still supposed to be listening
           try {
-            console.log('Restarting recognition...');
             recognitionRef.current?.start();
           } catch (e) {
-            console.log('Recognition restart failed:', e);
+            // Recognition restart failed
           }
         }
       };
@@ -667,7 +501,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
         credentials: session.credentials
       });
     } catch (error) {
-      console.error('Bedrock init failed:', error);
+      // Bedrock init failed
     }
   };
 
@@ -707,16 +541,12 @@ const OctoplanDemo = forwardRef((props, ref) => {
   };
 
   const getBedrockResponse = async (userMessage) => {
-    console.log('Getting Bedrock response for:', userMessage);
-    
     if (!bedrockRef.current) {
-      console.log('Initializing Bedrock...');
       await initializeBedrock();
     }
     
     if (!bedrockRef.current) {
-      console.error('Bedrock client not initialized');
-      return 'Hello! I\'m having trouble connecting right now. How can I help you with your dental appointment today?';
+      return 'Hello! I\'m having trouble connecting right now. How can I help you with your appointment today?';
     }
     
     const now = new Date();
@@ -777,7 +607,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
     });
     
     try {
-      console.log('Sending to Bedrock...');
       const command = new ConverseCommand({
         modelId: 'anthropic.claude-3-haiku-20240307-v1:0',
         messages: conversationHistoryRef.current,
@@ -790,7 +619,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
       });
       
       const response = await bedrockRef.current.send(command);
-      console.log('Bedrock response:', response);
       
       const assistantMessage = { role: 'assistant', content: response.output.message.content };
       conversationHistoryRef.current.push(assistantMessage);
@@ -826,27 +654,18 @@ const OctoplanDemo = forwardRef((props, ref) => {
       
       return response.output.message.content[0].text;
     } catch (error) {
-      console.error('Bedrock error:', error);
-      return 'Hello! I\'m your dental appointment assistant at Smiles By Maria. How can I help you today - would you like to create, move, or cancel a dental appointment?';
+      return 'Hello! I\'m your appointment assistant. How can I help you today - would you like to create, move, or cancel an appointment?';
     }
   };
 
   const handleUserMessage = async (userMessage) => {
-    console.log('handleUserMessage called with:', userMessage);
-    console.log('isIdleRef.current:', isIdleRef.current);
-    console.log('userMessage.trim():', userMessage.trim());
-    
     if (!userMessage.trim()) {
-      console.log('Empty message, returning');
       return;
     }
     
     if (isIdleRef.current) {
-      console.log('Is idle, returning');
       return;
     }
-    
-    console.log('Processing message:', userMessage);
     
     // Stop any current audio
     if ('speechSynthesis' in window) {
@@ -863,11 +682,10 @@ const OctoplanDemo = forwardRef((props, ref) => {
       waitMusicRef.current.loop = true;
       waitMusicRef.current.volume = 0.3;
     }
-    waitMusicRef.current.play().catch(e => console.log('Music play failed:', e));
+    waitMusicRef.current.play().catch(e => {});
     
     try {
       const response = await getBedrockResponse(userMessage);
-      console.log('Bot response:', response);
       setBotResponse(response);
       
       // Stop wait music
@@ -878,7 +696,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
       
       await speakText(response);
     } catch (error) {
-      console.error('Error:', error);
       setBotResponse('Sorry, I had trouble processing that.');
       
       // Stop wait music on error
@@ -910,8 +727,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
       const getVoice = () => {
         const voices = window.speechSynthesis.getVoices();
         if (!selectedVoiceRef.current && voices.length > 0) {
-          console.log('Available voices:', voices.map(v => `${v.name} (${v.lang}) - Local: ${v.localService}`));
-          
           const { isEdge, isChrome, isSafari, isMac, isWindows } = getBrowserAndOS();
           
           if (isEdge) {
@@ -987,9 +802,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
       const voice = getVoice();
       if (voice) {
         utterance.voice = voice;
-        console.log('Using browser TTS voice:', voice.name, '- Lang:', voice.lang, '- Local:', voice.localService);
-      } else {
-        console.log('No voice selected for browser TTS');
       }
       
       utterance.onend = () => {
@@ -999,7 +811,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
       };
       
       utterance.onerror = (e) => {
-        console.error('Speech error:', e);
         setIsSpeaking(false);
         isSpeakingRef.current = false;
       };
@@ -1012,7 +823,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
   };
 
   const startListening = async () => {
-    console.log('Starting listening...');
     if (!recognitionRef.current) {
       message.error(t.OctoplanDemo?.speechNotSupported || 'Speech recognition not supported in this browser');
       return;
@@ -1026,16 +836,13 @@ const OctoplanDemo = forwardRef((props, ref) => {
     try {
       // Small delay to ensure previous stop completed
       await new Promise(resolve => setTimeout(resolve, 100));
-      console.log('Attempting to start recognition...');
       recognitionRef.current.start();
-      console.log('Recognition started successfully');
       
       // Play introduction message
       const intro = "Hello! Welcome to Smiles By Maria dental clinic. I'm your virtual assistant. I can help you book dental appointments, answer questions about our services, and assist with your dental care needs. How can I help you today?";
       setBotResponse(intro);
       await speakText(intro);
     } catch (error) {
-      console.error('Error starting recognition:', error);
       message.error(t.OctoplanDemo?.voiceRecognitionFailed || 'Failed to start voice recognition');
       setIsListening(false);
       isIdleRef.current = true;
@@ -1043,8 +850,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
   };
 
   const stopDemo = () => {
-    console.log('Stopping demo...');
-    
     // Arrêter aussi startDiscussion si elle est active
     if (socketRef.current || mediaStreamRef.current) {
       stopDiscussion();
@@ -1065,7 +870,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
       try {
         recognitionRef.current.stop();
       } catch (e) {
-        console.log('Error stopping recognition:', e);
+        // Error stopping recognition
       }
     }
     
