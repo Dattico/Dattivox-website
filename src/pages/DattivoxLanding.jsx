@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Form, Input, Button, message, Space, Select } from 'antd';
 import { PhoneOutlined, ArrowRightOutlined, CalendarOutlined, QuestionCircleOutlined, ClockCircleOutlined, GlobalOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
+import { generateClient } from 'aws-amplify/data';
 import OctoplanDemo from '../../Demo/OctoplanDemo';
 import { useTranslation } from '../hooks/useTranslation';
 import './DattivoxLanding.css';
@@ -36,46 +37,85 @@ const DattivoxLanding = () => {
 
   const handleContactSubmit = async (values) => {
     setIsSubmitting(true);
+    let result = null;
     try {
-      // Utiliser Web3Forms API (gratuit)
-      const web3formsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+      // Generate client (Amplify is configured in main.jsx)
+      const client = generateClient();
       
-      if (!web3formsAccessKey) {
-        console.error('VITE_WEB3FORMS_ACCESS_KEY is not defined');
-        throw new Error('Configuration manquante. Veuillez contacter le support.');
-      }
-
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          access_key: web3formsAccessKey,
-          subject: `Nouveau message de contact - ${values.name}`,
-          from_name: values.name,
-          from_email: values.email,
+      // Call GraphQL mutation to send email (via Lambda like Octoplan)
+      // Using graphql method for custom mutations in Amplify Gen 2
+      result = await client.graphql({
+        query: `
+          mutation SendContactEmail($name: String!, $email: String!, $company: String, $phone: String, $message: String!, $to: String) {
+            sendContactEmail(name: $name, email: $email, company: $company, phone: $phone, message: $message, to: $to) {
+              success
+              message
+              messageId
+            }
+          }
+        `,
+        variables: {
           name: values.name,
           email: values.email,
-          company: values.company || 'Non fourni',
-          phone: values.phone || 'Non fourni',
+          company: values.company,
+          phone: values.phone,
           message: values.message,
-          to: import.meta.env.VITE_CONTACT_EMAIL || 'info@dattico.com'
-        })
+          to: CONTACT_EMAIL,
+        },
+        authMode: 'apiKey', // Explicitly use API key authentication
       });
 
-      const result = await response.json();
+      // Check for GraphQL errors first
+      if (result.errors && result.errors.length > 0) {
+        const firstError = result.errors[0];
+        const errorMessage = firstError?.message || firstError?.errorType || 'Unknown error';
+        console.error('GraphQL errors:', JSON.stringify(result.errors, null, 2));
+        console.error('First error details:', JSON.stringify(firstError, null, 2));
+        throw new Error(errorMessage);
+      }
 
-      if (result.success) {
+      // Check if mutation was successful
+      if (result.data?.sendContactEmail?.success) {
         message.success(t('contact.successMessage'));
         form.resetFields();
       } else {
-        throw new Error(result.message || 'Erreur lors de l\'envoi du message');
+        const errorMsg = result.data?.sendContactEmail?.message || 'Failed to send message';
+        console.error('Mutation failed:', JSON.stringify(result.data?.sendContactEmail, null, 2));
+        throw new Error(errorMsg);
       }
     } catch (error) {
+      // Better error logging with JSON serialization
       console.error('Contact form error:', error);
-      const errorMessage = error.message || t('contact.errorMessage');
+      
+      // Log the GraphQL result if available
+      if (result) {
+        console.error('GraphQL result:', JSON.stringify(result, null, 2));
+        if (result.errors && result.errors.length > 0) {
+          console.error('GraphQL errors array:', JSON.stringify(result.errors, null, 2));
+          result.errors.forEach((err, index) => {
+            console.error(`Error ${index}:`, {
+              message: err.message,
+              errorType: err.errorType,
+              path: err.path,
+              locations: err.locations,
+              errorInfo: err.errorInfo,
+              data: err.data
+            });
+          });
+        }
+      }
+      
+      // Extract error message from various sources
+      let errorMessage = t('contact.errorMessage');
+      if (error?.message) {
+        errorMessage = error.message;
+      } else if (result?.errors?.[0]?.message) {
+        errorMessage = result.errors[0].message;
+      } else if (result?.errors?.[0]?.errorType) {
+        errorMessage = `Lambda error: ${result.errors[0].errorType}`;
+      }
+      
+      console.error('Final error message:', errorMessage);
       message.error(errorMessage);
     } finally {
       setIsSubmitting(false);
