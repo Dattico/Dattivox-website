@@ -37,27 +37,46 @@ const DattivoxLanding = () => {
   const handleContactSubmit = async (values) => {
     setIsSubmitting(true);
     try {
-      // Call API endpoint to send email
-      const response = await fetch('/.netlify/functions/contact', {
+      // Utiliser Web3Forms API (gratuit)
+      const web3formsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+      
+      if (!web3formsAccessKey) {
+        console.error('VITE_WEB3FORMS_ACCESS_KEY is not defined');
+        throw new Error('Configuration manquante. Veuillez contacter le support.');
+      }
+
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
-          ...values,
-          to: CONTACT_EMAIL,
-        }),
+          access_key: web3formsAccessKey,
+          subject: `Nouveau message de contact - ${values.name}`,
+          from_name: values.name,
+          from_email: values.email,
+          name: values.name,
+          email: values.email,
+          company: values.company || 'Non fourni',
+          phone: values.phone || 'Non fourni',
+          message: values.message,
+          to: import.meta.env.VITE_CONTACT_EMAIL || 'info@dattico.com'
+        })
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
         message.success(t('contact.successMessage'));
         form.resetFields();
       } else {
-        throw new Error('Failed to send message');
+        throw new Error(result.message || 'Erreur lors de l\'envoi du message');
       }
     } catch (error) {
       console.error('Contact form error:', error);
-      message.error(t('contact.errorMessage'));
+      const errorMessage = error.message || t('contact.errorMessage');
+      message.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
