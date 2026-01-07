@@ -27,13 +27,14 @@ const DattivoxLanding = () => {
 
   const handleContactSubmit = async (values) => {
     setIsSubmitting(true);
+    let result = null;
     try {
       // Generate client (Amplify is configured in main.jsx)
       const client = generateClient();
       
       // Call GraphQL mutation to send email (via Lambda like Octoplan)
       // Using graphql method for custom mutations in Amplify Gen 2
-      const result = await client.graphql({
+      result = await client.graphql({
         query: `
           mutation SendContactEmail($name: String!, $email: String!, $company: String, $phone: String, $message: String!, $to: String) {
             sendContactEmail(name: $name, email: $email, company: $company, phone: $phone, message: $message, to: $to) {
@@ -56,8 +57,10 @@ const DattivoxLanding = () => {
 
       // Check for GraphQL errors first
       if (result.errors && result.errors.length > 0) {
-        const errorMessage = result.errors[0]?.message || 'Unknown error';
-        console.error('GraphQL errors:', result.errors);
+        const firstError = result.errors[0];
+        const errorMessage = firstError?.message || firstError?.errorType || 'Unknown error';
+        console.error('GraphQL errors:', JSON.stringify(result.errors, null, 2));
+        console.error('First error details:', JSON.stringify(firstError, null, 2));
         throw new Error(errorMessage);
       }
 
@@ -67,21 +70,42 @@ const DattivoxLanding = () => {
         form.resetFields();
       } else {
         const errorMsg = result.data?.sendContactEmail?.message || 'Failed to send message';
-        console.error('Mutation failed:', result.data?.sendContactEmail);
+        console.error('Mutation failed:', JSON.stringify(result.data?.sendContactEmail, null, 2));
         throw new Error(errorMsg);
       }
     } catch (error) {
-      // Better error logging
+      // Better error logging with JSON serialization
       console.error('Contact form error:', error);
-      console.error('Error details:', {
-        message: error?.message,
-        stack: error?.stack,
-        name: error?.name,
-        fullError: error
-      });
       
-      // Show user-friendly error message
-      const errorMessage = error?.message || t('contact.errorMessage');
+      // Log the GraphQL result if available
+      if (result) {
+        console.error('GraphQL result:', JSON.stringify(result, null, 2));
+        if (result.errors && result.errors.length > 0) {
+          console.error('GraphQL errors array:', JSON.stringify(result.errors, null, 2));
+          result.errors.forEach((err, index) => {
+            console.error(`Error ${index}:`, {
+              message: err.message,
+              errorType: err.errorType,
+              path: err.path,
+              locations: err.locations,
+              errorInfo: err.errorInfo,
+              data: err.data
+            });
+          });
+        }
+      }
+      
+      // Extract error message from various sources
+      let errorMessage = t('contact.errorMessage');
+      if (error?.message) {
+        errorMessage = error.message;
+      } else if (result?.errors?.[0]?.message) {
+        errorMessage = result.errors[0].message;
+      } else if (result?.errors?.[0]?.errorType) {
+        errorMessage = `Lambda error: ${result.errors[0].errorType}`;
+      }
+      
+      console.error('Final error message:', errorMessage);
       message.error(errorMessage);
     } finally {
       setIsSubmitting(false);
