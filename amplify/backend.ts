@@ -10,19 +10,19 @@ export const backend = defineBackend({
   health,
 });
 
-// Configure sendContactEmail Lambda permissions
+// Configure sendContactEmail Lambda permissions for SESv2
 const sendContactEmailLambda = backend.sendContactEmail.resources.lambda;
 sendContactEmailLambda.role?.addToPrincipalPolicy(
   new PolicyStatement({
     effect: Effect.ALLOW,
-    actions: ["ses:SendEmail", "ses:SendRawEmail"],
+    actions: [
+      "ses:SendEmail",
+      "ses:SendRawEmail",
+      "sesv2:SendEmail",
+      "sesv2:SendBulkEmail"
+    ],
     resources: ["*"],
   })
 );
 
-// Set environment variables for the Lambda
-sendContactEmailLambda.addEnvironment("REGION", "eu-central-1");
-sendContactEmailLambda.addEnvironment("DATTIVOX_FROM_EMAIL", process.env.DATTIVOX_FROM_EMAIL || "info@dattico.com");
-sendContactEmailLambda.addEnvironment("DATTIVOX_REPLY_TO", process.env.DATTIVOX_REPLY_TO || "info@dattico.com");
-sendContactEmailLambda.addEnvironment("DATTIVOX_CONTACT_EMAIL", process.env.DATTIVOX_CONTACT_EMAIL || "info@dattico.com");
 

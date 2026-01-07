@@ -16,6 +16,7 @@
     "@aws-amplify/ui-react": "^6.13.2",
     "@aws-sdk/client-bedrock-runtime": "^3.0.0",
     "@aws-sdk/client-ses": "^3.948.0",
+    "@aws-sdk/client-sesv2": "^3.964.0",
     "@dotenvx/dotenvx": "^1.51.4",
     "antd": "^5.12.8",
     "aws-amplify": "^6.15.9",

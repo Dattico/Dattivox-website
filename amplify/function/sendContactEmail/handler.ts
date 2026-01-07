@@ -1,5 +1,5 @@
 import type { Handler } from "aws-lambda";
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 
 // Email configuration from environment variables (like Callie)
 const DATTIVOX_FROM_EMAIL = process.env.DATTIVOX_FROM_EMAIL || "info@dattico.com";
@@ -7,7 +7,7 @@ const DATTIVOX_REPLY_TO = process.env.DATTIVOX_REPLY_TO || "info@dattico.com";
 const DATTIVOX_CONTACT_EMAIL = process.env.DATTIVOX_CONTACT_EMAIL || "info@dattico.com";
 const REGION = process.env.REGION || "eu-central-1";
 
-const sesClient = new SESClient({ region: REGION });
+const sesClient = new SESv2Client({ region: REGION });
 
 // Helper function to escape HTML (security - prevent XSS)
 function escapeHtml(text: string | undefined): string {
@@ -85,37 +85,38 @@ Submitted via Dattivox landing page
 Timestamp: ${new Date().toISOString()}
     `.trim();
 
-    // Send email using AWS SES
+    // Send email using AWS SESv2
     const params = {
-      Source: DATTIVOX_FROM_EMAIL,
+      FromEmailAddress: DATTIVOX_FROM_EMAIL,
       Destination: {
         ToAddresses: [toEmail]
       },
-      Message: {
-        Subject: {
-          Data: `New contact from ${name} - Dattivox`,
-          Charset: 'UTF-8'
-        },
-        Body: {
-          Html: {
-            Data: emailBody,
+      Content: {
+        Simple: {
+          Subject: {
+            Data: `New contact from ${name} - Dattivox`,
             Charset: 'UTF-8'
           },
-          Text: {
-            Data: textBody,
-            Charset: 'UTF-8'
+          Body: {
+            Html: {
+              Data: emailBody,
+              Charset: 'UTF-8'
+            },
+            Text: {
+              Data: textBody,
+              Charset: 'UTF-8'
+            }
           }
         }
       },
-      // Add Reply-To header if specified
-      ...(DATTIVOX_REPLY_TO && { ReplyToAddresses: [DATTIVOX_REPLY_TO] })
+      ReplyToAddresses: DATTIVOX_REPLY_TO ? [DATTIVOX_REPLY_TO] : undefined
     };
 
-    console.log("Sending contact email via AWS SES:", { from: DATTIVOX_FROM_EMAIL, to: toEmail });
+    console.log("Sending contact email via AWS SESv2:", { from: DATTIVOX_FROM_EMAIL, to: toEmail });
     const command = new SendEmailCommand(params);
     const result = await sesClient.send(command);
     
-    console.log("SES Response:", JSON.stringify(result, null, 2));
+    console.log("SESv2 Response:", JSON.stringify(result, null, 2));
 
     // Return directly for GraphQL (matches ContactEmailResponse type)
     return {
