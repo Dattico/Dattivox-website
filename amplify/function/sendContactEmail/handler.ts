@@ -26,12 +26,20 @@ export const handler: Handler = async (event: any) => {
   try {
     console.log("Contact form event received", JSON.stringify(event, null, 2));
     
-    // GraphQL passes arguments in event.arguments (like Callie)
-    const { name, email, company, phone, message, to } = event.arguments;
+    // GraphQL passes arguments in event.arguments or event.payload.arguments (Amplify Gen 2)
+    const arguments_ = event.arguments || event.payload?.arguments || event;
+    
+    console.log("Extracted arguments:", JSON.stringify(arguments_, null, 2));
+    
+    const { name, email, company, phone, message, to } = arguments_;
     
     // Validate required fields
     if (!name || !email || !message) {
-      throw new Error("Name, email, and message are required");
+      const missingFields = [];
+      if (!name) missingFields.push('name');
+      if (!email) missingFields.push('email');
+      if (!message) missingFields.push('message');
+      throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
     }
 
     // Destination email
