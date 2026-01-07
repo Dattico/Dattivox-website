@@ -54,15 +54,35 @@ const DattivoxLanding = () => {
         authMode: 'apiKey', // Explicitly use API key authentication
       });
 
+      // Check for GraphQL errors first
+      if (result.errors && result.errors.length > 0) {
+        const errorMessage = result.errors[0]?.message || 'Unknown error';
+        console.error('GraphQL errors:', result.errors);
+        throw new Error(errorMessage);
+      }
+
+      // Check if mutation was successful
       if (result.data?.sendContactEmail?.success) {
         message.success(t('contact.successMessage'));
         form.resetFields();
       } else {
-        throw new Error(result.data?.sendContactEmail?.message || result.errors?.[0]?.message || 'Failed to send message');
+        const errorMsg = result.data?.sendContactEmail?.message || 'Failed to send message';
+        console.error('Mutation failed:', result.data?.sendContactEmail);
+        throw new Error(errorMsg);
       }
     } catch (error) {
+      // Better error logging
       console.error('Contact form error:', error);
-      message.error(t('contact.errorMessage'));
+      console.error('Error details:', {
+        message: error?.message,
+        stack: error?.stack,
+        name: error?.name,
+        fullError: error
+      });
+      
+      // Show user-friendly error message
+      const errorMessage = error?.message || t('contact.errorMessage');
+      message.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
