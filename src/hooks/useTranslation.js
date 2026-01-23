@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react';
 import enTranslations from '../locales/en.json';
 import frTranslations from '../locales/fr.json';
+import nlTranslations from '../locales/nl.json';
+import deTranslations from '../locales/de.json';
 
 const translations = {
   en: enTranslations,
-  fr: frTranslations
+  fr: frTranslations,
+  nl: nlTranslations,
+  de: deTranslations
 };
 
 const detectBrowserLanguage = () => {
   const browserLang = navigator.language || navigator.languages[0];
   if (browserLang.startsWith('fr')) return 'fr';
+  if (browserLang.startsWith('nl')) return 'nl';
+  if (browserLang.startsWith('de')) return 'de';
   return 'en';
 };
 

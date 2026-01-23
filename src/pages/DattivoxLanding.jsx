@@ -182,7 +182,9 @@ const DattivoxLanding = () => {
               className="header-language"
               options={[
                 { value: 'en', label: 'EN' },
-                { value: 'fr', label: 'FR' }
+                { value: 'fr', label: 'FR' },
+                { value: 'nl', label: 'NL' },
+                { value: 'de', label: 'DE' }
               ]}
             />
           </div>

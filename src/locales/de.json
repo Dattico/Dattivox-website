@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "title": "Ihre 24/7 Virtuelle Sekretärin für Anrufe",
+    "subtitle": "Dattivox bearbeitet Telefonanrufe Tag und Nacht. Es antwortet, versteht die Anfrage des Anrufers und führt Workflows aus, alles was eine echte Sekretärin tun würde, 24/7 und ohne Verzögerung.",
+    "liveDemo": "Live-Demo",
+    "trySecretary": "Probieren Sie Unsere Virtuelle Sekretärin",
+    "showcaseDescription": "Rufen Sie jetzt an, um einen Termin zur Passverlängerung zu buchen oder stellen Sie Fragen zu unseren Dienstleistungen",
+    "tapToCall": "Tippen Sie zum Anrufen",
+    "freeCall": "Kostenloser Testanruf",
+    "contactUs": "Kontaktieren Sie Uns"
+  },
+  "showcase": {
+    "bookAppointments": "Termine buchen",
+    "askQuestions": "Fragen stellen",
+    "available247": "24/7 verfügbar"
+  },
+  "features": {
+    "title": "Ihre 24/7 Virtuelle Sekretärin",
+    "feature1": {
+      "title": "Eine 24/7 virtuelle Sekretärin für Telefonanrufe",
+      "description": "Verpassen Sie nie wieder einen Anruf mit 24/7 Verfügbarkeit"
+    },
+    "feature2": {
+      "title": "Bearbeitet Anrufe sofort, ohne Wartezeit",
+      "description": "Sofortige Reaktion auf jeden Anrufer, gewährleistet professionellen Service"
+    },
+    "feature3": {
+      "title": "Versteht Anfragen und erledigt Aufgaben",
+      "description": "Intelligente Bearbeitung der Bedürfnisse von Anrufern und automatisierte Aufgabenerfüllung"
+    },
+    "feature4": {
+      "title": "Bucht Termine und leitet Informationen weiter",
+      "description": "Nahtlose Planung und Informationsverwaltung für Ihr Unternehmen"
+    },
+    "feature5": {
+      "title": "Verbindet sich mit Ihren bestehenden Systemen",
+      "description": "Einfache Integration mit Ihren aktuellen Geschäftstools und Workflows"
+    },
+    "feature6": {
+      "title": "Funktioniert in mehreren Sprachen für europäische Märkte",
+      "description": "Mehrsprachige Unterstützung, um Ihre vielfältige Kundschaft zu bedienen"
+    }
+  },
+  "about": {
+    "title": "Über Uns",
+    "subtitle": "Das Team hinter Dattivox",
+    "description": "Wir sind ein KI-Unternehmen mit Sitz in Brüssel, das sich auf konversationelle KI-Lösungen für Unternehmen spezialisiert. Wir entwickeln intelligente virtuelle Assistenten, die verstehen, antworten und handeln — und machen Geschäftskommunikation nahtlos und 24/7 verfügbar.",
+    "mission": "Unsere Mission",
+    "missionText": "Geschäftskommunikation zu revolutionieren, indem KI-gestützte virtuelle Assistenten für jedes Unternehmen zugänglich gemacht werden, unabhängig von Größe oder technischer Expertise.",
+    "expertise": "Unsere Expertise",
+    "expertiseText": "Mit fundierter Expertise in natürlicher Sprachverarbeitung, Sprach-KI und Geschäftsautomatisierung schaffen wir Lösungen, die nicht nur Anrufe beantworten — sie verstehen Kontext, führen Aufgaben aus und integrieren sich nahtlos in bestehende Geschäftsworkflows.",
+    "location": "Mit Sitz in Brüssel, Belgien",
+    "locationText": "Bedienung von Unternehmen in ganz Europa mit mehrsprachigen KI-Lösungen"
+  },
+  "contact": {
+    "title": "Erhalten Sie Ihre 24/7 Virtuelle Sekretärin",
+    "subtitle": "Möchten Sie eine 24/7 virtuelle Sekretärin für Ihr Unternehmen? Erzählen Sie uns von Ihrem Anwendungsfall und wir melden uns mit den nächsten Schritten.",
+    "name": "Name",
+    "email": "E-Mail",
+    "company": "Unternehmen",
+    "phone": "Telefon",
+    "message": "Nachricht",
+    "namePlaceholder": "Ihr Name",
+    "emailPlaceholder": "ihre@email.com",
+    "companyPlaceholder": "Ihr Unternehmen (optional)",
+    "phonePlaceholder": "Ihre Telefonnummer (optional)",
+    "messagePlaceholder": "Erzählen Sie uns von Ihrem Anwendungsfall und wie eine 24/7 virtuelle Sekretärin Ihrem Unternehmen helfen könnte",
+    "sendMessage": "Nachricht senden",
+    "nameRequired": "Bitte geben Sie Ihren Namen ein",
+    "emailRequired": "Bitte geben Sie Ihre E-Mail ein",
+    "emailInvalid": "Bitte geben Sie eine gültige E-Mail ein",
+    "messageRequired": "Bitte geben Sie Ihre Nachricht ein",
+    "successMessage": "Nachricht erfolgreich gesendet! Wir melden uns bald bei Ihnen.",
+    "errorMessage": "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+  },
+  "footer": {
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutzrichtlinie",
+    "copyright": "© 2024 Dattivox. Alle Rechte vorbehalten.",
+    "madeBy": "Erstellt von Dattico",
+    "aboutUs": "Über Uns"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "title": "Uw 24/7 Virtuele Secretaresse voor Telefoongesprekken",
+    "subtitle": "Dattivox behandelt telefoongesprekken dag en nacht. Het beantwoordt, begrijpt het verzoek van de beller en voert workflows uit, alles wat een echte secretaresse zou doen, 24/7 en zonder vertraging.",
+    "liveDemo": "Live Demo",
+    "trySecretary": "Probeer Onze Virtuele Secretaresse",
+    "showcaseDescription": "Bel nu om een afspraak voor paspoortvernieuwing te boeken of stel vragen over onze diensten",
+    "tapToCall": "Tik om te bellen",
+    "freeCall": "Gratis testgesprek",
+    "contactUs": "Neem Contact Op"
+  },
+  "showcase": {
+    "bookAppointments": "Afspraken boeken",
+    "askQuestions": "Vragen stellen",
+    "available247": "24/7 beschikbaar"
+  },
+  "features": {
+    "title": "Uw 24/7 Virtuele Secretaresse",
+    "feature1": {
+      "title": "Een 24/7 virtuele secretaresse voor telefoongesprekken",
+      "description": "Mis nooit meer een oproep met 24/7 beschikbaarheid"
+    },
+    "feature2": {
+      "title": "Behandelt oproepen onmiddellijk, zonder wachttijd",
+      "description": "Onmiddellijke reactie op elke beller, waardoor professionele service wordt gegarandeerd"
+    },
+    "feature3": {
+      "title": "Begrijpt verzoeken en voltooit taken",
+      "description": "Intelligente verwerking van behoeften van bellers en geautomatiseerde uitvoering van taken"
+    },
+    "feature4": {
+      "title": "Boekt afspraken en routeert informatie",
+      "description": "Naadloze planning en informatiebeheer voor uw bedrijf"
+    },
+    "feature5": {
+      "title": "Verbindt met uw bestaande systemen",
+      "description": "Eenvoudige integratie met uw huidige bedrijfsinstrumenten en workflows"
+    },
+    "feature6": {
+      "title": "Werkt in meerdere talen voor Europese markten",
+      "description": "Meertalige ondersteuning om uw diverse klantenbestand te bedienen"
+    }
+  },
+  "about": {
+    "title": "Over Ons",
+    "subtitle": "Het team achter Dattivox",
+    "description": "Wij zijn een in Brussel gevestigd AI-bedrijf gespecialiseerd in conversationele AI-oplossingen voor bedrijven. We bouwen intelligente virtuele assistenten die begrijpen, reageren en handelen — waardoor zakelijke communicatie naadloos en 24/7 beschikbaar wordt.",
+    "mission": "Onze Missie",
+    "missionText": "Zakelijke communicatie revolutioneren door AI-aangedreven virtuele assistenten toegankelijk te maken voor elk bedrijf, ongeacht de grootte of technische expertise.",
+    "expertise": "Onze Expertise",
+    "expertiseText": "Met diepgaande expertise in natuurlijke taalverwerking, spraak-AI en bedrijfsautomatisering, creëren we oplossingen die niet alleen oproepen beantwoorden — ze begrijpen context, voeren taken uit en integreren naadloos met bestaande bedrijfsworkflows.",
+    "location": "Gevestigd in Brussel, België",
+    "locationText": "Bedrijven in heel Europa bedienen met meertalige AI-oplossingen"
+  },
+  "contact": {
+    "title": "Krijg Uw 24/7 Virtuele Secretaresse",
+    "subtitle": "Wilt u een 24/7 virtuele secretaresse voor uw bedrijf? Vertel ons over uw use case en we nemen contact met u op met de volgende stappen.",
+    "name": "Naam",
+    "email": "E-mail",
+    "company": "Bedrijf",
+    "phone": "Telefoon",
+    "message": "Bericht",
+    "namePlaceholder": "Uw naam",
+    "emailPlaceholder": "uw@email.com",
+    "companyPlaceholder": "Uw bedrijf (optioneel)",
+    "phonePlaceholder": "Uw telefoonnummer (optioneel)",
+    "messagePlaceholder": "Vertel ons over uw use case en hoe een 24/7 virtuele secretaresse uw bedrijf kan helpen",
+    "sendMessage": "Bericht verzenden",
+    "nameRequired": "Voer uw naam in",
+    "emailRequired": "Voer uw e-mail in",
+    "emailInvalid": "Voer een geldig e-mailadres in",
+    "messageRequired": "Voer uw bericht in",
+    "successMessage": "Bericht succesvol verzonden! We nemen binnenkort contact met u op.",
+    "errorMessage": "Verzenden van bericht mislukt. Probeer het opnieuw."
+  },
+  "footer": {
+    "terms": "Gebruiksvoorwaarden",
+    "privacy": "Privacybeleid",
+    "copyright": "© 2024 Dattivox. Alle rechten voorbehouden.",
+    "madeBy": "Gemaakt door Dattico",
+    "aboutUs": "Over Ons"
+  }
+}
