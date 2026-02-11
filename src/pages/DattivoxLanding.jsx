@@ -127,17 +127,17 @@ const DattivoxLanding = () => {
               onClick={() => setShowDemoModal(true)}
               size="large"
             >
-              Try Demo
+              {t('header.tryDemo')}
             </Button>
             <Button 
               className="header-contact-btn"
               onClick={() => scrollToSection('contact-section')}
               size="large"
             >
-              Contact Us
+              {t('header.contactUs')}
             </Button>
             <a href={`tel:${TEST_PHONE_NUMBER}`} className="header-phone-btn">
-              <PhoneOutlined /> Try Demo Call
+              <PhoneOutlined /> {t('header.tryDemoCall')}
             </a>
 
             <Select
@@ -147,7 +147,8 @@ const DattivoxLanding = () => {
               className="header-language"
               options={[
                 { value: 'en', label: 'EN' },
-                { value: 'fr', label: 'FR' }
+                { value: 'fr', label: 'FR' },
+                { value: 'nl', label: 'NL' }
               ]}
             />
           </div>
@@ -223,7 +224,7 @@ const DattivoxLanding = () => {
                   className="cta-primary-large"
                   onClick={openDemoModal}
                 >
-                  Try Demo <ArrowRightOutlined />
+                  {t('hero.tryDemoButton')} <ArrowRightOutlined />
                 </Button>
               </motion.div>
             </motion.div>
@@ -452,11 +453,11 @@ const DattivoxLanding = () => {
 
               
               <div className="demo-text-overlay">
-                <h3>AI Voice Demo</h3>
+                <h3>{t('demo.title')}</h3>
                 
                 <div className="demo-content-row">
                   <img src="/Passport-guichet.png" alt="Passport Renewal" className="demo-image" />
-                  <p>You are calling to renew your passport. Ask information about it and book an appointment."</p>
+                  <p>{t('demo.description')}</p>
                 </div>
               </div>
               
@@ -477,7 +478,7 @@ const DattivoxLanding = () => {
                   className={voiceInterval ? "stop-demo-btn" : "start-demo-btn"}
                   onClick={voiceInterval ? stopDemo : startDemo}
                 >
-                  {voiceInterval ? 'Stop Demo' : 'Start Demo'}
+                  {voiceInterval ? t('demo.stopDemo') : t('demo.startDemo')}
                 </Button>
               </div>
             </div>

@@ -1,4 +1,9 @@
 {
+  "header": {
+    "tryDemo": "Essayer la Démo",
+    "contactUs": "Nous Contacter",
+    "tryDemoCall": "Essayer l'Appel Démo"
+  },
   "hero": {
     "title": "Votre Secrétaire Virtuelle 24h/24 pour les Appels",
     "subtitle": "Dattivox gère les appels téléphoniques jour et nuit. Il répond, comprend la demande de l'appelant et exécute les workflows, tout ce qu'une vraie secrétaire ferait, 24h/24 et sans délais.",
@@ -7,7 +12,8 @@
     "showcaseDescription": "Appelez maintenant pour réserver un rendez-vous de rénovation de passeport ou poser des questions sur nos services",
     "tapToCall": "Appuyez pour appeler",
     "freeCall": "Appel test gratuit",
-    "contactUs": "Nous Contacter"
+    "contactUs": "Nous Contacter",
+    "tryDemoButton": "Essayer la Démo"
   },
   "showcase": {
     "bookAppointments": "Réserver des rendez-vous",
@@ -72,6 +78,12 @@
     "messageRequired": "Veuillez entrer votre message",
     "successMessage": "Message envoyé avec succès ! Nous vous recontacterons bientôt.",
     "errorMessage": "Échec de l'envoi du message. Veuillez réessayer."
+  },
+  "demo": {
+    "title": "Démo Vocale IA",
+    "description": "Vous appelez pour renouveler votre passeport. Demandez des informations à ce sujet et réservez un rendez-vous.",
+    "startDemo": "Démarrer la Démo",
+    "stopDemo": "Arrêter la Démo"
   },
   "footer": {
     "terms": "Conditions d'Utilisation",

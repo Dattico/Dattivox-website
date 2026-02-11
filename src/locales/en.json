@@ -1,4 +1,9 @@
 {
+  "header": {
+    "tryDemo": "Try Demo",
+    "contactUs": "Contact Us",
+    "tryDemoCall": "Try Demo Call"
+  },
   "hero": {
     "title": "Your 24/7 Virtual Secretary for Calls",
     "subtitle": "Dattivox handles phone calls day and night. It answers, understands the caller's request, and executes workflows, everything a real secretary would do, 24/7 and without delays.",
@@ -7,7 +12,8 @@
     "showcaseDescription": "Call now to book a passport renovation appointment or ask questions about our services",
     "tapToCall": "Tap to call",
     "freeCall": "Free test call",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "tryDemoButton": "Try Demo"
   },
   "showcase": {
     "bookAppointments": "Book appointments",
@@ -72,6 +78,12 @@
     "messageRequired": "Please enter your message",
     "successMessage": "Message sent successfully! We'll get back to you soon.",
     "errorMessage": "Failed to send message. Please try again."
+  },
+  "demo": {
+    "title": "AI Voice Demo",
+    "description": "You are calling to renew your passport. Ask information about it and book an appointment.",
+    "startDemo": "Start Demo",
+    "stopDemo": "Stop Demo"
   },
   "footer": {
     "terms": "Terms of Use",
