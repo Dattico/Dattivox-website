@@ -162,17 +162,17 @@ const DattivoxLanding = () => {
               onClick={() => setShowDemoModal(true)}
               size="large"
             >
-              Try Demo
+              {t('header.tryDemo')}
             </Button>
             <Button 
               className="header-contact-btn"
               onClick={() => scrollToSection('contact-section')}
               size="large"
             >
-              Contact Us
+              {t('header.contactUs')}
             </Button>
             <a href={`tel:${TEST_PHONE_NUMBER}`} className="header-phone-btn">
-              <PhoneOutlined /> Try Demo Call
+              <PhoneOutlined /> {t('header.tryDemoCall')}
             </a>
 
             <Select
@@ -182,7 +182,8 @@ const DattivoxLanding = () => {
               className="header-language"
               options={[
                 { value: 'en', label: 'EN' },
-                { value: 'fr', label: 'FR' }
+                { value: 'fr', label: 'FR' },
+                { value: 'nl', label: 'NL' }
               ]}
             />
           </div>
@@ -257,7 +258,7 @@ const DattivoxLanding = () => {
                   className="cta-primary-large"
                   onClick={() => setShowDemoModal(true)}
                 >
-                  Try Demo <ArrowRightOutlined />
+                  {t('hero.tryDemo')} <ArrowRightOutlined />
                 </Button>
               </motion.div>
             </motion.div>

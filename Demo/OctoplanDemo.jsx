@@ -905,10 +905,10 @@ const OctoplanDemo = forwardRef((props, ref) => {
       {isIdle ? (
         <>
           <div className="demo-text-overlay">
-            <h3>AI Voice Demo</h3>
+            <h3>{t.demo?.title || 'AI Voice Demo'}</h3>
             <div className="demo-content-row">
               <img src="/Passport-guichet.png" alt="Passport Renewal" className="demo-image" />
-              <p>You are calling to renew your passport. Ask information about it and book an appointment.</p>
+              <p>{t.demo?.description || 'You are calling to renew your passport. Ask information about it and book an appointment.'}</p>
             </div>
           </div>
           
@@ -918,17 +918,17 @@ const OctoplanDemo = forwardRef((props, ref) => {
               onClick={startDiscussion}
               size="large"
             >
-              <PhoneOutlined /> Start Voice Demo
+              <PhoneOutlined /> {t.demo?.startVoiceDemo || 'Start Voice Demo'}
             </Button>
           </div>
         </>
       ) : (
         <>
           <div className="demo-text-overlay">
-            <h3>AI Voice Demo</h3>
+            <h3>{t.demo?.title || 'AI Voice Demo'}</h3>
             <div className="demo-content-row">
               <img src="/Passport-guichet.png" alt="Passport Renewal" className="demo-image" />
-              <p>You are calling to renew your passport. Ask information about it and book an appointment.</p>
+              <p>{t.demo?.description || 'You are calling to renew your passport. Ask information about it and book an appointment.'}</p>
             </div>
           </div>
           
@@ -950,18 +950,18 @@ const OctoplanDemo = forwardRef((props, ref) => {
               onClick={stopDemo}
               size="large"
             >
-              <StopOutlined /> End Call
+              <StopOutlined /> {t.demo?.endCall || 'End Call'}
             </Button>
           </div>
           
           {transcript && (
             <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.5)', borderRadius: '1rem', color: '#4C2E76' }}>
-              <strong>You:</strong> {transcript}
+              <strong>{t.demo?.you || 'You'}:</strong> {transcript}
             </div>
           )}
           {botResponse && (
             <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(255,255,255,0.5)', borderRadius: '1rem', color: '#4C2E76' }}>
-              <strong>Dattivox:</strong> {botResponse}
+              <strong>{t.demo?.dattivox || 'Dattivox'}:</strong> {botResponse}
             </div>
           )}
         </>

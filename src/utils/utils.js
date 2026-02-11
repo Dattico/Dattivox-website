@@ -1,9 +1,13 @@
+import enTranslations from '../locales/en.json';
+import frTranslations from '../locales/fr.json';
+import nlTranslations from '../locales/nl.json';
+
+const translations = {
+  en: enTranslations,
+  fr: frTranslations,
+  nl: nlTranslations
+};
+
 export const getTranslation = (language) => {
-  return {
-    OctoplanDemo: {
-      microphoneAccessDenied: 'Microphone access denied. Please allow microphone access and try again.',
-      speechNotSupported: 'Speech recognition not supported in this browser',
-      voiceRecognitionFailed: 'Failed to start voice recognition'
-    }
-  };
+  return translations[language] || translations.en;
 };
