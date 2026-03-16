@@ -27,10 +27,15 @@
     "recharts": "^3.8.0"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.21.1",
+    "@aws-amplify/backend-cli": "^1.8.2",
+    "@aws-sdk/client-sesv2": "^3.1009.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
+    "aws-cdk-lib": "^2.243.0",
     "concurrently": "^8.2.2",
+    "constructs": "^10.5.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",

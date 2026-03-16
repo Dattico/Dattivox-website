@@ -1,0 +1,587 @@
+{
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5": [
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "amplify:deployment-type",
+          "value": "sandbox"
+        },
+        {
+          "key": "created-by",
+          "value": "amplify"
+        }
+      ]
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/deploymentType": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "deploymentType"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/region": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "region"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/definedFunctions": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "definedFunctions"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/awsAppsyncApiId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "awsAppsyncApiId"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/awsAppsyncApiEndpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "awsAppsyncApiEndpoint"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/awsAppsyncAuthenticationType": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "awsAppsyncAuthenticationType"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/awsAppsyncRegion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "awsAppsyncRegion"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/amplifyApiModelSchemaS3Uri": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyApiModelSchemaS3Uri"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/awsAppsyncApiKey": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "awsAppsyncApiKey"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/awsAppsyncAdditionalAuthenticationTypes": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "awsAppsyncAdditionalAuthenticationTypes"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-singleton",
+      "data": true
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 2
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-singleton",
+      "data": true
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 2
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/reference-to-amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionNestedStackfunctionNestedStackResource37D65D20Outputs.amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambda6C882F54Arn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifydattivoxwebsitesergiosandboxd04d9bd1b5functionNestedStackfunctionNestedStackResource37D65D20Outputsamplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambda6C882F54Arn"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/reference-to-amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionNestedStackfunctionNestedStackResource37D65D20Outputs.amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambdaServiceRoleF3031840Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifydattivoxwebsitesergiosandboxd04d9bd1b5functionNestedStackfunctionNestedStackResource37D65D20Outputsamplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambdaServiceRoleF3031840Ref"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPI6D071BB3ApiId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPI6D071BB3ApiId"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPI6D071BB3GraphQLUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPI6D071BB3GraphQLUrl"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB9FC3BD5FDestinationBucketArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB9FC3BD5FDestinationBucketArn"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPIDefaultApiKey9973FD15ApiKey": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPIDefaultApiKey9973FD15ApiKey"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data.NestedStack/data.NestedStackResource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "data7552DF31"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambda6C882F54Arn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambda6C882F54Arn"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambdaServiceRoleF3031840Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambdaServiceRoleF3031840Ref"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambda6C882F54Ref": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambda6C882F54Ref"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionhealthlambdaEC7F237BRef": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionhealthlambdaEC7F237BRef"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function.NestedStack/function.NestedStackResource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "function1351588B"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBC5D8AB21"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/modelIntrospectionSchemaBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "modelIntrospectionSchemaBucketF566B665"
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/AMPLIFY_DATA_GRAPHQL_ENDPOINTParameter/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AMPLIFYDATAGRAPHQLENDPOINTParameter1C2CBB16"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_BUCKET_NAMEParameter/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AMPLIFYDATAMODELINTROSPECTIONSCHEMABUCKETNAMEParameter47BF4F44"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_KEYParameter/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AMPLIFYDATAMODELINTROSPECTIONSCHEMAKEYParameterB6AEAE8A"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/AMPLIFY_DATA_DEFAULT_NAMEParameter/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AMPLIFYDATADEFAULTNAMEParameterE7C23CC4"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/GraphqlAccessPolicy1/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "GraphqlAccessPolicy11EF5618C"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/sendContactEmail-lambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "sendContactEmaillambdaEC57E740"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/health-lambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "healthlambda0BF7C8B5"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/GraphQLAPI/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataGraphQLAPI42A6FA33"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/GraphQLAPI/TransformerSchema": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataGraphQLAPITransformerSchemaFF50A789"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/GraphQLAPI/DefaultApiKey": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataGraphQLAPIDefaultApiKey1C8ED374"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/GraphQLAPI/NONE_DS": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "NONE_DS"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/HasEnvironmentParameter": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HasEnvironmentParameter"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/FnSendContactEmailLambdaDataSource": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "FnSendContactEmailLambdaDataSource"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/mutationSendContactEmailResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationsendContactEmailResolver"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Mutation.sendContactEmail"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/HealthLambdaDataSource": [
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "HealthLambdaDataSource"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/queryHealthResolver": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueryhealthResolver"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "Query.health"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/reference-to-amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionNestedStackfunctionNestedStackResource37D65D20Outputs.amplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambda6C882F54Arn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifydattivoxwebsitesergiosandboxd04d9bd1b5functionNestedStackfunctionNestedStackResource37D65D20Outputsamplifydattivoxwebsitesergiosandboxd04d9bd1b5functionsendContactEmaillambda6C882F54Arn"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/reference-to-amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPI6D071BB3ApiId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPI6D071BB3ApiId"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/reference-to-amplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPINONEDS85B3396BName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "referencetoamplifydattivoxwebsitesergiosandboxd04d9bd1b5dataamplifyDataGraphQLAPINONEDS85B3396BName"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack.NestedStack/FunctionDirectiveStack.NestedStackResource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataFunctionDirectiveStackNestedStackFunctionDirectiveStackNestedStackResource1246A302"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleA41FC8C2"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/modelIntrospectionSchemaBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "modelIntrospectionSchemaBucketPolicy4DAB0D15"
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/modelIntrospectionSchemaBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "modelIntrospectionSchemaBucketAutoDeleteObjectsCustomResourceFE57309F"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/modelIntrospectionSchemaBucketDeployment/AwsCliLayer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "modelIntrospectionSchemaBucketDeploymentAwsCliLayer13C432F7"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/modelIntrospectionSchemaBucketDeployment/CustomResource-1536MiB/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "modelIntrospectionSchemaBucketDeploymentCustomResource1536MiB104B97EC"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/sendContactEmail-lambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "sendContactEmaillambdaServiceRoleAECBC502"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/health-lambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "healthlambdaServiceRoleB53290E5"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/GraphQLAPI/NONE_DS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataGraphQLAPINONEDS684BF699"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "NONE_DS"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/FnSendContactEmailLambdaDataSource/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FnSendContactEmailLambdaDataSource"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "FnSendContactEmailLambdaDataSource"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/InvokeFnSendContactEmailLambdaDataSource/InvokeFnSendContactEmailLambdaDataSource.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InvokeFnSendContactEmailLambdaDataSourceInvokeFnSendContactEmailLambdaDataSourceAppSyncFunction8F8AE3BF"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "InvokeFnSendContactEmailLambdaDataSource"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/HealthLambdaDataSource/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HealthLambdaDataSource"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "HealthLambdaDataSource"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/InvokeHealthLambdaDataSource/InvokeHealthLambdaDataSource.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InvokeHealthLambdaDataSourceInvokeHealthLambdaDataSourceAppSyncFunction295D7532"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "InvokeHealthLambdaDataSource"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/MutationSendContactEmailAuthFN/MutationSendContactEmailAuthFN.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MutationSendContactEmailAuthFNMutationSendContactEmailAuthFNAppSyncFunction031598FD"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "MutationSendContactEmailAuthFN"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/QueryHealthAuthFN/QueryHealthAuthFN.AppSyncFunction": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "QueryHealthAuthFNQueryHealthAuthFNAppSyncFunctionF82EAF17"
+    },
+    {
+      "type": "graphqltransformer:resourceName",
+      "data": "QueryHealthAuthFN"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucket9CCB4ACA"
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleDefaultPolicyFF1C635B"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/function/sendContactEmail-lambda/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "sendContactEmaillambdaServiceRoleDefaultPolicy4BBC83C8"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/FnSendContactEmailLambdaDataSource/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FnSendContactEmailLambdaDataSourceServiceRoleFE1BB542"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/HealthLambdaDataSource/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HealthLambdaDataSourceServiceRole7904A43B"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketPolicyF1C1C548"
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketAutoDeleteObjectsCustomResource437F26F5"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/AwsCliLayer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentAwsCliLayerE322F905"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/CustomResource-1536MiB/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB21775929"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/FnSendContactEmailLambdaDataSource/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FnSendContactEmailLambdaDataSourceServiceRoleDefaultPolicy0AE29FDB"
+    }
+  ],
+  "/amplify-dattivoxwebsite-sergio-sandbox-d04d9bd1b5/data/amplifyData/FunctionDirectiveStack/HealthLambdaDataSource/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HealthLambdaDataSourceServiceRoleDefaultPolicyDFA7EF37"
+    }
+  ]
+}

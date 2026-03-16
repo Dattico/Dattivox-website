@@ -1,0 +1,14 @@
+type ContactEmailResponse @aws_api_key
+{
+  success: Boolean!
+  message: String!
+  messageId: String
+}
+
+type Mutation {
+  sendContactEmail(name: String!, email: String!, company: String, phone: String, message: String!, to: String): ContactEmailResponse @function(name: "FnSendContactEmail") @auth(rules: [{allow: public, provider: apiKey}])
+}
+
+type Query {
+  health: String @function(name: "health") @auth(rules: [{allow: public, provider: apiKey}])
+}

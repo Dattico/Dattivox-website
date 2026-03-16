@@ -1,0 +1,89 @@
+{
+    "version": 1,
+    "models": {},
+    "enums": {},
+    "nonModels": {
+        "ContactEmailResponse": {
+            "name": "ContactEmailResponse",
+            "fields": {
+                "success": {
+                    "name": "success",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "message": {
+                    "name": "message",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "messageId": {
+                    "name": "messageId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        }
+    },
+    "queries": {
+        "health": {
+            "name": "health",
+            "isArray": false,
+            "type": "String",
+            "isRequired": false
+        }
+    },
+    "mutations": {
+        "sendContactEmail": {
+            "name": "sendContactEmail",
+            "isArray": false,
+            "type": {
+                "nonModel": "ContactEmailResponse"
+            },
+            "isRequired": false,
+            "arguments": {
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true
+                },
+                "company": {
+                    "name": "company",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false
+                },
+                "phone": {
+                    "name": "phone",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false
+                },
+                "message": {
+                    "name": "message",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true
+                },
+                "to": {
+                    "name": "to",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false
+                }
+            }
+        }
+    }
+}
