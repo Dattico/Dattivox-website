@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConfigProvider } from 'antd';
-import DattivoxLanding from './pages/DattivoxLanding';
+import MunicipalityDemo from './pages/MunicipalityDemo';
 import './App.css';
 
 // Ant Design theme configuration to match Octoplan design system
@@ -37,7 +37,7 @@ function App() {
   return (
     <ConfigProvider theme={antdTheme}>
       <div className="App">
-        <DattivoxLanding />
+        <MunicipalityDemo />
       </div>
     </ConfigProvider>
   );
