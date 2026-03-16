@@ -93,5 +93,79 @@
     "copyright": "© 2024 Dattivox. All rights reserved.",
     "madeBy": "Made by Dattico",
     "aboutUs": "About Us"
+  },
+  "municipality": {
+    "heroTitle": "Your citizens call.",
+    "heroTitleBreak": "The assistant answers.",
+    "heroSubtitle": "Dattivox helps city halls guide citizens through administrative procedures automatically.",
+    "listening": "Listening",
+    "ticker": "You are a citizen and want information on the passport — what do you do?",
+    "endCall": "End Call",
+    "liveCall": "Live call",
+    "citizen": "Citizen",
+    "assistant": "Assistant",
+    "journeyTitle": "Design how your city hall responds.",
+    "journeySubtitle": "Configure the assistant's behaviour for each service — no code required.",
+    "conversationsTitle": "See every interaction.",
+    "conversationsSubtitle": "Full transparency on what the assistant said and why.",
+    "intent": "Intent",
+    "passportRenewal": "Passport renewal",
+    "appointmentBooked": "Appointment booked — Tuesday 10:30",
+    "roiTitle": "The ROI speaks for itself.",
+    "roiSubtitle": "Real numbers from municipalities using Dattivox.",
+    "staffHoursSaved": "Staff hours saved / year",
+    "costReduction": "Cost reduction",
+    "callsHandled": "Calls handled automatically",
+    "citizenSatisfaction": "Citizen satisfaction",
+    "closingTitle": "A city hall that answers every call.",
+    "closingText": "Dattivox helps municipalities provide faster, more accessible public services while reducing repetitive calls to staff.",
+    "scheduleDemonstration": "Schedule a demonstration",
+    "conversation": {
+      "msg1": "I would like to renew my passport.",
+      "msg2": "I can help with that. Would you like to schedule an appointment at city hall?",
+      "msg3": "Yes.",
+      "msg4": "The next available appointment is Tuesday at 10:30. Shall I confirm it?",
+      "msg5": "Yes please.",
+      "msg6": "Your appointment is confirmed. Please bring your current passport and a recent photo."
+    },
+    "flow": {
+      "passportRenewal": "Passport Renewal",
+      "phrases": "Phrases: 3",
+      "ask": "Ask",
+      "whatTypeDocument": "What type of document?",
+      "decision": "Decision",
+      "stolenOrLost": "Stolen or lost?",
+      "info": "Info",
+      "filePoliceReport": "File a police report",
+      "transfer": "Transfer",
+      "documentService": "Document Service",
+      "end": "End",
+      "conversationEnds": "Conversation ends",
+      "stolen": "Stolen",
+      "lost": "Lost",
+      "draft": "Draft",
+      "flowName": "Passport renewal flow"
+    },
+    "infoPanel": {
+      "title": "Info — File a police report",
+      "content": "Content",
+      "contentText": "You need to file a police report at the nearest station. Bring a valid ID if available.",
+      "contactEmail": "Contact Email",
+      "documents": "Documents",
+      "glossary": "Glossary",
+      "glossaryText": "Passport: Official travel document\nBiometric photo: 35x45mm\nPolice report: Declaration of loss/theft"
+    },
+    "log": {
+      "citizenSaid": "\"I want to renew my passport.\"",
+      "assistantSaid": "\"You will need your current passport and a recent photo.\""
+    },
+    "analytics": {
+      "topics": "Topics",
+      "language": "Language",
+      "sentiment": "Sentiment",
+      "callsThisMonth": "Calls this month",
+      "remaining": "remaining",
+      "callsOverTime": "Calls over time"
+    }
   }
 }

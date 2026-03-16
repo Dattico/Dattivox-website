@@ -26,20 +26,18 @@ const CONVERSATION = [
 
 // Analytics mock data — mirrors Analytics.jsx structure
 const LANGUAGE_DATA = [
-  { name: 'FR', value: 42 },
-  { name: 'NL', value: 28 },
-  { name: 'EN', value: 18 },
-  { name: 'DE', value: 12 },
+  { name: 'FR', value: 73 },
+  { name: 'NL', value: 27 },
 ];
 const LANGUAGE_COLORS = { FR: '#A286B9', NL: '#9EB9D8', EN: '#9EB9D8', DE: '#A286B9' };
 
 const SENTIMENT_DATA = [
-  { name: 'POSITIVE', value: 58 },
-  { name: 'NEUTRAL', value: 24 },
-  { name: 'NEGATIVE', value: 12 },
-  { name: 'MIXED', value: 6 },
+  { name: 'Postive', value: 58 },
+  { name: 'Netural', value: 24 },
+  { name: 'Negative', value: 12 },
+  { name: 'Mixed', value: 6 },
 ];
-const SENTIMENT_COLORS = { POSITIVE: '#34C759', NEGATIVE: '#FF3B30', NEUTRAL: '#8E8E93', MIXED: '#FF9500' };
+const SENTIMENT_COLORS = { Postive: '#34C759', Negative: '#FF3B30', Netural: '#8E8E93', Mixed: '#FF9500' };
 
 const TOPIC_DATA = [
   { name: 'Passport', value: 35 },
@@ -108,14 +106,26 @@ const useCountUp = (end, duration = 2000, inView = false, decimals = 0) => {
 
 // ── Waveform background ──
 
-const Waveform = () => (
-  <div className="md-waveform">
-    {Array.from({ length: 32 }).map((_, i) => (
+const Waveform = ({ active }) => (
+  <div className={`md-waveform ${active ? 'md-waveform--active' : ''}`}>
+    {active && <div className="md-waveform-glow" />}
+    {Array.from({ length: 48 }).map((_, i) => (
       <motion.div
         key={i}
         className="md-waveform-bar"
-        animate={{ scaleY: [0.3, 0.8 + Math.random() * 0.6, 0.3] }}
-        transition={{ duration: 1.5 + Math.random() * 1.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.05 }}
+        animate={active
+          ? {
+              scaleY: [0.15, 0.4 + Math.random() * 0.9, 0.15],
+              opacity: [0.3, 0.7 + Math.random() * 0.3, 0.3],
+            }
+          : { scaleY: [0.3, 0.8 + Math.random() * 0.6, 0.3] }
+        }
+        transition={{
+          duration: active ? 0.6 + Math.random() * 0.8 : 1.5 + Math.random() * 1.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: active ? Math.abs(i - 24) * 0.03 : i * 0.05,
+        }}
       />
     ))}
   </div>
@@ -448,9 +458,8 @@ const MunicipalityDemo = () => {
   const launchDemo = () => {
     setShowDemo(true);
     setTimeout(() => {
-      scrollToSection('demo-section');
-      setTimeout(() => octoplanDemoRef.current?.startDiscussion(), 600);
-    }, 100);
+      octoplanDemoRef.current?.startDiscussion();
+    }, 300);
   };
 
   const stopDemo = () => {
@@ -515,23 +524,37 @@ const MunicipalityDemo = () => {
       </header>
 
       {/* ── Hero ── */}
-      <section className="md-hero" ref={heroRef}>
-        <Waveform />
+      <section className={`md-hero ${showDemo ? 'md-hero--active' : ''}`} ref={heroRef}>
+        <Waveform active={showDemo} />
         <div className="md-hero-inner">
           <div className="md-hero-left">
+            {showDemo && (
+              <motion.div
+                className="md-listening-pill"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+              >
+                <span className="md-listening-dot" />
+                Listening
+              </motion.div>
+            )}
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
               Your citizens call.<br />The assistant answers.
             </motion.h1>
             <motion.p className="md-hero-sub" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}>
               Dattivox helps city halls guide citizens through administrative procedures automatically.
             </motion.p>
-            <motion.div className="md-hero-badge" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-              <span className="md-badge-label">Example scenario</span>
-              <span className="md-badge-title">Passport renewal</span>
-            </motion.div>
+            <AnimatePresence>
+              {showDemo && (
+                <motion.div className="md-ticker" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.4 }}>
+                  <span className="md-ticker-text">You are a citizen and want information on the passport — what do you do?</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
             <motion.div className="hero-buttons" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}>
-              <Button size="large" className="cta-primary-large" onClick={launchDemo}>
-                {t('hero.tryDemo')} <ArrowRightOutlined />
+              <Button size="large" className={showDemo ? 'cta-end-call' : 'cta-primary-large'} onClick={showDemo ? stopDemo : launchDemo}>
+                {showDemo ? 'End Call' : t('hero.tryDemo')} {showDemo ? null : <ArrowRightOutlined />}
               </Button>
             </motion.div>
           </div>
@@ -544,14 +567,11 @@ const MunicipalityDemo = () => {
         </div>
       </section>
 
-      {/* ── Inline Demo ── */}
+      {/* ── Inline Demo (hidden, no UI — voice only) ── */}
       {showDemo && (
-        <section id="demo-section" className="md-demo-section">
-          <div className="md-demo-container">
-            <button className="md-demo-close" onClick={stopDemo}>×</button>
-            <OctoplanDemo ref={octoplanDemoRef} language={language} />
-          </div>
-        </section>
+        <div style={{ display: 'none' }}>
+          <OctoplanDemo ref={octoplanDemoRef} language={language} />
+        </div>
       )}
 
       {/* ── Journey / Flow editor with inline info panel ── */}

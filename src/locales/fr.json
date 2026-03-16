@@ -93,5 +93,79 @@
     "copyright": "© 2024 Dattivox. Tous droits réservés.",
     "madeBy": "Créé par Dattico",
     "aboutUs": "À Propos"
+  },
+  "municipality": {
+    "heroTitle": "Vos citoyens appellent.",
+    "heroTitleBreak": "L'assistant répond.",
+    "heroSubtitle": "Dattivox aide les administrations communales à guider les citoyens dans leurs démarches administratives automatiquement.",
+    "listening": "Écoute en cours",
+    "ticker": "Vous êtes un citoyen et souhaitez des informations sur le passeport — que faites-vous ?",
+    "endCall": "Terminer l'appel",
+    "liveCall": "Appel en direct",
+    "citizen": "Citoyen",
+    "assistant": "Assistant",
+    "journeyTitle": "Configurez la façon dont votre commune répond.",
+    "journeySubtitle": "Configurez le comportement de l'assistant pour chaque service — aucun code requis.",
+    "conversationsTitle": "Visualisez chaque interaction.",
+    "conversationsSubtitle": "Transparence totale sur ce que l'assistant a dit et pourquoi.",
+    "intent": "Intention",
+    "passportRenewal": "Renouvellement de passeport",
+    "appointmentBooked": "Rendez-vous pris — Mardi 10h30",
+    "roiTitle": "Le ROI parle de lui-même.",
+    "roiSubtitle": "Des chiffres réels de communes utilisant Dattivox.",
+    "staffHoursSaved": "Heures de personnel économisées / an",
+    "costReduction": "Réduction des coûts",
+    "callsHandled": "Appels traités automatiquement",
+    "citizenSatisfaction": "Satisfaction des citoyens",
+    "closingTitle": "Une commune qui répond à chaque appel.",
+    "closingText": "Dattivox aide les communes à fournir des services publics plus rapides et plus accessibles tout en réduisant les appels répétitifs au personnel.",
+    "scheduleDemonstration": "Planifier une démonstration",
+    "conversation": {
+      "msg1": "Je souhaite renouveler mon passeport.",
+      "msg2": "Je peux vous aider. Souhaitez-vous prendre rendez-vous à la mairie ?",
+      "msg3": "Oui.",
+      "msg4": "Le prochain rendez-vous disponible est mardi à 10h30. Dois-je le confirmer ?",
+      "msg5": "Oui s'il vous plaît.",
+      "msg6": "Votre rendez-vous est confirmé. Veuillez apporter votre passeport actuel et une photo récente."
+    },
+    "flow": {
+      "passportRenewal": "Renouvellement de passeport",
+      "phrases": "Phrases : 3",
+      "ask": "Demander",
+      "whatTypeDocument": "Quel type de document ?",
+      "decision": "Décision",
+      "stolenOrLost": "Volé ou perdu ?",
+      "info": "Info",
+      "filePoliceReport": "Déposer une plainte",
+      "transfer": "Transfert",
+      "documentService": "Service des documents",
+      "end": "Fin",
+      "conversationEnds": "La conversation se termine",
+      "stolen": "Volé",
+      "lost": "Perdu",
+      "draft": "Brouillon",
+      "flowName": "Flux renouvellement passeport"
+    },
+    "infoPanel": {
+      "title": "Info — Déposer une plainte",
+      "content": "Contenu",
+      "contentText": "Vous devez déposer une plainte au commissariat le plus proche. Apportez une pièce d'identité valide si possible.",
+      "contactEmail": "Email de contact",
+      "documents": "Documents",
+      "glossary": "Glossaire",
+      "glossaryText": "Passeport : Document de voyage officiel\nPhoto biométrique : 35x45mm\nPlainte : Déclaration de perte/vol"
+    },
+    "log": {
+      "citizenSaid": "\"Je veux renouveler mon passeport.\"",
+      "assistantSaid": "\"Vous aurez besoin de votre passeport actuel et d'une photo récente.\""
+    },
+    "analytics": {
+      "topics": "Sujets",
+      "language": "Langue",
+      "sentiment": "Sentiment",
+      "callsThisMonth": "Appels ce mois-ci",
+      "remaining": "restants",
+      "callsOverTime": "Appels dans le temps"
+    }
   }
 }

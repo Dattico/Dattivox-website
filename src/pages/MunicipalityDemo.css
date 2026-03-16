@@ -49,10 +49,107 @@
 
 /* Waveform */
 .md-waveform {
-  position: absolute; inset: 0; display: flex; align-items: center;
-  justify-content: center; gap: 6px; opacity: 0.08; z-index: 1; pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.md-waveform-bar { width: 4px; height: 120px; background: #fff; border-radius: 4px; }
+.md-waveform--active {
+  opacity: 1;
+}
+
+/* Soft radial glow behind bars — like Siri's ambient light */
+.md-waveform-glow {
+  position: absolute;
+  width: 60%;
+  height: 50%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(158,185,216,0.25) 0%, rgba(162,134,185,0.15) 40%, transparent 70%);
+  filter: blur(60px);
+  animation: md-glow-breathe 3s ease-in-out infinite;
+}
+
+@keyframes md-glow-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.md-waveform-bar {
+  width: 5px; height: 140px; border-radius: 3px;
+  background: rgba(255,255,255,0.12);
+  transition: background 0.6s ease;
+}
+.md-waveform--active .md-waveform-bar {
+  background: linear-gradient(
+    180deg,
+    rgba(158,185,216,0.6) 0%,
+    rgba(255,255,255,0.45) 50%,
+    rgba(162,134,185,0.5) 100%
+  );
+}
+
+/* Hero active state — subtle background shift */
+.md-hero--active {
+  background: linear-gradient(135deg, hsl(270,30%,58%), hsl(270,46%,28%));
+  transition: background 1s ease;
+}
+
+/* Floating listening pill — inspired by Apple Live Activities */
+.md-listening-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  color: rgba(255,255,255,0.9);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  width: fit-content;
+  margin: 0 auto 1.5rem auto;
+}
+
+.md-listening-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34C759;
+  animation: md-dot-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes md-dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Ticker */
+.md-ticker {
+  margin-bottom: 1.6rem;
+}
+.md-ticker-text {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  backdrop-filter: blur(8px);
+}
 
 /* Conversation card */
 .md-conversation-card {
@@ -324,6 +421,26 @@
 .md-cta-large:hover {
   background: rgba(255,255,255,0.22) !important;
   transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+}
+
+/* End call button */
+.cta-end-call {
+  background: rgba(255, 59, 48, 0.9) !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 2rem;
+  padding: 2rem 5rem;
+  height: auto;
+  border-radius: 999px;
+  box-shadow: 0 14px 46px rgba(255, 59, 48, 0.3);
+  min-width: 400px;
+  transition: all 0.3s ease;
+}
+.cta-end-call:hover {
+  background: rgba(255, 59, 48, 1) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(255, 59, 48, 0.4);
 }
 
 /* ── Responsive ── */
