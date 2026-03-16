@@ -15,36 +15,41 @@ const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL || 'hello@dattico.com';
 
 // ── Mock data ──
 
-const CONVERSATION = [
-  { role: 'citizen', text: 'I would like to renew my passport.' },
-  { role: 'assistant', text: 'I can help with that. Would you like to schedule an appointment at city hall?' },
-  { role: 'citizen', text: 'Yes.' },
-  { role: 'assistant', text: 'The next available appointment is Tuesday at 10:30. Shall I confirm it?' },
-  { role: 'citizen', text: 'Yes please.' },
-  { role: 'assistant', text: 'Your appointment is confirmed. Please bring your current passport and a recent photo.' },
+const getConversation = (t) => [
+  { role: 'citizen', text: t('municipality.conversation.msg1') },
+  { role: 'assistant', text: t('municipality.conversation.msg2') },
+  { role: 'citizen', text: t('municipality.conversation.msg3') },
+  { role: 'assistant', text: t('municipality.conversation.msg4') },
+  { role: 'citizen', text: t('municipality.conversation.msg5') },
+  { role: 'assistant', text: t('municipality.conversation.msg6') },
 ];
 
 // Analytics mock data — mirrors Analytics.jsx structure
-const LANGUAGE_DATA = [
+const getLanguageData = () => [
   { name: 'FR', value: 73 },
   { name: 'NL', value: 27 },
 ];
 const LANGUAGE_COLORS = { FR: '#A286B9', NL: '#9EB9D8', EN: '#9EB9D8', DE: '#A286B9' };
 
-const SENTIMENT_DATA = [
-  { name: 'Postive', value: 58 },
-  { name: 'Netural', value: 24 },
-  { name: 'Negative', value: 12 },
-  { name: 'Mixed', value: 6 },
+const getSentimentData = (t) => [
+  { name: t('municipality.analytics.positive'), value: 58 },
+  { name: t('municipality.analytics.neutral'), value: 24 },
+  { name: t('municipality.analytics.negative'), value: 12 },
+  { name: t('municipality.analytics.mixed'), value: 6 },
 ];
-const SENTIMENT_COLORS = { Postive: '#34C759', Negative: '#FF3B30', Netural: '#8E8E93', Mixed: '#FF9500' };
+const getSentimentColors = (t) => ({
+  [t('municipality.analytics.positive')]: '#34C759',
+  [t('municipality.analytics.negative')]: '#FF3B30',
+  [t('municipality.analytics.neutral')]: '#8E8E93',
+  [t('municipality.analytics.mixed')]: '#FF9500'
+});
 
-const TOPIC_DATA = [
-  { name: 'Passport', value: 35 },
-  { name: 'ID Card', value: 25 },
-  { name: 'Certificate', value: 22 },
-  { name: 'Parking', value: 10 },
-  { name: 'Other', value: 8 },
+const getTopicData = (t) => [
+  { name: t('municipality.analytics.passport'), value: 35 },
+  { name: t('municipality.analytics.idCard'), value: 25 },
+  { name: t('municipality.analytics.certificate'), value: 22 },
+  { name: t('municipality.analytics.parking'), value: 10 },
+  { name: t('municipality.analytics.other'), value: 8 },
 ];
 const TOPIC_COLORS = ['#4C2E76', '#A286B9', '#9EB9D8', '#c4b5d4', '#d9d0e3'];
 
@@ -67,20 +72,20 @@ const NODE_H = 52;
 const CANVAS_W = 480;
 const CANVAS_H = 460;
 
-const FLOW_NODES = [
-  { id: 'trigger', type: 'trigger', label: 'Passport Renewal', sublabel: 'Phrases: 3', cx: 240, cy: 26, bg: '#E3F2FD', iconColor: '#1976D2', icon: 'bolt' },
-  { id: 'ask', type: 'ask', label: 'Ask', sublabel: 'What type of document?', cx: 240, cy: 106, bg: '#E8F4F8', iconColor: '#0288D1', icon: 'help_outline' },
-  { id: 'decision', type: 'decision', label: 'Decision', sublabel: 'Stolen or lost?', cx: 240, cy: 190, bg: '#FFF3E0', iconColor: '#F57C00', icon: 'account_tree' },
-  { id: 'info', type: 'info', label: 'Info', sublabel: 'File a police report', cx: 120, cy: 290, bg: '#E8F5E9', iconColor: '#388E3C', icon: 'info', clickable: true },
-  { id: 'transfer', type: 'transfer', label: 'Transfer', sublabel: 'Document Service', cx: 360, cy: 290, bg: '#F3E5F5', iconColor: '#7B1FA2', icon: 'phone_forwarded' },
-  { id: 'end', type: 'end', label: 'End', sublabel: 'Conversation ends', cx: 240, cy: 390, bg: '#f5f5f5', iconColor: '#666', icon: 'stop_circle' },
+const getFlowNodes = (t) => [
+  { id: 'trigger', type: 'trigger', label: t('municipality.flow.passportRenewal'), sublabel: t('municipality.flow.phrases'), cx: 240, cy: 26, bg: '#E3F2FD', iconColor: '#1976D2', icon: 'bolt' },
+  { id: 'ask', type: 'ask', label: t('municipality.flow.ask'), sublabel: t('municipality.flow.whatTypeDocument'), cx: 240, cy: 106, bg: '#E8F4F8', iconColor: '#0288D1', icon: 'help_outline' },
+  { id: 'decision', type: 'decision', label: t('municipality.flow.decision'), sublabel: t('municipality.flow.stolenOrLost'), cx: 240, cy: 190, bg: '#FFF3E0', iconColor: '#F57C00', icon: 'account_tree' },
+  { id: 'info', type: 'info', label: t('municipality.flow.info'), sublabel: t('municipality.flow.filePoliceReport'), cx: 120, cy: 290, bg: '#E8F5E9', iconColor: '#388E3C', icon: 'info', clickable: true },
+  { id: 'transfer', type: 'transfer', label: t('municipality.flow.transfer'), sublabel: t('municipality.flow.documentService'), cx: 360, cy: 290, bg: '#F3E5F5', iconColor: '#7B1FA2', icon: 'phone_forwarded' },
+  { id: 'end', type: 'end', label: t('municipality.flow.end'), sublabel: t('municipality.flow.conversationEnds'), cx: 240, cy: 390, bg: '#f5f5f5', iconColor: '#666', icon: 'stop_circle' },
 ];
 
-const FLOW_EDGES = [
+const getFlowEdges = (t) => [
   { from: 'trigger', to: 'ask' },
   { from: 'ask', to: 'decision' },
-  { from: 'decision', to: 'info', label: 'Stolen' },
-  { from: 'decision', to: 'transfer', label: 'Lost' },
+  { from: 'decision', to: 'info', label: t('municipality.flow.stolen') },
+  { from: 'decision', to: 'transfer', label: t('municipality.flow.lost') },
   { from: 'info', to: 'end' },
   { from: 'transfer', to: 'end' },
 ];
@@ -133,7 +138,8 @@ const Waveform = ({ active }) => (
 
 // ── Looping conversation ──
 
-const LoopingConversation = ({ inView }) => {
+const LoopingConversation = ({ inView, t }) => {
+  const conversation = getConversation(t);
   const [visibleCount, setVisibleCount] = useState(0);
   const [cycle, setCycle] = useState(0);
 
@@ -141,21 +147,20 @@ const LoopingConversation = ({ inView }) => {
     if (!inView) return;
     setVisibleCount(0);
     const timers = [];
-    CONVERSATION.forEach((_, i) => {
+    conversation.forEach((_, i) => {
       timers.push(setTimeout(() => setVisibleCount(i + 1), i * 1400));
     });
-    // After all shown, wait 3s then restart
     timers.push(setTimeout(() => {
       setVisibleCount(0);
       setCycle(c => c + 1);
-    }, CONVERSATION.length * 1400 + 3000));
+    }, conversation.length * 1400 + 3000));
     return () => timers.forEach(clearTimeout);
   }, [inView, cycle]);
 
   return (
     <div className="md-card-body">
       <AnimatePresence mode="popLayout">
-        {CONVERSATION.slice(0, visibleCount).map((msg, i) => (
+        {conversation.slice(0, visibleCount).map((msg, i) => (
           <motion.div
             key={`${cycle}-${i}`}
             className={`md-bubble md-bubble--${msg.role}`}
@@ -164,7 +169,7 @@ const LoopingConversation = ({ inView }) => {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35 }}
           >
-            <span className="md-bubble-label">{msg.role === 'citizen' ? 'Citizen' : 'Assistant'}</span>
+            <span className="md-bubble-label">{msg.role === 'citizen' ? t('municipality.citizen') : t('municipality.assistant')}</span>
             <p>{msg.text}</p>
           </motion.div>
         ))}
@@ -175,7 +180,9 @@ const LoopingConversation = ({ inView }) => {
 
 // ── Flow editor mock ──
 
-const FlowEditorMock = ({ inView, onNodeClick, onActiveNode }) => {
+const FlowEditorMock = ({ inView, onNodeClick, onActiveNode, t }) => {
+  const flowNodes = getFlowNodes(t);
+  const flowEdges = getFlowEdges(t);
   const [activeIdx, setActiveIdx] = useState(-1);
 
   useEffect(() => {
@@ -183,14 +190,13 @@ const FlowEditorMock = ({ inView, onNodeClick, onActiveNode }) => {
     let i = 0;
     const interval = setInterval(() => {
       setActiveIdx(i);
-      onActiveNode?.(FLOW_NODES[i]);
+      onActiveNode?.(flowNodes[i]);
       i++;
-      if (i >= FLOW_NODES.length) i = 0;
+      if (i >= flowNodes.length) i = 0;
     }, 900);
     return () => clearInterval(interval);
   }, [inView]);
 
-  // Edge helper: get bottom-center and top-center of nodes
   const getBottom = (n) => ({ x: n.cx, y: n.cy + NODE_H });
   const getTop = (n) => ({ x: n.cx, y: n.cy });
 
@@ -198,15 +204,14 @@ const FlowEditorMock = ({ inView, onNodeClick, onActiveNode }) => {
     <div className="md-flow-editor">
       <div className="md-flow-toolbar">
         <span className="material-icons" style={{ fontSize: 16, opacity: 0.5 }}>add_circle_outline</span>
-        <span className="md-flow-toolbar-label">Passport renewal flow</span>
-        <span className="md-flow-toolbar-badge">Draft</span>
+        <span className="md-flow-toolbar-label">{t('municipality.flow.flowName')}</span>
+        <span className="md-flow-toolbar-badge">{t('municipality.flow.draft')}</span>
       </div>
       <div className="md-flow-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
-        {/* Edges — same px coordinate space as nodes */}
         <svg className="md-flow-svg" viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`} preserveAspectRatio="xMidYMid meet">
-          {FLOW_EDGES.map((edge, i) => {
-            const from = FLOW_NODES.find(n => n.id === edge.from);
-            const to = FLOW_NODES.find(n => n.id === edge.to);
+          {flowEdges.map((edge, i) => {
+            const from = flowNodes.find(n => n.id === edge.from);
+            const to = flowNodes.find(n => n.id === edge.to);
             const p1 = getBottom(from);
             const p2 = getTop(to);
             const midY = (p1.y + p2.y) / 2;
@@ -234,8 +239,7 @@ const FlowEditorMock = ({ inView, onNodeClick, onActiveNode }) => {
           })}
         </svg>
 
-        {/* Nodes — positioned in same px space */}
-        {FLOW_NODES.map((node, i) => {
+        {flowNodes.map((node, i) => {
           const isActive = i === activeIdx;
           return (
             <motion.div
@@ -264,7 +268,7 @@ const FlowEditorMock = ({ inView, onNodeClick, onActiveNode }) => {
 
 // ── Info panel (animated, inside flow editor) ──
 
-const InfoPanel = ({ open, onClose }) => (
+const InfoPanel = ({ open, onClose, t }) => (
   <AnimatePresence>
     {open && (
       <motion.div
@@ -277,7 +281,7 @@ const InfoPanel = ({ open, onClose }) => (
         <div className="md-info-panel-header">
           <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span className="material-icons" style={{ fontSize: 16, color: '#388E3C' }}>info</span>
-            <strong>Info — File a police report</strong>
+            <strong>{t('municipality.infoPanel.title')}</strong>
           </span>
           <button className="md-info-panel-close" onClick={onClose}><CloseOutlined /></button>
         </div>
@@ -285,15 +289,15 @@ const InfoPanel = ({ open, onClose }) => (
           <Collapse defaultActiveKey={['content', 'docs']} ghost size="small" items={[
             {
               key: 'content',
-              label: <span style={{ fontWeight: 600, fontSize: 12 }}>Content</span>,
+              label: <span style={{ fontWeight: 600, fontSize: 12 }}>{t('municipality.infoPanel.content')}</span>,
               children: (
                 <>
                   <Input.TextArea
-                    value="You need to file a police report at the nearest station. Bring a valid ID if available."
+                    value={t('municipality.infoPanel.contentText')}
                     rows={2} readOnly style={{ marginBottom: 8, background: '#fff', fontSize: 12 }}
                   />
                   <div>
-                    <label style={{ display: 'block', marginBottom: 2, fontWeight: 500, fontSize: 11 }}>Contact Email</label>
+                    <label style={{ display: 'block', marginBottom: 2, fontWeight: 500, fontSize: 11 }}>{t('municipality.infoPanel.contactEmail')}</label>
                     <Input value="documents@commune.be" readOnly prefix="📧" size="small" />
                   </div>
                 </>
@@ -301,7 +305,7 @@ const InfoPanel = ({ open, onClose }) => (
             },
             {
               key: 'docs',
-              label: <span style={{ fontWeight: 600, fontSize: 12 }}>Documents</span>,
+              label: <span style={{ fontWeight: 600, fontSize: 12 }}>{t('municipality.infoPanel.documents')}</span>,
               children: (
                 <>
                   {['Passport_Renewal_Guide.pdf', 'Required_Documents.docx'].map((name) => (
@@ -313,10 +317,10 @@ const InfoPanel = ({ open, onClose }) => (
                   <Divider style={{ margin: '8px 0' }} />
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                     <BookOutlined style={{ color: '#722ed1', fontSize: 12 }} />
-                    <span style={{ fontWeight: 500, fontSize: 11 }}>Glossary</span>
+                    <span style={{ fontWeight: 500, fontSize: 11 }}>{t('municipality.infoPanel.glossary')}</span>
                   </div>
                   <Input.TextArea
-                    value={"Passport: Official travel document\nBiometric photo: 35x45mm\nPolice report: Declaration of loss/theft"}
+                    value={t('municipality.infoPanel.glossaryText')}
                     rows={3} readOnly style={{ fontFamily: 'monospace', fontSize: 10, background: '#fff' }}
                   />
                 </>
@@ -331,15 +335,20 @@ const InfoPanel = ({ open, onClose }) => (
 
 // ── Analytics charts ──
 
-const AnalyticsCharts = ({ inView }) => (
+const AnalyticsCharts = ({ inView, t }) => {
+  const topicData = getTopicData(t);
+  const languageData = getLanguageData();
+  const sentimentData = getSentimentData(t);
+  const sentimentColors = getSentimentColors(t);
+
+  return (
   <div className="md-analytics">
-    {/* Top row: 2 KPIs stacked left + Language pie + Sentiment pie */}
     <motion.div className="md-analytics-top" initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 }}>
-      <Card className="md-chart-card" title={<span className="md-chart-label">Topics</span>}>
+      <Card className="md-chart-card" title={<span className="md-chart-label">{t('municipality.analytics.topics')}</span>}>
         <ResponsiveContainer width="100%" height={260}>
           <PieChart>
-            <Pie data={TOPIC_DATA} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={70}>
-              {TOPIC_DATA.map((_, i) => <Cell key={i} fill={TOPIC_COLORS[i]} />)}
+            <Pie data={topicData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={70}>
+              {topicData.map((_, i) => <Cell key={i} fill={TOPIC_COLORS[i]} />)}
             </Pie>
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: 12 }} />
@@ -347,11 +356,11 @@ const AnalyticsCharts = ({ inView }) => (
         </ResponsiveContainer>
       </Card>
 
-      <Card className="md-chart-card" title={<span className="md-chart-label">Language</span>}>
+      <Card className="md-chart-card" title={<span className="md-chart-label">{t('municipality.analytics.language')}</span>}>
         <ResponsiveContainer width="100%" height={260}>
           <PieChart>
-            <Pie data={LANGUAGE_DATA} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
-              {LANGUAGE_DATA.map((entry, i) => <Cell key={i} fill={LANGUAGE_COLORS[entry.name]} />)}
+            <Pie data={languageData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
+              {languageData.map((entry, i) => <Cell key={i} fill={LANGUAGE_COLORS[entry.name]} />)}
             </Pie>
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: 12 }} />
@@ -359,11 +368,11 @@ const AnalyticsCharts = ({ inView }) => (
         </ResponsiveContainer>
       </Card>
 
-      <Card className="md-chart-card" title={<span className="md-chart-label">Sentiment</span>}>
+      <Card className="md-chart-card" title={<span className="md-chart-label">{t('municipality.analytics.sentiment')}</span>}>
         <ResponsiveContainer width="100%" height={260}>
           <PieChart>
-            <Pie data={SENTIMENT_DATA} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
-              {SENTIMENT_DATA.map((entry, i) => <Cell key={i} fill={SENTIMENT_COLORS[entry.name]} />)}
+            <Pie data={sentimentData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
+              {sentimentData.map((entry, i) => <Cell key={i} fill={sentimentColors[entry.name]} />)}
             </Pie>
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: 12 }} />
@@ -375,12 +384,12 @@ const AnalyticsCharts = ({ inView }) => (
     {/* Bottom row: Topics pie + Calls over time line chart */}
     <motion.div className="md-analytics-bottom" initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.3 }}>
       <Card className="md-kpi-card">
-        <Statistic title="Calls this month" value={287} suffix="/ 1000" valueStyle={{ color: '#4C2E76', fontSize: 28, fontWeight: 600 }} />
+        <Statistic title={t('municipality.analytics.callsThisMonth')} value={287} suffix="/ 1000" valueStyle={{ color: '#4C2E76', fontSize: 28, fontWeight: 600 }} />
         <Progress percent={29} strokeColor="#A286B9" style={{ marginTop: 12 }} />
-        <div className="md-kpi-sub">713 remaining</div>
+        <div className="md-kpi-sub">713 {t('municipality.analytics.remaining')}</div>
       </Card>
 
-      <Card className="md-chart-card" title={<span className="md-chart-label">Calls over time</span>}>
+      <Card className="md-chart-card" title={<span className="md-chart-label">{t('municipality.analytics.callsOverTime')}</span>}>
         <ResponsiveContainer width="100%" height={220}>
           <LineChart data={CALLS_OVER_TIME}>
             <XAxis dataKey="label" tick={{ fontSize: 11 }} />
@@ -392,21 +401,22 @@ const AnalyticsCharts = ({ inView }) => (
       </Card>
     </motion.div>
   </div>
-);
+  );
+};
 
 // ── ROI Statistics (4 key numbers, no cards) ──
 
-const ROIStats = ({ inView }) => {
+const ROIStats = ({ inView, t }) => {
   const savedHours = useCountUp(1240, 2000, inView);
   const costReduction = useCountUp(67, 2000, inView);
   const callsHandled = useCountUp(94, 2000, inView, 1);
   const citizenSatisfaction = useCountUp(4.6, 2000, inView, 1);
 
   const stats = [
-    { value: savedHours, suffix: 'h', label: 'Staff hours saved / year' },
-    { value: costReduction, suffix: '%', label: 'Cost reduction' },
-    { value: callsHandled, suffix: '%', label: 'Calls handled automatically' },
-    { value: citizenSatisfaction, suffix: '/ 5', label: 'Citizen satisfaction' },
+    { value: savedHours, suffix: 'h', label: t('municipality.staffHoursSaved') },
+    { value: costReduction, suffix: '%', label: t('municipality.costReduction') },
+    { value: callsHandled, suffix: '%', label: t('municipality.callsHandled') },
+    { value: citizenSatisfaction, suffix: '/ 5', label: t('municipality.citizenSatisfaction') },
   ];
 
   return (
@@ -536,32 +546,32 @@ const MunicipalityDemo = () => {
                 exit={{ opacity: 0, y: -10 }}
               >
                 <span className="md-listening-dot" />
-                Listening
+                {t('municipality.listening')}
               </motion.div>
             )}
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              Your citizens call.<br />The assistant answers.
+              {t('municipality.heroTitle')}<br />{t('municipality.heroTitleBreak')}
             </motion.h1>
             <motion.p className="md-hero-sub" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}>
-              Dattivox helps city halls guide citizens through administrative procedures automatically.
+              {t('municipality.heroSubtitle')}
             </motion.p>
             <AnimatePresence>
               {showDemo && (
                 <motion.div className="md-ticker" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.4 }}>
-                  <span className="md-ticker-text">You are a citizen and want information on the passport — what do you do?</span>
+                  <span className="md-ticker-text">{t('municipality.ticker')}</span>
                 </motion.div>
               )}
             </AnimatePresence>
             <motion.div className="hero-buttons" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}>
               <Button size="large" className={showDemo ? 'cta-end-call' : 'cta-primary-large'} onClick={showDemo ? stopDemo : launchDemo}>
-                {showDemo ? 'End Call' : t('hero.tryDemo')} {showDemo ? null : <ArrowRightOutlined />}
+                {showDemo ? t('municipality.endCall') : t('hero.tryDemo')} {showDemo ? null : <ArrowRightOutlined />}
               </Button>
             </motion.div>
           </div>
           <div className="md-hero-right">
             <div className="md-conversation-card">
-              <div className="md-card-header"><PhoneOutlined /> Live call</div>
-              <LoopingConversation inView={heroInView} />
+              <div className="md-card-header"><PhoneOutlined /> {t('municipality.liveCall')}</div>
+              <LoopingConversation inView={heroInView} t={t} />
             </div>
           </div>
         </div>
@@ -578,11 +588,11 @@ const MunicipalityDemo = () => {
       <Section id="journey" className="md-journey-section">
         {(inView) => (
           <div className="md-container">
-            <h2 className="md-title">Design how your city hall responds.</h2>
-            <p className="md-subtitle">Configure the assistant's behaviour for each service — no code required.</p>
+            <h2 className="md-title">{t('municipality.journeyTitle')}</h2>
+            <p className="md-subtitle">{t('municipality.journeySubtitle')}</p>
             <div className="md-flow-wrapper">
-              <FlowEditorMock inView={inView} onNodeClick={() => setInfoDrawerOpen(true)} onActiveNode={(node) => setInfoDrawerOpen(node?.id === 'info')} />
-              <InfoPanel open={infoDrawerOpen} onClose={() => setInfoDrawerOpen(false)} />
+              <FlowEditorMock inView={inView} onNodeClick={() => setInfoDrawerOpen(true)} onActiveNode={(node) => setInfoDrawerOpen(node?.id === 'info')} t={t} />
+              <InfoPanel open={infoDrawerOpen} onClose={() => setInfoDrawerOpen(false)} t={t} />
             </div>
           </div>
         )}
@@ -592,8 +602,8 @@ const MunicipalityDemo = () => {
       <Section id="conversations" className="md-conversations-section">
         {(inView) => (
           <div className="md-container">
-            <h2 className="md-title">See every interaction.</h2>
-            <p className="md-subtitle">Full transparency on what the assistant said and why.</p>
+            <h2 className="md-title">{t('municipality.conversationsTitle')}</h2>
+            <p className="md-subtitle">{t('municipality.conversationsSubtitle')}</p>
             <motion.div
               className="md-log-card md-log-card--single"
               initial={{ opacity: 0, y: 20 }}
@@ -602,23 +612,23 @@ const MunicipalityDemo = () => {
             >
               <div className="md-log-top">
                 <span className="md-log-phone">+32 2 xxx xx 41</span>
-                <span className="md-log-time">Today, 09:14</span>
+                <span className="md-log-time">{t('municipality.analytics.today')}, 09:14</span>
                 <span className="md-log-lang">EN</span>
               </div>
               <div className="md-log-row">
-                <span className="md-log-label">Intent</span>
-                <span className="md-log-value">Passport renewal</span>
+                <span className="md-log-label">{t('municipality.intent')}</span>
+                <span className="md-log-value">{t('municipality.passportRenewal')}</span>
               </div>
               <div className="md-log-row">
-                <span className="md-log-label">Citizen</span>
-                <span className="md-log-value md-log-italic">"I want to renew my passport."</span>
+                <span className="md-log-label">{t('municipality.citizen')}</span>
+                <span className="md-log-value md-log-italic">{t('municipality.log.citizenSaid')}</span>
               </div>
               <div className="md-log-row">
-                <span className="md-log-label">Assistant</span>
-                <span className="md-log-value">"You will need your current passport and a recent photo."</span>
+                <span className="md-log-label">{t('municipality.assistant')}</span>
+                <span className="md-log-value">{t('municipality.log.assistantSaid')}</span>
               </div>
               <div className="md-log-outcome">
-                <CheckCircleFilled style={{ color: '#34C759' }} /> Appointment booked — Tuesday 10:30
+                <CheckCircleFilled style={{ color: '#34C759' }} /> {t('municipality.appointmentBooked')}
               </div>
             </motion.div>
           </div>
@@ -629,10 +639,10 @@ const MunicipalityDemo = () => {
       <Section id="statistics" className="md-stats-section">
         {(inView) => (
           <div className="md-container">
-            <h2 className="md-title">The ROI speaks for itself.</h2>
-            <p className="md-subtitle">Real numbers from municipalities using Dattivox.</p>
-            <ROIStats inView={inView} />
-            <AnalyticsCharts inView={inView} />
+            <h2 className="md-title">{t('municipality.roiTitle')}</h2>
+            <p className="md-subtitle">{t('municipality.roiSubtitle')}</p>
+            <ROIStats inView={inView} t={t} />
+            <AnalyticsCharts inView={inView} t={t} />
           </div>
         )}
       </Section>
@@ -641,12 +651,12 @@ const MunicipalityDemo = () => {
       <Section className="md-closing-section">
         {() => (
           <div className="md-container md-closing-inner">
-            <h2 className="md-title md-title--light">A city hall that answers every call.</h2>
+            <h2 className="md-title md-title--light">{t('municipality.closingTitle')}</h2>
             <p className="md-closing-text">
-              Dattivox helps municipalities provide faster, more accessible public services while reducing repetitive calls to staff.
+              {t('municipality.closingText')}
             </p>
             <Button className="md-cta-large" onClick={() => scrollToSection('contact-section')}>
-              Schedule a demonstration <ArrowRightOutlined />
+              {t('municipality.scheduleDemonstration')} <ArrowRightOutlined />
             </Button>
           </div>
         )}

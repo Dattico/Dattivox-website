@@ -165,7 +165,17 @@
       "sentiment": "Sentiment",
       "callsThisMonth": "Oproepen deze maand",
       "remaining": "resterend",
-      "callsOverTime": "Oproepen in de tijd"
+      "callsOverTime": "Oproepen in de tijd",
+      "today": "Vandaag",
+      "positive": "Positief",
+      "neutral": "Neutraal",
+      "negative": "Negatief",
+      "mixed": "Gemengd",
+      "passport": "Paspoort",
+      "idCard": "Identiteitskaart",
+      "certificate": "Certificaat",
+      "parking": "Parkeren",
+      "other": "Overig"
     }
   }
 }

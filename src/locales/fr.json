@@ -165,7 +165,17 @@
       "sentiment": "Sentiment",
       "callsThisMonth": "Appels ce mois-ci",
       "remaining": "restants",
-      "callsOverTime": "Appels dans le temps"
+      "callsOverTime": "Appels dans le temps",
+      "today": "Aujourd'hui",
+      "positive": "Positif",
+      "neutral": "Neutre",
+      "negative": "Négatif",
+      "mixed": "Mixte",
+      "passport": "Passeport",
+      "idCard": "Carte d'identité",
+      "certificate": "Certificat",
+      "parking": "Stationnement",
+      "other": "Autre"
     }
   }
 }

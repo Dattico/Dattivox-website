@@ -165,7 +165,17 @@
       "sentiment": "Sentiment",
       "callsThisMonth": "Calls this month",
       "remaining": "remaining",
-      "callsOverTime": "Calls over time"
+      "callsOverTime": "Calls over time",
+      "today": "Today",
+      "positive": "Positive",
+      "neutral": "Neutral",
+      "negative": "Negative",
+      "mixed": "Mixed",
+      "passport": "Passport",
+      "idCard": "ID Card",
+      "certificate": "Certificate",
+      "parking": "Parking",
+      "other": "Other"
     }
   }
 }
