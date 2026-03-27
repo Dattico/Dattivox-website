@@ -11,7 +11,12 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguageState] = useState(() => localStorage.getItem('dattivox-lang') || 'en');
+  
+  const setLanguage = (lang) => {
+    localStorage.setItem('dattivox-lang', lang);
+    setLanguageState(lang);
+  };
   
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
