@@ -5,8 +5,8 @@
     "tryDemoCall": "Essayer l'Appel Démo"
   },
   "hero": {
-    "title": "Votre Secrétaire Virtuelle 24h/24 pour les Appels",
-    "subtitle": "Dattivox gère les appels téléphoniques jour et nuit. Il répond, comprend la demande de l'appelant et exécute les workflows, tout ce qu'une vraie secrétaire ferait, 24h/24 et sans délais.",
+    "title": "L'assistant vocal IA pour communes et administrations",
+    "subtitle": "Dattivox gère l'accueil téléphonique de votre commune 24h/24. Il répond aux citoyens, comprend leurs demandes administratives et prend des rendez-vous automatiquement — sans intervention de votre personnel.",
     "liveDemo": "Démo en Direct",
     "trySecretary": "Essayez Notre Secrétaire Virtuelle",
     "showcaseDescription": "Appelez maintenant pour réserver un rendez-vous de rénovation de passeport ou poser des questions sur nos services",
@@ -21,30 +21,30 @@
     "available247": "Disponible 24h/24"
   },
   "features": {
-    "title": "Votre Secrétaire Virtuelle 24h/24",
+    "title": "Assistant vocal pour communes — ce que Dattivox fait pour vous",
     "feature1": {
-      "title": "Une secrétaire virtuelle 24h/24 pour les appels téléphoniques",
-      "description": "Ne ratez plus jamais un appel grâce à une disponibilité 24h/24"
+      "title": "Accueil téléphonique automatique pour votre commune",
+      "description": "Ne ratez plus jamais un appel citoyen grâce à une disponibilité 24h/24 et 7j/7"
     },
     "feature2": {
-      "title": "Gère les appels instantanément, sans temps d'attente",
-      "description": "Réponse immédiate à chaque appelant, garantissant un service professionnel"
+      "title": "Réponse instantanée, sans temps d'attente",
+      "description": "Réponse immédiate à chaque citoyen, garantissant un service public professionnel"
     },
     "feature3": {
-      "title": "Comprend les demandes et accomplit les tâches",
-      "description": "Traitement intelligent des besoins des appelants et exécution automatisée des tâches"
+      "title": "Comprend les demandes administratives et agit",
+      "description": "Traitement intelligent des demandes citoyens : passeport, carte d'identité, rendez-vous, informations"
     },
     "feature4": {
-      "title": "Réserve des rendez-vous et achemine les informations",
-      "description": "Planification transparente et gestion des informations pour votre entreprise"
+      "title": "Prise de rendez-vous et orientation automatiques",
+      "description": "Planification transparente et gestion des demandes pour votre administration communale"
     },
     "feature5": {
-      "title": "Se connecte à vos systèmes existants",
-      "description": "Intégration facile avec vos outils et workflows d'entreprise actuels"
+      "title": "S'intègre à vos systèmes existants",
+      "description": "Intégration facile avec vos outils et workflows d'administration publique actuels"
     },
     "feature6": {
-      "title": "Fonctionne en plusieurs langues pour les marchés européens",
-      "description": "Support multilingue pour servir votre clientèle diversifiée"
+      "title": "Multilingue : français, néerlandais, anglais",
+      "description": "Support multilingue pour servir tous les citoyens de votre commune"
     }
   },
   "about": {

@@ -5,8 +5,8 @@
     "tryDemoCall": "Probeer Demo Oproep"
   },
   "hero": {
-    "title": "Uw 24/7 Virtuele Secretaresse voor Oproepen",
-    "subtitle": "Dattivox behandelt telefoongesprekken dag en nacht. Het beantwoordt, begrijpt het verzoek van de beller en voert workflows uit, alles wat een echte secretaresse zou doen, 24/7 en zonder vertragingen.",
+    "title": "De AI-spraakassistent voor gemeenten en overheidsdiensten",
+    "subtitle": "Dattivox beheert de telefoonopvang van uw gemeente 24/7. Het beantwoordt burgers, begrijpt hun administratieve vragen en maakt automatisch afspraken — zonder tussenkomst van uw personeel.",
     "liveDemo": "Live Demo",
     "trySecretary": "Probeer Onze Virtuele Secretaresse",
     "showcaseDescription": "Bel nu om een afspraak te maken voor paspoortvernieuwing of stel vragen over onze diensten",
@@ -21,30 +21,30 @@
     "available247": "24/7 beschikbaar"
   },
   "features": {
-    "title": "Uw 24/7 Virtuele Secretaresse",
+    "title": "Spraakassistent voor gemeenten — wat Dattivox voor u doet",
     "feature1": {
-      "title": "Een 24/7 virtuele secretaresse voor telefoongesprekken",
-      "description": "Mis nooit meer een oproep met 24/7 beschikbaarheid"
+      "title": "Automatische telefoonopvang voor uw gemeente",
+      "description": "Mis nooit meer een burgervraag met 24/7 en 7/7 beschikbaarheid"
     },
     "feature2": {
-      "title": "Behandelt oproepen onmiddellijk, zonder wachttijd",
-      "description": "Directe reactie op elke beller, met gegarandeerde professionele service"
+      "title": "Directe respons, zonder wachttijd",
+      "description": "Onmiddellijk antwoord op elke burger, met gegarandeerde professionele dienstverlening"
     },
     "feature3": {
-      "title": "Begrijpt verzoeken en voltooit taken",
-      "description": "Intelligente verwerking van de behoeften van bellers en geautomatiseerde taakuitvoering"
+      "title": "Begrijpt administratieve vragen en handelt ze af",
+      "description": "Intelligente verwerking van burgervragen: paspoort, identiteitskaart, afspraken, informatie"
     },
     "feature4": {
-      "title": "Maakt afspraken en routeert informatie",
-      "description": "Naadloze planning en informatiebeheer voor uw bedrijf"
+      "title": "Automatische afspraken en doorverwijzing",
+      "description": "Naadloze planning en informatiebeheer voor uw gemeentelijke administratie"
     },
     "feature5": {
-      "title": "Verbindt met uw bestaande systemen",
-      "description": "Eenvoudige integratie met uw huidige bedrijfstools en workflows"
+      "title": "Integreert met uw bestaande systemen",
+      "description": "Eenvoudige integratie met uw huidige tools en workflows van de overheid"
     },
     "feature6": {
-      "title": "Werkt in meerdere talen voor Europese markten",
-      "description": "Meertalige ondersteuning om uw diverse klantenbestand te bedienen"
+      "title": "Meertalig: Nederlands, Frans, Engels",
+      "description": "Meertalige ondersteuning om alle burgers van uw gemeente te bedienen"
     }
   },
   "about": {
