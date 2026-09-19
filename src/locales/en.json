@@ -177,5 +177,211 @@
       "parking": "Parking",
       "other": "Other"
     }
+  },
+  "brand": {
+    "nav": {
+      "how": "How it works",
+      "product": "Product",
+      "industries": "Industries",
+      "customers": "Customers",
+      "resources": "Resources",
+      "about": "About",
+      "bookDemo": "Book a demo",
+      "tryVoiceDemo": "Try the voice demo",
+      "language": "Change language"
+    },
+    "hero": {
+      "headline": "Every customer gets an answer.",
+      "subhead": "Your customers still call you. Dattivox makes sure someone is there to help.",
+      "ctaCall": "Call Dattivox",
+      "ctaHow": "See how it works",
+      "liveLabel": "Live calls, right now",
+      "checkAvailable": "Always available",
+      "checkMultilingual": "Multilingual",
+      "checkIntegrates": "Works with your systems"
+    },
+    "integrations": {
+      "label": "Integrates directly with the systems you already run —",
+      "more": "+ more coming"
+    },
+    "stories": {
+      "eyebrow": "Different organizations, same reassurance",
+      "title": "Someone calls. Someone is there to help.",
+      "subtitle": "Two different customers. Two different problems. The same promise.",
+      "quietlyLabel": "What Dattivox quietly handles",
+      "uccle": {
+        "eyebrow": "Public service, multilingual",
+        "headline": "I can focus on the person in front of me.",
+        "problem": "Citizens need help. So does the person standing at the counter. A municipality can't always give both at once — until now.",
+        "flow": {
+          "calling": "Citizen calling",
+          "language": "Language understood",
+          "reason": "Reason identified",
+          "information": "Information provided",
+          "resolved": "Resolved or transferred",
+          "visible": "Visible in Dattivox"
+        },
+        "outcome": "The citizen gets help. The employee isn't interrupted.",
+        "proof": "Verified with the Municipality of Uccle: the majority of citizen calls are handled without staff involvement.",
+        "photoCaption": "A municipal employee giving full attention to the citizen in front of them"
+      },
+      "maria": {
+        "eyebrow": "A small business, entrepreneurial",
+        "headline": "You shouldn't have to choose between the customer in front of you and the one calling you.",
+        "problem": "When Smiles by Maria is busy with a client, the phone still rings. Stopping mid-appointment was never really an option.",
+        "flow": {
+          "calling": "Customer calling",
+          "answered": "Answered by Dattivox",
+          "handled": "Message taken or appointment booked",
+          "notified": "Maria notified afterwards"
+        },
+        "outcome": "Maria stays with the client in the chair. Nothing is missed, and nothing interrupts her.",
+        "proof": "Verified customer results for Smiles by Maria — coming soon.",
+        "photoCaption": "A business owner focused entirely on the customer in front of them"
+      },
+      "tagline1": "Different organizations. Different calls.",
+      "tagline2": "Same reassurance."
+    },
+    "caseStudy": {
+      "quote": "Dattivox helps us manage a high volume of citizen calls, in multiple languages, with measurable results.",
+      "role": "Reception team, Municipality of Uccle",
+      "place": "Uccle / Brussels",
+      "title": "Live in Uccle",
+      "text": "Real conversations. Real impact.",
+      "link": "Read the case study"
+    },
+    "liveCalls": {
+      "answered": "Answered",
+      "resolved": "Resolved",
+      "transferred": "Transferred"
+    },
+    "journey": {
+      "title": "From call to outcome.",
+      "subtitle": "Every call follows the same calm path — whoever calls, whatever they need.",
+      "steps": {
+        "call": "Call",
+        "understand": "Understand",
+        "language": "Language",
+        "information": "Information",
+        "action": "Action",
+        "human": "Human, when needed",
+        "outcome": "Outcome"
+      }
+    },
+    "human": {
+      "eyebrow": "Human attention",
+      "title": "Let people handle what needs people.",
+      "body": "Dattivox quietly takes the repetitive calls, so your team's attention stays on the person in front of them.",
+      "photoCaption": "A receptionist giving full attention to the visitor in front of them"
+    },
+    "always": {
+      "title": "Nobody gets ignored.",
+      "subtitle": "Several calls, several languages, any time of day — every one of them is picked up.",
+      "footnote": "Evenings, weekends, lunch breaks, all at once — it makes no difference."
+    },
+    "knowAct": {
+      "eyebrow": "Know and act",
+      "title": "The right information, exactly when your customer needs it.",
+      "subtitle": "No more putting a customer on hold while someone searches for the answer.",
+      "request": "I need to change my appointment.",
+      "steps": {
+        "understand": "Understands the appointment request",
+        "identify": "Identifies the customer",
+        "calendar": "Accesses the calendar",
+        "propose": "Proposes availability",
+        "confirm": "Changes the appointment",
+        "outcome": "Appointment moved and confirmed"
+      }
+    },
+    "different": {
+      "title": "Built to fit your business, not the other way around.",
+      "configure": { "title": "You stay in control", "body": "Simple to configure, no developers needed." },
+      "integrate": { "title": "Connects to what you run", "body": "Crossuite, Odoo, and more — more integrations on the way." },
+      "telephony": { "title": "Easy telephony, real pricing", "body": "Simple to set up, and priced to compete." }
+    },
+    "handoff": {
+      "eyebrow": "Human handoff",
+      "title": "Dattivox knows when you are needed.",
+      "body": "When a conversation calls for a person, Dattivox recognises it and hands it over — with everything already said, so your customer never has to repeat themselves.",
+      "customerLine": "This is the third time I've called about this — can someone just look into it properly?",
+      "systemNote": "Handed to a team member, with full context",
+      "humanLine": "Hi, I can see exactly what's happened — let me take it from here.",
+      "contextNote": "No repeating. No starting over. Just picked up where it left off."
+    },
+    "visibility": {
+      "eyebrow": "Visibility",
+      "title": "Know what's happening, without watching it happen.",
+      "subtitle": "Why customers called, how it went, in which language, and what needs following up — laid out clearly, not buried in a dashboard.",
+      "sentimentNote": "Including how people actually felt about the call — not just what they said."
+    },
+    "industries": {
+      "title": "Different conversations. Same promise.",
+      "subtitle": "Choose an industry to see how the same calm handling adapts to it.",
+      "tagline": "Every customer gets an answer.",
+      "tabs": {
+        "publicSector": "Public Sector",
+        "healthcare": "Healthcare",
+        "property": "Property",
+        "insurance": "Insurance",
+        "automotive": "Automotive",
+        "legal": "Legal"
+      },
+      "examples": {
+        "publicSector": {
+          "opening": "I would like to renew my passport.",
+          "outcome": "Appointment booked at the town hall"
+        },
+        "healthcare": {
+          "opening": "I need to reschedule my appointment with Dr. Janssens.",
+          "outcome": "Appointment moved and confirmed"
+        },
+        "property": {
+          "opening": "I'd like to report a maintenance issue in my flat.",
+          "outcome": "Repair request logged and routed to the caretaker"
+        },
+        "insurance": {
+          "opening": "I want to report a claim after a car accident.",
+          "outcome": "Claim opened and an advisor notified"
+        },
+        "automotive": {
+          "opening": "I need to book a service appointment for my car.",
+          "outcome": "Service slot booked at the nearest garage"
+        },
+        "legal": {
+          "opening": "I have a question about the status of my case.",
+          "outcome": "Update shared, and a call back scheduled with the case handler"
+        }
+      }
+    },
+    "proof": {
+      "eyebrow": "Proof, not the whole story",
+      "title": "Real conversations, in a demanding environment.",
+      "body": "This is Dattivox running for a Belgian municipality — multilingual, high call volume, real administrative procedures. One proof point among many, not the whole identity.",
+      "quote": "Calls are handled, so I can focus on what really matters.",
+      "quoteAttribution": "Receptionist, Municipality of Uccle"
+    },
+    "origin": {
+      "eyebrow": "Why Dattivox exists",
+      "title": "It started with a plumber.",
+      "p1": "Sergio needed to book an appointment with his plumber. The plumber was working and couldn't pick up. He called back later — Sergio couldn't answer. They kept missing each other, call after call.",
+      "p2": "It raised an obvious question: after decades of digital transformation, why does getting help by phone still depend on two people being free at exactly the same moment?",
+      "question": "Dattivox is the answer to that question."
+    },
+    "team": {
+      "title": "Built by a small team in Brussels.",
+      "subtitle": "Dattico builds systems that turn data into conversations. Dattivox is where that comes to life.",
+      "people": {
+        "sergio": { "initial": "S", "name": "Sergio", "role": "Founder", "quote": "Ideas build the map; execution is how we walk it." },
+        "nathan": { "initial": "N", "name": "Nathan", "role": "Co-Founder, Data Scientist & Engineer", "quote": "Nothing is useless if you can learn something from it." },
+        "elie": { "initial": "E", "name": "Elie", "role": "Co-Founder, Business & Strategy", "quote": "Great products start with understanding the problem." },
+        "hugues": { "initial": "H", "name": "Hugues", "role": "Business Developer", "quote": "Every connection is an opportunity waiting to happen." }
+      }
+    },
+    "experience": {
+      "title": "Don't take our word for it. Call Dattivox.",
+      "callLabel": "Call Dattivox",
+      "or": "or",
+      "bookDemo": "Book a demo"
+    }
   }
 }

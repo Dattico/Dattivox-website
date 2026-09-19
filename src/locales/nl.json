@@ -177,6 +177,212 @@
       "parking": "Parkeren",
       "other": "Overig"
     }
+  },
+  "brand": {
+    "nav": {
+      "how": "Hoe het werkt",
+      "product": "Product",
+      "industries": "Sectoren",
+      "customers": "Klanten",
+      "resources": "Bronnen",
+      "about": "Over ons",
+      "bookDemo": "Boek een demo",
+      "tryVoiceDemo": "Probeer de spraakdemo",
+      "language": "Taal wijzigen"
+    },
+    "hero": {
+      "headline": "Elke klant krijgt een antwoord.",
+      "subhead": "Uw klanten blijven u bellen. Dattivox zorgt ervoor dat er altijd iemand klaarstaat om te helpen.",
+      "ctaCall": "Bel Dattivox",
+      "ctaHow": "Bekijk hoe het werkt",
+      "liveLabel": "Lopende gesprekken",
+      "checkAvailable": "Altijd beschikbaar",
+      "checkMultilingual": "Meertalig",
+      "checkIntegrates": "Werkt met uw systemen"
+    },
+    "integrations": {
+      "label": "Integreert rechtstreeks met de systemen die u al gebruikt —",
+      "more": "+ binnenkort meer"
+    },
+    "stories": {
+      "eyebrow": "Verschillende organisaties, dezelfde gerustheid",
+      "title": "Iemand belt. Iemand staat klaar om te helpen.",
+      "subtitle": "Twee verschillende klanten. Twee verschillende problemen. Dezelfde belofte.",
+      "quietlyLabel": "Wat Dattivox stil op de achtergrond regelt",
+      "uccle": {
+        "eyebrow": "Overheidsdienst, meertalig",
+        "headline": "Ik kan me focussen op de persoon die voor me staat.",
+        "problem": "Burgers hebben hulp nodig. De persoon aan het loket ook. Een gemeente kan niet altijd beide tegelijk bieden — tot nu.",
+        "flow": {
+          "calling": "Burger belt",
+          "language": "Taal begrepen",
+          "reason": "Reden geïdentificeerd",
+          "information": "Informatie gegeven",
+          "resolved": "Opgelost of doorverbonden",
+          "visible": "Zichtbaar in Dattivox"
+        },
+        "outcome": "De burger krijgt hulp. De medewerker wordt niet onderbroken.",
+        "proof": "Geverifieerd bij de Gemeente Ukkel: het merendeel van de burgeroproepen wordt afgehandeld zonder tussenkomst van personeel.",
+        "photoCaption": "Een gemeentemedewerker die volledige aandacht geeft aan de burger voor hen"
+      },
+      "maria": {
+        "eyebrow": "Een kleine onderneming, ondernemend",
+        "headline": "U zou niet moeten kiezen tussen de klant voor u en de klant die belt.",
+        "problem": "Wanneer Smiles by Maria bezig is met een klant, blijft de telefoon rinkelen. Halverwege stoppen was nooit echt een optie.",
+        "flow": {
+          "calling": "Klant belt",
+          "answered": "Beantwoord door Dattivox",
+          "handled": "Bericht genoteerd of afspraak geboekt",
+          "notified": "Maria achteraf op de hoogte gebracht"
+        },
+        "outcome": "Maria blijft bij de klant in de stoel. Niets wordt gemist, niets onderbreekt haar.",
+        "proof": "Geverifieerde klantresultaten voor Smiles by Maria — binnenkort beschikbaar.",
+        "photoCaption": "Een ondernemer volledig gericht op de klant voor haar"
+      },
+      "tagline1": "Verschillende organisaties. Verschillende oproepen.",
+      "tagline2": "Dezelfde gerustheid."
+    },
+    "caseStudy": {
+      "quote": "Dattivox helpt ons een hoog volume aan burgeroproepen te beheren, in meerdere talen, met meetbare resultaten.",
+      "role": "Onthaalteam, Gemeente Ukkel",
+      "place": "Ukkel / Brussel",
+      "title": "Actief in Ukkel",
+      "text": "Echte gesprekken. Echte impact.",
+      "link": "Lees de case study"
+    },
+    "liveCalls": {
+      "answered": "Beantwoord",
+      "resolved": "Opgelost",
+      "transferred": "Doorverbonden"
+    },
+    "journey": {
+      "title": "Van oproep tot resultaat.",
+      "subtitle": "Elk gesprek volgt hetzelfde rustige traject — wie er ook belt, wat de vraag ook is.",
+      "steps": {
+        "call": "Oproep",
+        "understand": "Begrip",
+        "language": "Taal",
+        "information": "Informatie",
+        "action": "Actie",
+        "human": "Een mens, indien nodig",
+        "outcome": "Resultaat"
+      }
+    },
+    "human": {
+      "eyebrow": "Menselijke aandacht",
+      "title": "Laat mensen doen waar mensen voor nodig zijn.",
+      "body": "Dattivox neemt de repetitieve inkomende oproepen stilletjes op de achtergrond over — dezelfde vragen, dezelfde verzoeken, dezelfde kleine taken — zodat de aandacht van uw team gaat naar wat er echt toe doet: de persoon die voor hen staat.",
+      "photoCaption": "Een receptioniste die volle aandacht geeft aan de bezoeker voor haar"
+    },
+    "always": {
+      "title": "Niemand wordt genegeerd.",
+      "subtitle": "Meerdere oproepen, meerdere talen, op elk moment van de dag — elk gesprek wordt beantwoord.",
+      "footnote": "'s Avonds, in het weekend, tijdens de lunchpauze, allemaal tegelijk — het maakt geen verschil."
+    },
+    "knowAct": {
+      "eyebrow": "Weten en handelen",
+      "title": "De juiste informatie, precies op het moment dat uw klant het nodig heeft.",
+      "subtitle": "Geen wachttijd meer terwijl iemand het antwoord opzoekt. Eén gesprek, van begin tot eind afgehandeld.",
+      "request": "Ik wil mijn afspraak verzetten.",
+      "steps": {
+        "understand": "Begrijpt het verzoek om de afspraak te wijzigen",
+        "identify": "Identificeert de klant",
+        "calendar": "Raadpleegt de agenda",
+        "propose": "Stelt beschikbare tijdstippen voor",
+        "confirm": "Wijzigt de afspraak",
+        "outcome": "Afspraak verzet en bevestigd"
+      }
+    },
+    "different": {
+      "title": "Gebouwd om zich aan uw bedrijf aan te passen, niet omgekeerd.",
+      "configure": { "title": "U houdt de controle", "body": "Eenvoudig te configureren, zonder ontwikkelaars." },
+      "integrate": { "title": "Sluit aan op wat u al gebruikt", "body": "Crossuite, Odoo, en meer integraties op komst." },
+      "telephony": { "title": "Eenvoudige telefonie, scherpe prijs", "body": "Snel op te zetten, en competitief geprijsd." }
+    },
+    "handoff": {
+      "eyebrow": "Overdracht naar een mens",
+      "title": "Dattivox weet wanneer u nodig bent.",
+      "body": "Wanneer een gesprek een mens vereist, herkent Dattivox dat en verbindt het door — met alles wat al gezegd is, zodat uw klant zich nooit hoeft te herhalen.",
+      "customerLine": "Dit is al de derde keer dat ik hierover bel — kan er nu eens echt naar gekeken worden?",
+      "systemNote": "Doorverbonden naar een medewerker, met volledige context",
+      "humanLine": "Dag, ik zie precies wat er is gebeurd — ik neem het van hier over.",
+      "contextNote": "Geen herhaling. Geen nieuwe start. Het gesprek gaat verder waar het gebleven was."
+    },
+    "visibility": {
+      "eyebrow": "Overzicht",
+      "title": "Weten wat er speelt, zonder het te moeten volgen.",
+      "subtitle": "Waarom klanten belden, hoe het afliep, in welke taal, en wat opvolging nodig heeft — helder weergegeven, niet verstopt in een dashboard.",
+      "sentimentNote": "Inclusief hoe mensen zich tijdens het gesprek daadwerkelijk voelden — niet alleen wat ze zeiden."
+    },
+    "industries": {
+      "title": "Andere gesprekken. Dezelfde belofte.",
+      "subtitle": "Kies een sector om te zien hoe dezelfde rustige aanpak zich aanpast.",
+      "tagline": "Elke klant krijgt een antwoord.",
+      "tabs": {
+        "publicSector": "Overheid",
+        "healthcare": "Zorg",
+        "property": "Vastgoed",
+        "insurance": "Verzekeringen",
+        "automotive": "Automotive",
+        "legal": "Juridisch"
+      },
+      "examples": {
+        "publicSector": {
+          "opening": "Ik zou graag mijn paspoort vernieuwen.",
+          "outcome": "Afspraak geboekt bij het gemeentehuis"
+        },
+        "healthcare": {
+          "opening": "Ik moet mijn afspraak met Dr. Janssens verzetten.",
+          "outcome": "Afspraak verzet en bevestigd"
+        },
+        "property": {
+          "opening": "Ik wil een onderhoudsprobleem in mijn appartement melden.",
+          "outcome": "Melding geregistreerd en doorgestuurd naar de huisbewaarder"
+        },
+        "insurance": {
+          "opening": "Ik wil een schadegeval melden na een auto-ongeval.",
+          "outcome": "Dossier geopend en adviseur op de hoogte gebracht"
+        },
+        "automotive": {
+          "opening": "Ik wil een afspraak maken voor het onderhoud van mijn auto.",
+          "outcome": "Onderhoudsmoment geboekt bij de dichtstbijzijnde garage"
+        },
+        "legal": {
+          "opening": "Ik heb een vraag over de stand van zaken in mijn dossier.",
+          "outcome": "Update meegedeeld en terugbelafspraak ingepland met de dossierbehandelaar"
+        }
+      }
+    },
+    "proof": {
+      "eyebrow": "Een bewijs, niet het hele verhaal",
+      "title": "Echte gesprekken, in een veeleisende omgeving.",
+      "body": "Dit is Dattivox in gebruik bij een Belgische gemeente — meertalig, hoog belvolume, echte administratieve procedures. Eén bewijs onder vele, niet de hele identiteit.",
+      "quote": "Oproepen worden afgehandeld, zodat ik me kan focussen op wat er echt toe doet.",
+      "quoteAttribution": "Receptioniste, Gemeente Ukkel"
+    },
+    "origin": {
+      "eyebrow": "Waarom Dattivox bestaat",
+      "title": "Het begon met een loodgieter.",
+      "p1": "Sergio wilde een afspraak maken met zijn loodgieter. Die was aan het werk en kon niet opnemen. Hij belde later terug — toen kon Sergio niet opnemen. Ze belden elkaar keer op keer mis.",
+      "p2": "Dat riep een voor de hand liggende vraag op: waarom hangt hulp krijgen via de telefoon, na decennia van digitale transformatie, nog steeds af van twee mensen die op exact hetzelfde moment beschikbaar zijn?",
+      "question": "Dattivox is het antwoord op die vraag."
+    },
+    "team": {
+      "title": "Gebouwd door een klein team in Brussel.",
+      "subtitle": "Dattico bouwt systemen die data omzetten in gesprekken. Dattivox is waar dat tot leven komt.",
+      "people": {
+        "sergio": { "initial": "S", "name": "Sergio", "role": "Oprichter", "quote": "Ideeën tekenen de kaart; uitvoering is hoe we de weg afleggen." },
+        "nathan": { "initial": "N", "name": "Nathan", "role": "Mede-oprichter, Data Scientist & Engineer", "quote": "Niets is nutteloos als je er iets van kan leren." },
+        "elie": { "initial": "E", "name": "Elie", "role": "Mede-oprichter, Business & Strategie", "quote": "Goede producten beginnen met het begrijpen van het probleem." },
+        "hugues": { "initial": "H", "name": "Hugues", "role": "Business Developer", "quote": "Elke connectie is een kans die staat te wachten." }
+      }
+    },
+    "experience": {
+      "title": "Neem het niet zomaar van ons aan. Bel Dattivox.",
+      "callLabel": "Bel Dattivox",
+      "or": "of",
+      "bookDemo": "Boek een demo"
+    }
   }
 }
 

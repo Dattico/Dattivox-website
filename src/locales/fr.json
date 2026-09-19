@@ -177,5 +177,211 @@
       "parking": "Stationnement",
       "other": "Autre"
     }
+  },
+  "brand": {
+    "nav": {
+      "how": "Comment ça marche",
+      "product": "Produit",
+      "industries": "Secteurs",
+      "customers": "Clients",
+      "resources": "Ressources",
+      "about": "À propos",
+      "bookDemo": "Réserver une démo",
+      "tryVoiceDemo": "Essayer la démo vocale",
+      "language": "Changer de langue"
+    },
+    "hero": {
+      "headline": "Chaque client obtient une réponse.",
+      "subhead": "Vos clients continuent de vous appeler. Dattivox veille à ce que quelqu'un soit toujours là pour les aider.",
+      "ctaCall": "Appeler Dattivox",
+      "ctaHow": "Voir comment ça marche",
+      "liveLabel": "Appels en cours",
+      "checkAvailable": "Toujours disponible",
+      "checkMultilingual": "Multilingue",
+      "checkIntegrates": "Compatible avec vos systèmes"
+    },
+    "integrations": {
+      "label": "S'intègre directement aux systèmes que vous utilisez déjà —",
+      "more": "+ à venir"
+    },
+    "stories": {
+      "eyebrow": "Des organisations différentes, la même tranquillité d'esprit",
+      "title": "Quelqu'un appelle. Quelqu'un est là pour aider.",
+      "subtitle": "Deux clients différents. Deux problèmes différents. La même promesse.",
+      "quietlyLabel": "Ce que Dattivox gère discrètement",
+      "uccle": {
+        "eyebrow": "Service public, multilingue",
+        "headline": "Je peux me concentrer sur la personne en face de moi.",
+        "problem": "Les citoyens ont besoin d'aide. La personne au guichet aussi. Une commune ne peut pas toujours offrir les deux à la fois — jusqu'à présent.",
+        "flow": {
+          "calling": "Appel d'un citoyen",
+          "language": "Langue comprise",
+          "reason": "Motif identifié",
+          "information": "Information fournie",
+          "resolved": "Résolu ou transféré",
+          "visible": "Visible dans Dattivox"
+        },
+        "outcome": "Le citoyen est aidé. L'employé n'est pas interrompu.",
+        "proof": "Vérifié auprès de la Commune d'Uccle : la majorité des appels citoyens sont traités sans intervention du personnel.",
+        "photoCaption": "Un employé communal pleinement attentif au citoyen en face de lui"
+      },
+      "maria": {
+        "eyebrow": "Une petite entreprise, entrepreneuriale",
+        "headline": "Vous ne devriez pas avoir à choisir entre le client en face de vous et celui qui appelle.",
+        "problem": "Quand Smiles by Maria est occupée avec une cliente, le téléphone continue de sonner. Interrompre le soin en cours n'a jamais vraiment été une option.",
+        "flow": {
+          "calling": "Appel d'un client",
+          "answered": "Répondu par Dattivox",
+          "handled": "Message pris ou rendez-vous réservé",
+          "notified": "Maria informée ensuite"
+        },
+        "outcome": "Maria reste concentrée sur la cliente en soin. Rien n'est manqué, rien ne l'interrompt.",
+        "proof": "Résultats clients vérifiés pour Smiles by Maria — à venir.",
+        "photoCaption": "Une entrepreneuse entièrement concentrée sur la cliente en face d'elle"
+      },
+      "tagline1": "Des organisations différentes. Des appels différents.",
+      "tagline2": "La même tranquillité d'esprit."
+    },
+    "caseStudy": {
+      "quote": "Dattivox nous aide à gérer un volume élevé d'appels citoyens, en plusieurs langues, avec des résultats mesurables.",
+      "role": "Équipe d'accueil, Commune d'Uccle",
+      "place": "Uccle / Bruxelles",
+      "title": "En service à Uccle",
+      "text": "De vraies conversations. Un vrai impact.",
+      "link": "Lire l'étude de cas"
+    },
+    "liveCalls": {
+      "answered": "Pris en charge",
+      "resolved": "Résolu",
+      "transferred": "Transféré"
+    },
+    "journey": {
+      "title": "De l'appel au résultat.",
+      "subtitle": "Chaque appel suit le même parcours serein — quel que soit l'appelant, quel que soit son besoin.",
+      "steps": {
+        "call": "Appel",
+        "understand": "Compréhension",
+        "language": "Langue",
+        "information": "Information",
+        "action": "Action",
+        "human": "Un humain, si besoin",
+        "outcome": "Résultat"
+      }
+    },
+    "human": {
+      "eyebrow": "Attention humaine",
+      "title": "Laissez les personnes s'occuper de ce qui a besoin d'une personne.",
+      "body": "Dattivox prend discrètement en charge les appels répétitifs en arrière-plan — les mêmes questions, les mêmes demandes, les mêmes petites tâches — pour que l'attention de vos équipes se porte là où elle compte vraiment : la personne qui se trouve en face d'elles.",
+      "photoCaption": "Un accueil pleinement attentif à la personne présente devant lui"
+    },
+    "always": {
+      "title": "Personne n'est laissé sans réponse.",
+      "subtitle": "Plusieurs appels, plusieurs langues, à toute heure — chacun d'eux est pris en charge.",
+      "footnote": "Le soir, le week-end, pendant la pause déjeuner, tous en même temps — cela ne change rien."
+    },
+    "knowAct": {
+      "eyebrow": "Savoir et agir",
+      "title": "La bonne information, exactement au moment où votre client en a besoin.",
+      "subtitle": "Fini l'attente pendant que quelqu'un cherche la réponse. Un appel, traité de bout en bout.",
+      "request": "Je souhaite déplacer mon rendez-vous.",
+      "steps": {
+        "understand": "Comprend la demande de rendez-vous",
+        "identify": "Identifie le client",
+        "calendar": "Consulte l'agenda",
+        "propose": "Propose des créneaux disponibles",
+        "confirm": "Modifie le rendez-vous",
+        "outcome": "Rendez-vous déplacé et confirmé"
+      }
+    },
+    "different": {
+      "title": "Conçu pour s'adapter à votre entreprise, pas l'inverse.",
+      "configure": { "title": "Vous gardez le contrôle", "body": "Simple à configurer, sans développeur." },
+      "integrate": { "title": "Compatible avec vos outils", "body": "Crossuite, Odoo, et d'autres intégrations à venir." },
+      "telephony": { "title": "Téléphonie simple, prix compétitif", "body": "Facile à mettre en place, à un tarif compétitif." }
+    },
+    "handoff": {
+      "eyebrow": "Transfert vers un humain",
+      "title": "Dattivox sait quand vous êtes nécessaire.",
+      "body": "Lorsqu'une conversation nécessite l'intervention d'une personne, Dattivox le reconnaît et transfère l'appel — avec tout ce qui a déjà été dit, pour que votre client n'ait jamais à se répéter.",
+      "customerLine": "C'est la troisième fois que j'appelle pour ça — quelqu'un peut-il enfin s'en occuper sérieusement ?",
+      "systemNote": "Transféré à un collaborateur, avec le contexte complet",
+      "humanLine": "Bonjour, je vois exactement ce qui s'est passé — je prends le relais.",
+      "contextNote": "Aucune répétition. Aucun recommencement. La conversation reprend là où elle s'était arrêtée."
+    },
+    "visibility": {
+      "eyebrow": "Visibilité",
+      "title": "Savoir ce qui se passe, sans devoir le surveiller.",
+      "subtitle": "Pourquoi les clients appellent, comment cela s'est terminé, dans quelle langue, et ce qui nécessite un suivi — présenté clairement, pas enfoui dans un tableau de bord.",
+      "sentimentNote": "Y compris le ressenti réel des personnes pendant l'appel — pas seulement ce qu'elles ont dit."
+    },
+    "industries": {
+      "title": "Des conversations différentes. La même promesse.",
+      "subtitle": "Choisissez un secteur pour voir comment la même prise en charge sereine s'y adapte.",
+      "tagline": "Chaque client obtient une réponse.",
+      "tabs": {
+        "publicSector": "Secteur public",
+        "healthcare": "Santé",
+        "property": "Immobilier",
+        "insurance": "Assurance",
+        "automotive": "Automobile",
+        "legal": "Juridique"
+      },
+      "examples": {
+        "publicSector": {
+          "opening": "Je souhaiterais renouveler mon passeport.",
+          "outcome": "Rendez-vous pris à l'administration communale"
+        },
+        "healthcare": {
+          "opening": "Je dois déplacer mon rendez-vous avec le Dr Janssens.",
+          "outcome": "Rendez-vous déplacé et confirmé"
+        },
+        "property": {
+          "opening": "Je souhaite signaler un problème d'entretien dans mon appartement.",
+          "outcome": "Demande d'intervention enregistrée et transmise au concierge"
+        },
+        "insurance": {
+          "opening": "Je souhaite déclarer un sinistre suite à un accident de voiture.",
+          "outcome": "Dossier ouvert et conseiller informé"
+        },
+        "automotive": {
+          "opening": "Je dois prendre rendez-vous pour l'entretien de ma voiture.",
+          "outcome": "Créneau réservé dans le garage le plus proche"
+        },
+        "legal": {
+          "opening": "J'ai une question sur l'état d'avancement de mon dossier.",
+          "outcome": "Point d'étape communiqué et rappel programmé avec le responsable du dossier"
+        }
+      }
+    },
+    "proof": {
+      "eyebrow": "Une preuve, pas toute l'histoire",
+      "title": "De vraies conversations, dans un environnement exigeant.",
+      "body": "Voici Dattivox en fonctionnement pour une commune belge — multilingue, fort volume d'appels, démarches administratives réelles. Une preuve parmi d'autres, pas l'identité tout entière.",
+      "quote": "Les appels sont pris en charge, je peux me concentrer sur l'essentiel.",
+      "quoteAttribution": "Réceptionniste, Commune d'Uccle"
+    },
+    "origin": {
+      "eyebrow": "Pourquoi Dattivox existe",
+      "title": "Tout a commencé avec un plombier.",
+      "p1": "Sergio devait prendre rendez-vous avec son plombier. Celui-ci travaillait et ne pouvait pas répondre. Il a rappelé plus tard — Sergio ne pouvait plus répondre. Ils se sont manqués, appel après appel.",
+      "p2": "Cela a soulevé une question évidente : après des décennies de transformation numérique, pourquoi obtenir de l'aide par téléphone dépend-il encore du fait que deux personnes soient disponibles exactement au même moment ?",
+      "question": "Dattivox est la réponse à cette question."
+    },
+    "team": {
+      "title": "Conçu par une petite équipe à Bruxelles.",
+      "subtitle": "Dattico conçoit des systèmes qui transforment les données en conversations. Dattivox en est l'aboutissement.",
+      "people": {
+        "sergio": { "initial": "S", "name": "Sergio", "role": "Fondateur", "quote": "Les idées tracent la carte ; l'exécution, c'est la façon dont on avance." },
+        "nathan": { "initial": "N", "name": "Nathan", "role": "Co-fondateur, Data Scientist & Ingénieur", "quote": "Rien n'est inutile si on peut en tirer une leçon." },
+        "elie": { "initial": "E", "name": "Elie", "role": "Co-fondateur, Business & Stratégie", "quote": "Les meilleurs produits partent d'une bonne compréhension du problème." },
+        "hugues": { "initial": "H", "name": "Hugues", "role": "Business Developer", "quote": "Chaque connexion est une opportunité qui n'attend qu'à se réaliser." }
+      }
+    },
+    "experience": {
+      "title": "Ne nous croyez pas sur parole. Appelez Dattivox.",
+      "callLabel": "Appeler Dattivox",
+      "or": "ou",
+      "bookDemo": "Réserver une démo"
+    }
   }
 }
