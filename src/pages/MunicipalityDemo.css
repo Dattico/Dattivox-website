@@ -127,20 +127,25 @@
 .brand-hero-checks .anticon { color: var(--brand-accent); }
 
 /* ── Integrations strip ── */
-.brand-integrations-strip { background: var(--brand-accent-soft); border-top: 1px solid var(--brand-line); border-bottom: 1px solid var(--brand-line); }
+.brand-integrations-strip { border-top: 1px solid var(--brand-line); border-bottom: 1px solid var(--brand-line); }
 .brand-integrations-inner {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem 2rem;
-  padding: 1.4rem 2rem;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem 2.2rem;
+  padding: 1.6rem 2rem;
 }
 .brand-integrations-label { font-size: 0.95rem; color: var(--brand-ink); font-weight: 600; }
 .brand-integrations-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 1.8rem; }
-.brand-integration-logo {
-  font-family: 'Montserrat', system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--brand-ink);
-  letter-spacing: -0.01em;
+.brand-integration-name {
+  font-family: 'Montserrat', system-ui, sans-serif; font-weight: 700; font-size: 1.05rem;
+  color: var(--brand-ink); letter-spacing: -0.01em; white-space: nowrap;
+  text-decoration: none; border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
-.brand-integration-logo--muted { font-weight: 500; font-size: 0.85rem; color: var(--brand-ink-soft); }
+.brand-integration-name:hover { color: var(--brand-accent); border-color: var(--brand-accent); }
+.brand-integration-more {
+  font-weight: 500; font-size: 0.85rem; color: var(--brand-ink-soft);
+}
 @media (max-width: 640px) {
-  .brand-integrations-inner { flex-direction: column; gap: 0.6rem; text-align: center; }
+  .brand-integrations-inner { flex-direction: column; gap: 0.8rem; text-align: center; }
 }
 
 /* Live calls panel + hero photo/quote (photo behind-right, panel overlapping front-left) */
@@ -219,23 +224,31 @@
 .md-listening-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand-accent); animation: md-dot-pulse 1.5s ease-in-out infinite; }
 @keyframes md-dot-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
 
-/* ── 2. Journey steps ── */
-.brand-journey-row {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-  gap: 0.6rem; max-width: 980px; margin: 0 auto;
+/* ── 2. Journey flow (single flowing path, not boxes) ── */
+.brand-journey-flow {
+  position: relative; max-width: 1080px; margin: 2rem auto 0; padding-top: 2.4rem;
 }
-.brand-journey-step {
-  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-  background: #fff; border: 1px solid var(--brand-line); border-radius: 14px;
-  padding: 1rem 1.2rem; min-width: 118px; text-align: center;
+.brand-journey-svg { width: 100%; height: auto; display: block; }
+.brand-journey-labels { position: relative; margin-top: -0.6rem; height: 3.4rem; }
+.brand-journey-label-item {
+  position: absolute; top: 0; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+  width: 108px; text-align: center;
 }
 .brand-journey-index {
-  width: 22px; height: 22px; border-radius: 50%; background: var(--brand-accent-soft);
-  color: var(--brand-accent); font-size: 0.75rem; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%; background: var(--brand-accent-soft);
+  color: var(--brand-accent); font-size: 0.68rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.brand-journey-label { font-size: 0.85rem; font-weight: 600; color: var(--brand-ink); }
-.brand-journey-arrow { color: var(--brand-ink-soft); font-size: 1rem; }
+.brand-journey-label { font-size: 0.78rem; font-weight: 600; color: var(--brand-ink); line-height: 1.25; }
+@media (max-width: 900px) {
+  .brand-journey-label { font-size: 0.68rem; }
+  .brand-journey-label-item { width: 80px; }
+}
+@media (max-width: 640px) {
+  .brand-journey-label-item { width: 62px; }
+  .brand-journey-label { font-size: 0.6rem; }
+}
 
 /* ── 3. Human attention ── */
 .brand-human-grid {
@@ -431,20 +444,17 @@
 
 /* ── 7. Visibility (reused analytics) ── */
 .md-stats-section { background: var(--brand-bg-soft); }
-.md-roi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 900px; margin: 0 auto 3rem; text-align: center; }
+.md-roi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 700px; margin: 0 auto 3rem; text-align: center; }
 .md-roi-stat { display: flex; flex-direction: column; align-items: center; }
 .md-roi-value { font-family: 'Montserrat', system-ui, sans-serif; font-size: 2.6rem; font-weight: 700; color: var(--brand-ink); line-height: 1.1; }
 .md-roi-suffix { font-size: 1.1rem; color: var(--brand-accent); margin-left: 4px; font-weight: 600; }
 .md-roi-label { font-size: 0.8rem; color: var(--brand-ink-soft); margin-top: 4px; font-weight: 500; }
 
-.md-analytics { max-width: 900px; margin: 0 auto; }
-.md-analytics-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-.md-kpi-card, .md-chart-card { border-radius: 12px; box-shadow: 0 1px 3px rgba(28,34,48,0.06); }
-.md-kpi-card .ant-statistic-title { color: var(--brand-ink-soft); font-size: 13px; margin-bottom: 8px; }
-.md-kpi-sub { margin-top: 8px; font-size: 13px; color: var(--brand-ink-soft); text-align: center; }
+.md-analytics { max-width: 760px; margin: 0 auto; }
+.md-analytics-single { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.md-chart-card { border-radius: 12px; box-shadow: 0 1px 3px rgba(28,34,48,0.06); }
 .md-chart-card .ant-card-head-title { color: var(--brand-ink); font-weight: 600; font-size: 15px; }
 .md-chart-label { color: var(--brand-ink-soft); font-weight: 500; font-size: 13px; }
-.md-analytics-bottom { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; }
 .md-analytics .recharts-pie-sector { transition: opacity 0.2s; }
 .md-analytics .recharts-pie-sector:hover { opacity: 0.8; }
 
@@ -532,7 +542,7 @@
 
 /* ── About / team ── */
 .brand-team-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 560px; margin: 0 auto;
 }
 .brand-team-card {
   background: #fff; border: 1px solid var(--brand-line); border-radius: var(--brand-radius);
@@ -541,6 +551,23 @@
 .brand-team-avatar {
   width: 44px; height: 44px; border-radius: 50%; background: var(--brand-accent-soft); color: var(--brand-accent);
   font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 0.6rem;
+}
+.brand-team-avatar--photo {
+  position: relative; width: 76px; height: 76px; overflow: hidden; padding: 0;
+}
+.brand-team-avatar--photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+}
+.brand-team-avatar--photo:hover img { transform: scale(1.08); }
+.brand-team-avatar-overlay {
+  position: absolute; inset: 0; border-radius: 50%; background: rgba(76,46,118,0.88);
+  display: flex; align-items: center; justify-content: center; padding: 0.7rem;
+  opacity: 0; transition: opacity 0.35s ease;
+}
+.brand-team-avatar--photo:hover .brand-team-avatar-overlay { opacity: 1; }
+.brand-team-avatar-overlay p {
+  color: #fff; font-size: 0.6rem; font-style: italic; line-height: 1.3; margin: 0; text-align: center;
 }
 .brand-team-card strong { color: var(--brand-ink); font-size: 1.02rem; }
 .brand-team-role { color: var(--brand-ink-soft); font-size: 0.8rem; margin-bottom: 0.6rem; }
@@ -572,8 +599,7 @@
   .brand-title, .md-title { font-size: 1.9rem; }
   .md-section { padding: 4rem 0; }
   .md-roi-grid { grid-template-columns: repeat(2, 1fr); }
-  .md-analytics-top { grid-template-columns: 1fr; }
-  .md-analytics-bottom { grid-template-columns: 1fr; }
+  .md-analytics-single { grid-template-columns: 1fr; }
   .md-flow-wrapper { flex-direction: column; }
   .md-info-panel { border-left: none; border-top: 1px solid var(--brand-line); }
   .md-flow-editor { max-width: 100%; }

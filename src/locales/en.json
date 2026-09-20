@@ -381,6 +381,7 @@
       "title": "Don't take our word for it. Call Dattivox.",
       "callLabel": "Call Dattivox",
       "or": "or",
+      "tryBrowserDemo": "Try it in your browser",
       "bookDemo": "Book a demo"
     }
   }

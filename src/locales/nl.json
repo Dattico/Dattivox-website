@@ -381,6 +381,7 @@
       "title": "Neem het niet zomaar van ons aan. Bel Dattivox.",
       "callLabel": "Bel Dattivox",
       "or": "of",
+      "tryBrowserDemo": "Probeer het in je browser",
       "bookDemo": "Boek een demo"
     }
   }

@@ -2,6 +2,29 @@
 
 ## [Unreleased]
 
+### Fixed
+- The in-browser voice demo was silently broken: `launchDemo()`/`stopDemo()` and the `<OctoplanDemo>` mount were still in `MunicipalityDemo.jsx`, but no button called `launchDemo()` anymore, and the demo was mounted inside a `display: none` wrapper so even if triggered it would never be visible. Fixed by reusing the working modal pattern already proven in `DattivoxLanding.jsx` (`.demo-modal-overlay`/`.demo-modal`/`.demo-modal-close`, styles already in `DattivoxLanding.css`).
+- Wired the hero section's "Call Dattivox" button (under "Every customer gets an answer.") to open this in-browser demo modal directly — per feedback, this one button on the main page is the single, obvious entry point to the demo, rather than a separate small link buried in the closing section. The closing section's "Don't take our word for it. Call Dattivox." block is untouched and still dials the real phone number.
+
+### Removed
+- The "Receptionist, Municipality of Uccle" attribution caption overlaid on the hero photo of the woman — kept the quote itself, dropped the name/title line per feedback.
+
+### Changed
+- Integrations strip: dropped the button/card chrome around "Odoo" and "Crossuite" — they're now plain clickable text links (to odoo.com and crossuite.com) with a subtle underline-on-hover, in line with keeping the site minimal and elegant instead of button-heavy.
+
+### Fixed
+- Team photos were swapped (Sergio's card showed Nathan's photo and vice versa) — swapped the file contents of `team-sergio.jpg`/`team-nathan.jpg` so each name matches its real photo again.
+
+### Changed
+- Footer logo: gave it a white background chip instead of sitting directly on the dark-purple footer, since the logo's own purple fill was nearly invisible against the near-identical purple footer background (`DattivoxLanding.css`).
+- Integrations strip: replaced the Odoo/Crossuite logo images with plain company-name text cards, per feedback to drop the logos.
+- Team section: removed Elie and Hugues, keeping only Sergio and Nathan; grid adjusted from 4 columns to 2.
+- Team section (`MunicipalityDemo.jsx`/`.css`): added real photos for Sergio and Nathan (`src/assets/photos/team-sergio.jpg`, `team-nathan.jpg`) with a hover quote-overlay effect matching the reference design; Elie and Hugues keep their initial avatars since no photo was supplied for them.
+- "Know what's happening" (visibility/analytics) section: cut the chart/number clutter — reduced `ROIStats` from 4 counters to 3, and `AnalyticsCharts` from 3 pie charts + a KPI progress card + a line chart down to a single topics pie chart plus the calls-over-time line chart. Removed the now-unused `Statistic`/`Progress` antd imports.
+- Integrations strip: replaced the external CDN Odoo/Crossuite logo URLs with locally bundled assets (`src/assets/logos/odoo.webp`, `crossuite.png`), and redesigned the strip with proper white logo cards and a "+ more coming" pill instead of bare inline images, to give this section real brand presence.
+- "Let people handle what needs people" section: swapped in a new user-supplied receptionist/hotel-desk handoff photo (`src/assets/photos/receptionist-handoff.webp`) in place of the previous placeholder, using the same photo-frame proportions/styling already in place.
+- "From call to outcome" journey: replaced the row of numbered boxes with arrows with a single flowing SVG path graphic (animated draw-in line with stops for each stage) so the journey reads as one continuous story rather than disconnected boxes.
+
 ### Added
 - Post-build prerendering step (`scripts/prerender.js`, run via `npm run build`) that renders the SPA in headless Chromium and bakes the fully-rendered `#root` markup into `dist/index.html`. This is a client-only React app with no SSR, so crawlers and AI agents that fetch raw HTML without executing JS previously only ever saw an empty `<div id="root">` plus a small hidden fallback blurb; now they get the real, current page content. Adds `puppeteer` and `serve-handler` as dev dependencies.
 

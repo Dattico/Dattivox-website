@@ -381,6 +381,7 @@
       "title": "Ne nous croyez pas sur parole. Appelez Dattivox.",
       "callLabel": "Appeler Dattivox",
       "or": "ou",
+      "tryBrowserDemo": "Essayer dans votre navigateur",
       "bookDemo": "Réserver une démo"
     }
   }

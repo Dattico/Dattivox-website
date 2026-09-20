@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Form, Input, Dropdown, message, Card, Statistic, Progress, Collapse, Divider } from 'antd';
+import { Button, Form, Input, Dropdown, message, Card, Collapse, Divider } from 'antd';
 import { ArrowRightOutlined, PhoneOutlined, CheckCircleFilled, GlobalOutlined, FileTextOutlined, BookOutlined, CloseOutlined, BankOutlined, TranslationOutlined, DatabaseOutlined, UserOutlined, MedicineBoxOutlined, HomeOutlined, SafetyCertificateOutlined, CarOutlined, AuditOutlined, CalendarOutlined, SettingOutlined, ApiOutlined, ThunderboltOutlined, SmileOutlined } from '@ant-design/icons';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { generateClient } from 'aws-amplify/data';
 import OctoplanDemo from '../../Demo/OctoplanDemo';
 import { useTranslation } from '../hooks/useTranslation';
-import receptionistWelcomePhoto from '../assets/photos/receptionist-welcome.jpg';
+import receptionistWelcomePhoto from '../assets/photos/receptionist-handoff.webp';
 import uccleReceptionPhoto from '../assets/photos/uccle-reception.jpg';
 import receptionistTestimonialPhoto from '../assets/photos/receptionist-testimonial.jpg';
+import teamSergioPhoto from '../assets/photos/team-sergio.jpg';
+import teamNathanPhoto from '../assets/photos/team-nathan.jpg';
 import './DattivoxLanding.css';
 import './MunicipalityDemo.css';
+
+const TEAM_PHOTOS = { sergio: teamSergioPhoto, nathan: teamNathanPhoto };
 
 const { TextArea } = Input;
 // NOTE: TEST_PHONE_NUMBER stays the single source of truth for every tel: link on this page
@@ -196,22 +200,62 @@ const LiveCallsPanel = ({ inView, t }) => {
 
 const JOURNEY_STEPS = ['call', 'understand', 'language', 'information', 'action', 'human', 'outcome'];
 
+// A single flowing path rather than a row of boxes: one calm line the call travels along,
+// from ring (top-left) to resolved outcome (bottom-right), with each stage as a stop on the way.
+const JOURNEY_POINTS = [
+  { x: 40, y: 90 }, { x: 220, y: 40 }, { x: 400, y: 130 }, { x: 580, y: 60 },
+  { x: 760, y: 140 }, { x: 940, y: 70 }, { x: 1120, y: 100 },
+];
+const journeyPath = JOURNEY_POINTS.reduce((d, p, i) => {
+  if (i === 0) return `M ${p.x} ${p.y}`;
+  const prev = JOURNEY_POINTS[i - 1];
+  const midX = (prev.x + p.x) / 2;
+  return `${d} C ${midX} ${prev.y}, ${midX} ${p.y}, ${p.x} ${p.y}`;
+}, '');
+
 const JourneySteps = ({ inView, t }) => (
-  <div className="brand-journey-row">
-    {JOURNEY_STEPS.map((step, i) => (
-      <React.Fragment key={step}>
+  <div className="brand-journey-flow">
+    <svg viewBox="0 0 1160 190" className="brand-journey-svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <motion.path
+        d={journeyPath}
+        fill="none"
+        stroke="var(--brand-accent)"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={inView ? { pathLength: 1, opacity: 1 } : {}}
+        transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
+      />
+      {JOURNEY_POINTS.map((p, i) => (
+        <motion.circle
+          key={i}
+          cx={p.x}
+          cy={p.y}
+          r={i === JOURNEY_POINTS.length - 1 ? 9 : 6}
+          fill={i === JOURNEY_POINTS.length - 1 ? 'var(--brand-accent)' : '#fff'}
+          stroke="var(--brand-accent)"
+          strokeWidth="2.5"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={inView ? { scale: 1, opacity: 1 } : {}}
+          transition={{ duration: 0.4, delay: 0.3 + i * 0.18 }}
+        />
+      ))}
+    </svg>
+    <div className="brand-journey-labels">
+      {JOURNEY_STEPS.map((step, i) => (
         <motion.div
-          className="brand-journey-step"
-          initial={{ opacity: 0, y: 12 }}
+          key={step}
+          className="brand-journey-label-item"
+          style={{ left: `${(JOURNEY_POINTS[i].x / 1160) * 100}%` }}
+          initial={{ opacity: 0, y: 8 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4, delay: i * 0.08 }}
+          transition={{ duration: 0.4, delay: 0.4 + i * 0.18 }}
         >
           <span className="brand-journey-index">{i + 1}</span>
           <span className="brand-journey-label">{t(`brand.journey.steps.${step}`)}</span>
         </motion.div>
-        {i < JOURNEY_STEPS.length - 1 && <span className="brand-journey-arrow" aria-hidden="true">→</span>}
-      </React.Fragment>
-    ))}
+      ))}
+    </div>
   </div>
 );
 
@@ -395,53 +439,22 @@ const InfoPanel = ({ open, onClose, t }) => (
 
 const AnalyticsCharts = ({ inView, t }) => {
   const topicData = getTopicData(t);
-  const languageData = getLanguageData();
-  const sentimentData = getSentimentData(t);
-  const sentimentColors = getSentimentColors(t);
 
   return (
     <div className="md-analytics">
-      <motion.div className="md-analytics-top" initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 }}>
+      <motion.div className="md-analytics-single" initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 }}>
         <Card className="md-chart-card" title={<span className="md-chart-label">{t('municipality.analytics.topics')}</span>}>
-          <ResponsiveContainer width="100%" height={260}>
+          <ResponsiveContainer width="100%" height={240}>
             <PieChart>
-              <Pie data={topicData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={70}>
+              <Pie data={topicData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={75}>
                 {topicData.map((_, i) => <Cell key={i} fill={TOPIC_COLORS[i]} />)}
               </Pie>
               <Tooltip /><Legend wrapperStyle={{ fontSize: 12 }} />
             </PieChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="md-chart-card" title={<span className="md-chart-label">{t('municipality.analytics.language')}</span>}>
-          <ResponsiveContainer width="100%" height={260}>
-            <PieChart>
-              <Pie data={languageData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
-                {languageData.map((entry, i) => <Cell key={i} fill={LANGUAGE_COLORS[entry.name]} />)}
-              </Pie>
-              <Tooltip /><Legend wrapperStyle={{ fontSize: 12 }} />
-            </PieChart>
-          </ResponsiveContainer>
-        </Card>
-        <Card className="md-chart-card" title={<span className="md-chart-label">{t('municipality.analytics.sentiment')}</span>}>
-          <ResponsiveContainer width="100%" height={260}>
-            <PieChart>
-              <Pie data={sentimentData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80}>
-                {sentimentData.map((entry, i) => <Cell key={i} fill={sentimentColors[entry.name]} />)}
-              </Pie>
-              <Tooltip /><Legend wrapperStyle={{ fontSize: 12 }} />
-            </PieChart>
-          </ResponsiveContainer>
-        </Card>
-      </motion.div>
-
-      <motion.div className="md-analytics-bottom" initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.3 }}>
-        <Card className="md-kpi-card">
-          <Statistic title={t('municipality.analytics.callsThisMonth')} value={287} suffix="/ 1000" valueStyle={{ color: '#4C2E76', fontSize: 28, fontWeight: 600 }} />
-          <Progress percent={29} strokeColor="#4C2E76" style={{ marginTop: 12 }} />
-          <div className="md-kpi-sub">713 {t('municipality.analytics.remaining')}</div>
-        </Card>
         <Card className="md-chart-card" title={<span className="md-chart-label">{t('municipality.analytics.callsOverTime')}</span>}>
-          <ResponsiveContainer width="100%" height={220}>
+          <ResponsiveContainer width="100%" height={240}>
             <LineChart data={CALLS_OVER_TIME}>
               <XAxis dataKey="label" tick={{ fontSize: 11 }} />
               <YAxis tick={{ fontSize: 11 }} />
@@ -457,12 +470,10 @@ const AnalyticsCharts = ({ inView, t }) => {
 
 const ROIStats = ({ inView, t }) => {
   const savedHours = useCountUp(1240, 2000, inView);
-  const costReduction = useCountUp(67, 2000, inView);
   const callsHandled = useCountUp(94, 2000, inView, 1);
   const citizenSatisfaction = useCountUp(4.6, 2000, inView, 1);
   const stats = [
     { value: savedHours, suffix: 'h', label: t('municipality.staffHoursSaved') },
-    { value: costReduction, suffix: '%', label: t('municipality.costReduction') },
     { value: callsHandled, suffix: '%', label: t('municipality.callsHandled') },
     { value: citizenSatisfaction, suffix: '/ 5', label: t('municipality.citizenSatisfaction') },
   ];
@@ -556,7 +567,6 @@ const MunicipalityDemo = () => {
 
   const launchDemo = () => {
     setShowDemo(true);
-    setTimeout(() => { octoplanDemoRef.current?.startDiscussion(); }, 300);
   };
 
   const stopDemo = () => {
@@ -643,7 +653,7 @@ const MunicipalityDemo = () => {
               {t('brand.hero.subhead')}
             </motion.p>
             <motion.div className="brand-hero-ctas" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-              <a href={`tel:${TEST_PHONE_NUMBER}`} className="brand-cta-primary"><PhoneOutlined /> {t('brand.hero.ctaCall')}</a>
+              <button className="brand-cta-primary" onClick={launchDemo}><PhoneOutlined /> {t('brand.hero.ctaCall')}</button>
               <button className="brand-cta-secondary" onClick={() => scrollToSection('journey')}>
                 {t('brand.hero.ctaHow')} <ArrowRightOutlined />
               </button>
@@ -659,7 +669,6 @@ const MunicipalityDemo = () => {
               <img src={receptionistTestimonialPhoto} alt="" className="brand-hero-photo" aria-hidden="true" />
               <blockquote className="brand-hero-quote">
                 <p>{t('brand.proof.quote')}</p>
-                <cite>{t('brand.proof.quoteAttribution')}</cite>
               </blockquote>
             </div>
             <div className="brand-hero-panel-wrap">
@@ -670,8 +679,11 @@ const MunicipalityDemo = () => {
       </section>
 
       {showDemo && (
-        <div style={{ display: 'none' }}>
-          <OctoplanDemo ref={octoplanDemoRef} language={language} />
+        <div className="demo-modal-overlay" onClick={stopDemo}>
+          <div className="demo-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="demo-modal-close" onClick={stopDemo}>×</button>
+            <OctoplanDemo ref={octoplanDemoRef} language={language} />
+          </div>
         </div>
       )}
 
@@ -680,9 +692,9 @@ const MunicipalityDemo = () => {
         <div className="md-container brand-integrations-inner">
           <span className="brand-integrations-label">{t('brand.integrations.label')}</span>
           <div className="brand-integrations-logos">
-            <span className="brand-integration-logo">Odoo</span>
-            <span className="brand-integration-logo">Crossuite</span>
-            <span className="brand-integration-logo brand-integration-logo--muted">{t('brand.integrations.more')}</span>
+            <a href="https://www.odoo.com" target="_blank" rel="noopener noreferrer" className="brand-integration-name">Odoo</a>
+            <a href="https://www.crossuite.com" target="_blank" rel="noopener noreferrer" className="brand-integration-name">Crossuite</a>
+            <span className="brand-integration-more">{t('brand.integrations.more')}</span>
           </div>
         </div>
       </div>
@@ -915,14 +927,26 @@ const MunicipalityDemo = () => {
             <h2 className="brand-title">{t('brand.team.title')}</h2>
             <p className="brand-subtitle">{t('brand.team.subtitle')}</p>
             <div className="brand-team-grid">
-              {['sergio', 'nathan', 'elie', 'hugues'].map((person) => (
-                <div className="brand-team-card" key={person}>
-                  <div className="brand-team-avatar" aria-hidden="true">{t(`brand.team.people.${person}.initial`)}</div>
-                  <strong>{t(`brand.team.people.${person}.name`)}</strong>
-                  <span className="brand-team-role">{t(`brand.team.people.${person}.role`)}</span>
-                  <p className="brand-team-quote">&ldquo;{t(`brand.team.people.${person}.quote`)}&rdquo;</p>
-                </div>
-              ))}
+              {['sergio', 'nathan'].map((person) => {
+                const photo = TEAM_PHOTOS[person];
+                return (
+                  <div className="brand-team-card" key={person}>
+                    {photo ? (
+                      <div className="brand-team-avatar brand-team-avatar--photo">
+                        <img src={photo} alt={t(`brand.team.people.${person}.name`)} />
+                        <div className="brand-team-avatar-overlay" aria-hidden="true">
+                          <p>&ldquo;{t(`brand.team.people.${person}.quote`)}&rdquo;</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="brand-team-avatar" aria-hidden="true">{t(`brand.team.people.${person}.initial`)}</div>
+                    )}
+                    <strong>{t(`brand.team.people.${person}.name`)}</strong>
+                    <span className="brand-team-role">{t(`brand.team.people.${person}.role`)}</span>
+                    <p className="brand-team-quote">&ldquo;{t(`brand.team.people.${person}.quote`)}&rdquo;</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
