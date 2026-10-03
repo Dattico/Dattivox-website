@@ -296,7 +296,7 @@
     "different": {
       "title": "Conçu pour s'adapter à votre entreprise, pas l'inverse.",
       "configure": { "title": "Vous gardez le contrôle", "body": "Simple à configurer, sans développeur." },
-      "integrate": { "title": "Compatible avec vos outils", "body": "Crossuite, Odoo, et d'autres intégrations à venir." },
+      "integrate": { "title": "Compatible avec vos outils", "body": "Odoo, et d'autres intégrations à venir." },
       "telephony": { "title": "Téléphonie simple, prix compétitif", "body": "Facile à mettre en place, à un tarif compétitif." }
     },
     "handoff": {

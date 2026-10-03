@@ -296,7 +296,7 @@
     "different": {
       "title": "Built to fit your business, not the other way around.",
       "configure": { "title": "You stay in control", "body": "Simple to configure, no developers needed." },
-      "integrate": { "title": "Connects to what you run", "body": "Crossuite, Odoo, and more — more integrations on the way." },
+      "integrate": { "title": "Connects to what you run", "body": "Odoo, and more — more integrations on the way." },
       "telephony": { "title": "Easy telephony, real pricing", "body": "Simple to set up, and priced to compete." }
     },
     "handoff": {

@@ -693,7 +693,6 @@ const MunicipalityDemo = () => {
           <span className="brand-integrations-label">{t('brand.integrations.label')}</span>
           <div className="brand-integrations-logos">
             <a href="https://www.odoo.com" target="_blank" rel="noopener noreferrer" className="brand-integration-name">Odoo</a>
-            <a href="https://www.crossuite.com" target="_blank" rel="noopener noreferrer" className="brand-integration-name">Crossuite</a>
             <span className="brand-integration-more">{t('brand.integrations.more')}</span>
           </div>
         </div>

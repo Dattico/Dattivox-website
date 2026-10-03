@@ -296,7 +296,7 @@
     "different": {
       "title": "Gebouwd om zich aan uw bedrijf aan te passen, niet omgekeerd.",
       "configure": { "title": "U houdt de controle", "body": "Eenvoudig te configureren, zonder ontwikkelaars." },
-      "integrate": { "title": "Sluit aan op wat u al gebruikt", "body": "Crossuite, Odoo, en meer integraties op komst." },
+      "integrate": { "title": "Sluit aan op wat u al gebruikt", "body": "CrossuOdoo, en meer integraties op komst." },
       "telephony": { "title": "Eenvoudige telefonie, scherpe prijs", "body": "Snel op te zetten, en competitief geprijsd." }
     },
     "handoff": {
