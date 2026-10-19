@@ -17,13 +17,20 @@ const detectBrowserLanguage = () => {
 };
 
 export const useTranslation = () => {
-  const [language, setLanguage] = useState(() => {
+  const [language, setLanguageState] = useState(() => {
     const saved = localStorage.getItem('dattivox-language');
     return saved || detectBrowserLanguage();
   });
 
+  // Only remember an explicit choice, so visitors who never pick a language
+  // keep following their browser language.
+  const setLanguage = (lang) => {
+    localStorage.setItem('dattivox-language', lang);
+    setLanguageState(lang);
+  };
+
   useEffect(() => {
-    localStorage.setItem('dattivox-language', language);
+    document.documentElement.lang = language;
   }, [language]);
 
   const t = (key) => {

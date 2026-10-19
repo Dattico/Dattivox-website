@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Changed
+- SEO metadata in `index.html` (title, description, keywords, Open Graph/Twitter, JSON-LD `SoftwareApplication` + `FAQPage`) rewritten to describe Dattivox as a 24/7 AI phone assistant for businesses across industries; it previously described only communes/public administrations, which is how search engines and AI tools summarised the site.
+- `<html lang>` now follows the active language (`src/hooks/useTranslation.js`), and the browser-detected language is no longer saved to localStorage — only an explicit choice in the language switcher is remembered.
+- `public/sitemap.xml`: removed hreflang entries that pointed all three languages to the same URL; updated `lastmod`.
+
+### Removed
+- Hidden `#seo-content` block (French/Dutch public-sector text clipped to 1px) from `index.html` — redundant now that the build prerenders real content, and hidden keyword text is a search-spam risk. Also removed same-URL hreflang links from `<head>`.
+
 ### Fixed
 - The in-browser voice demo was silently broken: `launchDemo()`/`stopDemo()` and the `<OctoplanDemo>` mount were still in `MunicipalityDemo.jsx`, but no button called `launchDemo()` anymore, and the demo was mounted inside a `display: none` wrapper so even if triggered it would never be visible. Fixed by reusing the working modal pattern already proven in `DattivoxLanding.jsx` (`.demo-modal-overlay`/`.demo-modal`/`.demo-modal-close`, styles already in `DattivoxLanding.css`).
 - Wired the hero section's "Call Dattivox" button (under "Every customer gets an answer.") to open this in-browser demo modal directly — per feedback, this one button on the main page is the single, obvious entry point to the demo, rather than a separate small link buried in the closing section. The closing section's "Don't take our word for it. Call Dattivox." block is untouched and still dials the real phone number.
