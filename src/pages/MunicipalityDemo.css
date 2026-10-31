@@ -542,42 +542,32 @@
 
 /* ── About / team ── */
 .brand-team-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 560px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; max-width: 1000px; margin: 0 auto;
 }
 .brand-team-card {
+  flex: 0 1 180px;
   background: #fff; border: 1px solid var(--brand-line); border-radius: var(--brand-radius);
-  padding: 1.6rem 1.3rem; display: flex; flex-direction: column; gap: 0.3rem;
+  padding: 1.6rem 1rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.3rem;
 }
 .brand-team-avatar {
   width: 44px; height: 44px; border-radius: 50%; background: var(--brand-accent-soft); color: var(--brand-accent);
   font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 0.6rem;
 }
 .brand-team-avatar--photo {
-  position: relative; width: 76px; height: 76px; overflow: hidden; padding: 0;
+  position: relative; width: 112px; height: 112px; overflow: hidden; padding: 0; margin-bottom: 0.9rem;
 }
 .brand-team-avatar--photo img {
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.5s cubic-bezier(.4,0,.2,1);
 }
 .brand-team-avatar--photo:hover img { transform: scale(1.08); }
-.brand-team-avatar-overlay {
-  position: absolute; inset: 0; border-radius: 50%; background: rgba(76,46,118,0.88);
-  display: flex; align-items: center; justify-content: center; padding: 0.7rem;
-  opacity: 0; transition: opacity 0.35s ease;
-}
-.brand-team-avatar--photo:hover .brand-team-avatar-overlay { opacity: 1; }
-.brand-team-avatar-overlay p {
-  color: #fff; font-size: 0.6rem; font-style: italic; line-height: 1.3; margin: 0; text-align: center;
-}
 .brand-team-card strong { color: var(--brand-ink); font-size: 1.02rem; }
-.brand-team-role { color: var(--brand-ink-soft); font-size: 0.8rem; margin-bottom: 0.6rem; }
-.brand-team-quote { color: var(--brand-ink-soft); font-size: 0.88rem; font-style: italic; line-height: 1.5; margin: 0; }
+.brand-team-role { color: var(--brand-ink-soft); font-size: 0.8rem; line-height: 1.4; }
 
-@media (max-width: 768px) {
-  .brand-team-grid { grid-template-columns: 1fr 1fr; }
-}
+.brand-team-more { display: flex; justify-content: center; margin-top: 2rem; }
+
 @media (max-width: 480px) {
-  .brand-team-grid { grid-template-columns: 1fr; }
+  .brand-team-card { flex-basis: calc(50% - 0.625rem); }
 }
 
 .brand-closing { background: var(--brand-ink); text-align: center; }

@@ -6,15 +6,12 @@ import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip, Responsive
 import { generateClient } from 'aws-amplify/data';
 import OctoplanDemo from '../../Demo/OctoplanDemo';
 import { useTranslation } from '../hooks/useTranslation';
+import { useTeam, TEAM_PAGE_URL } from '../hooks/useTeam';
 import receptionistWelcomePhoto from '../assets/photos/receptionist-handoff.webp';
 import uccleReceptionPhoto from '../assets/photos/uccle-reception.jpg';
 import receptionistTestimonialPhoto from '../assets/photos/receptionist-testimonial.jpg';
-import teamSergioPhoto from '../assets/photos/team-sergio.jpg';
-import teamNathanPhoto from '../assets/photos/team-nathan.jpg';
 import './DattivoxLanding.css';
 import './MunicipalityDemo.css';
-
-const TEAM_PHOTOS = { sergio: teamSergioPhoto, nathan: teamNathanPhoto };
 
 const { TextArea } = Input;
 // NOTE: TEST_PHONE_NUMBER stays the single source of truth for every tel: link on this page
@@ -561,6 +558,7 @@ const MunicipalityDemo = () => {
   const [form] = Form.useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { t, language, setLanguage } = useTranslation();
+  const { team, status: teamStatus } = useTeam();
   const [infoDrawerOpen, setInfoDrawerOpen] = useState(false);
 
   const scrollToSection = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -925,28 +923,26 @@ const MunicipalityDemo = () => {
           <div className="md-container">
             <h2 className="brand-title">{t('brand.team.title')}</h2>
             <p className="brand-subtitle">{t('brand.team.subtitle')}</p>
-            <div className="brand-team-grid">
-              {['sergio', 'nathan'].map((person) => {
-                const photo = TEAM_PHOTOS[person];
-                return (
-                  <div className="brand-team-card" key={person}>
-                    {photo ? (
-                      <div className="brand-team-avatar brand-team-avatar--photo">
-                        <img src={photo} alt={t(`brand.team.people.${person}.name`)} />
-                        <div className="brand-team-avatar-overlay" aria-hidden="true">
-                          <p>&ldquo;{t(`brand.team.people.${person}.quote`)}&rdquo;</p>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="brand-team-avatar" aria-hidden="true">{t(`brand.team.people.${person}.initial`)}</div>
-                    )}
-                    <strong>{t(`brand.team.people.${person}.name`)}</strong>
-                    <span className="brand-team-role">{t(`brand.team.people.${person}.role`)}</span>
-                    <p className="brand-team-quote">&ldquo;{t(`brand.team.people.${person}.quote`)}&rdquo;</p>
+            {teamStatus === 'ready' && (
+              <div className="brand-team-grid">
+                {team.map((member) => (
+                  <div className="brand-team-card" key={member.id}>
+                    <div className="brand-team-avatar brand-team-avatar--photo">
+                      <img src={member.image} alt={member.name} loading="lazy" />
+                    </div>
+                    <strong>{member.name}</strong>
+                    <span className="brand-team-role">{member.role}</span>
                   </div>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            )}
+            {teamStatus !== 'loading' && (
+              <div className="brand-team-more">
+                <a className="brand-cta-secondary" href={TEAM_PAGE_URL} target="_blank" rel="noopener noreferrer">
+                  {t('brand.team.meetTeam')} <ArrowRightOutlined />
+                </a>
+              </div>
+            )}
           </div>
         )}
       </Section>

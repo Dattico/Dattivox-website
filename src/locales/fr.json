@@ -370,12 +370,7 @@
     "team": {
       "title": "Conçu par une petite équipe à Bruxelles.",
       "subtitle": "Dattico conçoit des systèmes qui transforment les données en conversations. Dattivox en est l'aboutissement.",
-      "people": {
-        "sergio": { "initial": "S", "name": "Sergio", "role": "Fondateur", "quote": "Les idées tracent la carte ; l'exécution, c'est la façon dont on avance." },
-        "nathan": { "initial": "N", "name": "Nathan", "role": "Co-fondateur, Data Scientist & Ingénieur", "quote": "Rien n'est inutile si on peut en tirer une leçon." },
-        "elie": { "initial": "E", "name": "Elie", "role": "Co-fondateur, Business & Stratégie", "quote": "Les meilleurs produits partent d'une bonne compréhension du problème." },
-        "hugues": { "initial": "H", "name": "Hugues", "role": "Business Developer", "quote": "Chaque connexion est une opportunité qui n'attend qu'à se réaliser." }
-      }
+      "meetTeam": "Découvrez l'équipe sur dattico.com"
     },
     "experience": {
       "title": "Ne nous croyez pas sur parole. Appelez Dattivox.",

@@ -370,12 +370,7 @@
     "team": {
       "title": "Gebouwd door een klein team in Brussel.",
       "subtitle": "Dattico bouwt systemen die data omzetten in gesprekken. Dattivox is waar dat tot leven komt.",
-      "people": {
-        "sergio": { "initial": "S", "name": "Sergio", "role": "Oprichter", "quote": "Ideeën tekenen de kaart; uitvoering is hoe we de weg afleggen." },
-        "nathan": { "initial": "N", "name": "Nathan", "role": "Mede-oprichter, Data Scientist & Engineer", "quote": "Niets is nutteloos als je er iets van kan leren." },
-        "elie": { "initial": "E", "name": "Elie", "role": "Mede-oprichter, Business & Strategie", "quote": "Goede producten beginnen met het begrijpen van het probleem." },
-        "hugues": { "initial": "H", "name": "Hugues", "role": "Business Developer", "quote": "Elke connectie is een kans die staat te wachten." }
-      }
+      "meetTeam": "Ontmoet het team op dattico.com"
     },
     "experience": {
       "title": "Neem het niet zomaar van ons aan. Bel Dattivox.",

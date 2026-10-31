@@ -370,12 +370,7 @@
     "team": {
       "title": "Built by a small team in Brussels.",
       "subtitle": "Dattico builds systems that turn data into conversations. Dattivox is where that comes to life.",
-      "people": {
-        "sergio": { "initial": "S", "name": "Sergio", "role": "Founder", "quote": "Ideas build the map; execution is how we walk it." },
-        "nathan": { "initial": "N", "name": "Nathan", "role": "Co-Founder, Data Scientist & Engineer", "quote": "Nothing is useless if you can learn something from it." },
-        "elie": { "initial": "E", "name": "Elie", "role": "Co-Founder, Business & Strategy", "quote": "Great products start with understanding the problem." },
-        "hugues": { "initial": "H", "name": "Hugues", "role": "Business Developer", "quote": "Every connection is an opportunity waiting to happen." }
-      }
+      "meetTeam": "Meet the team on dattico.com"
     },
     "experience": {
       "title": "Don't take our word for it. Call Dattivox.",
