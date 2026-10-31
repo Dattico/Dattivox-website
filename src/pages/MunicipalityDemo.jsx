@@ -6,7 +6,7 @@ import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip, Responsive
 import { generateClient } from 'aws-amplify/data';
 import OctoplanDemo from '../../Demo/OctoplanDemo';
 import { useTranslation } from '../hooks/useTranslation';
-import { useTeam, TEAM_PAGE_URL } from '../hooks/useTeam';
+import { useTeam } from '../hooks/useTeam';
 import receptionistWelcomePhoto from '../assets/photos/receptionist-handoff.webp';
 import uccleReceptionPhoto from '../assets/photos/uccle-reception.jpg';
 import receptionistTestimonialPhoto from '../assets/photos/receptionist-testimonial.jpg';
@@ -934,13 +934,6 @@ const MunicipalityDemo = () => {
                     <span className="brand-team-role">{member.role}</span>
                   </div>
                 ))}
-              </div>
-            )}
-            {teamStatus !== 'loading' && (
-              <div className="brand-team-more">
-                <a className="brand-cta-secondary" href={TEAM_PAGE_URL} target="_blank" rel="noopener noreferrer">
-                  {t('brand.team.meetTeam')} <ArrowRightOutlined />
-                </a>
               </div>
             )}
           </div>

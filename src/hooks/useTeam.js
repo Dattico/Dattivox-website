@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 // dattico-website repo) and served from its /api/team route. Dattivox only
 // displays it, so team changes never need a Dattivox deploy.
 export const TEAM_URL = import.meta.env.VITE_TEAM_URL || 'https://www.dattico.com/api/team';
-export const TEAM_PAGE_URL = 'https://www.dattico.com/team';
 
 // status: 'loading' | 'ready' | 'error'
 export const useTeam = () => {

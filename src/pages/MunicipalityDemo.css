@@ -564,8 +564,6 @@
 .brand-team-card strong { color: var(--brand-ink); font-size: 1.02rem; }
 .brand-team-role { color: var(--brand-ink-soft); font-size: 0.8rem; line-height: 1.4; }
 
-.brand-team-more { display: flex; justify-content: center; margin-top: 2rem; }
-
 @media (max-width: 480px) {
   .brand-team-card { flex-basis: calc(50% - 0.625rem); }
 }

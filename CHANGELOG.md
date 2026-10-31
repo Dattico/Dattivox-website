@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 ### Changed
-- Team section now loads the team from www.dattico.com (`/api/team`, via new `src/hooks/useTeam.js`) instead of hardcoding it, so the team is maintained only in the dattico-website repo (`src/data/team.json`). Cards show only the dattico avatar, name and role (no quotes or bios), in a compact centered layout — one row of five on desktop, two per row on phones (`MunicipalityDemo.jsx`/`.css`). A "Meet the team on dattico.com" link is always shown, and is the only thing shown if the feed can't be reached. The feed URL can be overridden with `VITE_TEAM_URL`.
+- Team section now loads the team from www.dattico.com (`/api/team`, via new `src/hooks/useTeam.js`) instead of hardcoding it, so the team is maintained only in the dattico-website repo (`src/data/team.json`). Cards show only the dattico avatar, name and role (no quotes or bios), in a compact centered layout — one row of five on desktop, two per row on phones (`MunicipalityDemo.jsx`/`.css`). If the feed can't be reached, only the section title and subtitle are shown. The feed URL can be overridden with `VITE_TEAM_URL`.
 
 ### Removed
 - Hardcoded team members (`brand.team.people` in en/fr/nl locales) and the local photos `src/assets/photos/team-sergio.jpg` / `team-nathan.jpg`.
