@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dattivox Pricing</title>
+
+<!--
+  CUSTOMER-FACING. Contains no cost, margin, LTV or break-even data, by design —
+  same discipline as customerFacing() in packages/shared/src/utils/roi.ts.
+  Internal economics live in docs/pricing-strategy.md.
+
+  TODO(pricing): the MINUTE BUNDLES section below carries PLACEHOLDER prices,
+  mirroring MINUTE_BUNDLES in packages/shared/src/utils/dattivoxPricing.ts.
+  Replace both with the agreed bundle table before publishing this page.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Dattico brand — docs/style-guide.md */
+    --black: #000000;
+    --white: #ffffff;
+    --off-white: #f3f3ef;
+    --blue: #9eb9d8;
+    --lavender: #a286b9;
+    --purple: #4c2e76;
+    --meta: #6b6b6b;
+
+    --g-blue-lav: linear-gradient(135deg, #9eb9d8, #a286b9);
+    --g-lav-purple: linear-gradient(135deg, #a286b9, #4c2e76);
+    --g-purple-blue: linear-gradient(135deg, #4c2e76, #9eb9d8);
+
+    --card-border: 1px solid rgba(162, 134, 185, 0.2);
+    --card-shadow: 0 4px 40px rgba(162, 134, 185, 0.12);
+    --radius: 20px;
+    --u: 8px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    background: var(--off-white);
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  h1, h2, h3, .eyebrow, .pc-name, .cta {
+    font-family: 'Clash Display', 'Montserrat', system-ui, sans-serif;
+  }
+  .material-symbols-outlined { font-size: 19px; line-height: 1; vertical-align: -4px; }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  /* ─── Header ─── */
+  header { padding: 72px 0 40px; text-align: center; }
+  .eyebrow {
+    display: inline-block; font-weight: 600; font-size: 0.68rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple);
+    margin-bottom: calc(var(--u) * 2);
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 700; line-height: 1.15;
+    margin: 0 0 calc(var(--u) * 2);
+    background: var(--g-blue-lav);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub { color: var(--meta); font-size: 1.05rem; max-width: 620px; margin: 0 auto; font-weight: 500; }
+
+  h2 {
+    font-size: 1.8rem; font-weight: 700; margin: 0 0 calc(var(--u));
+    text-align: center;
+  }
+  .section-sub { text-align: center; color: var(--meta); font-weight: 500; margin: 0 0 calc(var(--u) * 4); }
+  .section { padding: 56px 0 0; }
+
+  /* ─── Tier cards ─── */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--u) * 2.5); }
+  @media (max-width: 960px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+
+  .pcard {
+    position: relative; background: var(--white);
+    border: var(--card-border); border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: calc(var(--u) * 4) calc(var(--u) * 3) calc(var(--u) * 3.5);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  /* Purple → Blue card top accent, per the style guide */
+  .pcard::before {
+    content: ''; position: absolute; inset: 0 0 auto 0; height: 4px;
+    background: var(--g-purple-blue);
+  }
+  .pcard.featured { box-shadow: 0 8px 50px rgba(76, 46, 118, 0.22); }
+
+  .ribbon {
+    position: absolute; top: calc(var(--u) * 2); right: calc(var(--u) * 2);
+    background: rgba(158, 185, 216, 0.3); color: var(--purple);
+    font-family: 'Clash Display', sans-serif; font-weight: 600;
+    font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .pc-name { font-size: 1.2rem; font-weight: 600; color: var(--purple); }
+  .pc-persona { color: var(--meta); font-size: 0.82rem; font-weight: 500; margin-top: 2px; min-height: 2.6em; }
+
+  .pc-price { margin: calc(var(--u) * 2) 0 2px; display: flex; align-items: baseline; gap: 4px; }
+  .pc-price .cur { font-size: 1.15rem; font-weight: 600; }
+  .pc-price .amt {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1;
+  }
+  .pc-price .per { color: var(--meta); font-size: 0.9rem; font-weight: 500; }
+  .pc-custom {
+    font-family: 'Clash Display', sans-serif; font-size: 2rem; font-weight: 700;
+    margin: calc(var(--u) * 2) 0 2px; line-height: 1.1;
+  }
+
+  .pc-mins {
+    margin-top: calc(var(--u) * 2); padding-top: calc(var(--u) * 2);
+    border-top: 1px solid rgba(162, 134, 185, 0.25);
+    font-size: 0.92rem;
+  }
+  .pc-mins .big { font-weight: 700; color: var(--purple); }
+  .pc-extra { color: var(--meta); font-size: 0.85rem; font-weight: 500; margin-top: 4px; }
+  .pc-split {
+    margin-top: calc(var(--u) * 2); padding-top: calc(var(--u) * 2);
+    border-top: 1px solid rgba(162, 134, 185, 0.25);
+    display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 1.5);
+  }
+  .pc-split-item { text-align: center; }
+  .pc-split-label {
+    font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--meta); margin-bottom: 4px;
+  }
+  .pc-split-val {
+    font-family: 'Clash Display', sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--purple);
+  }
+  .pc-split-note { font-size: 0.72rem; color: var(--meta); font-weight: 500; margin-top: 2px; }
+  .pc-split-full { grid-column: 1 / -1; }
+
+  .pc-setup {
+    margin-top: calc(var(--u) * 1.5); font-size: 0.82rem; color: var(--meta); font-weight: 500;
+    display: flex; gap: 6px; align-items: flex-start;
+  }
+  .pc-setup .material-symbols-outlined { font-size: 16px; color: var(--lavender); margin-top: 2px; }
+
+  .cta {
+    margin-top: auto; padding-top: calc(var(--u) * 3);
+  }
+  .cta a {
+    display: flex; justify-content: center; align-items: center;
+    height: 48px; border-radius: 6px; text-decoration: none;
+    font-weight: 600; font-size: 0.95rem;
+    background: var(--g-lav-purple); color: var(--white);
+    transition: filter .15s;
+  }
+  .cta a:hover { filter: brightness(1.1); }
+  .cta a.ghost {
+    background: transparent; color: var(--meta);
+    border: 1px solid rgba(162, 134, 185, 0.35);
+  }
+  .cta a.ghost:hover { color: var(--purple); border-color: var(--lavender); filter: none; }
+
+  /* ─── Bundles ─── */
+  .bundles { display: grid; grid-template-columns: repeat(6, 1fr); gap: calc(var(--u) * 2); }
+  @media (max-width: 900px) { .bundles { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 520px) { .bundles { grid-template-columns: 1fr; } }
+  .bcard {
+    background: var(--white); border: var(--card-border); border-radius: var(--radius);
+    box-shadow: var(--card-shadow); padding: calc(var(--u) * 3) calc(var(--u) * 2);
+    text-align: center;
+  }
+  .b-min {
+    font-family: 'Clash Display', sans-serif; font-size: 1.6rem; font-weight: 700;
+    color: var(--purple); line-height: 1.1;
+  }
+  .b-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--meta); font-weight: 600; }
+  .b-price { margin-top: calc(var(--u) * 1.5); font-size: 1.1rem; font-weight: 700; }
+  .b-rate { color: var(--meta); font-size: 0.82rem; font-weight: 500; }
+
+  .rules {
+    margin-top: calc(var(--u) * 4); background: var(--white);
+    border: var(--card-border); border-radius: var(--radius); box-shadow: var(--card-shadow);
+    padding: calc(var(--u) * 3);
+  }
+  .rules ul { margin: 0; padding-left: calc(var(--u) * 3); }
+  .rules li { font-size: 0.92rem; margin-bottom: 6px; }
+  .rules li::marker { color: var(--lavender); }
+
+  /* ─── Comparison table ─── */
+  .table-shell {
+    background: var(--white); border: var(--card-border);
+    border-radius: var(--radius); box-shadow: var(--card-shadow); overflow: hidden;
+  }
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 860px; }
+  th, td {
+    text-align: left; padding: 13px 18px; font-size: 0.88rem;
+    border-bottom: 1px solid rgba(162, 134, 185, 0.18); vertical-align: top;
+  }
+  th.rowlabel, td.rowlabel {
+    position: sticky; left: 0; z-index: 2; background: var(--white);
+    font-weight: 600; min-width: 180px;
+    border-right: 1px solid rgba(162, 134, 185, 0.3);
+  }
+  thead th { background: var(--off-white); border-bottom: 2px solid rgba(162, 134, 185, 0.4); }
+  thead th.rowlabel { background: var(--off-white); }
+  .company { font-weight: 600; font-size: 0.88rem; }
+  .descr { display: block; color: var(--meta); font-weight: 500; font-size: 0.78rem; margin-top: 3px; }
+  .pkg {
+    display: block; margin-top: 10px; font-family: 'Clash Display', sans-serif;
+    font-size: 0.95rem; font-weight: 600; color: var(--purple);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  tr.section-row td {
+    background: var(--g-lav-purple); color: var(--white);
+    font-family: 'Clash Display', sans-serif; font-weight: 600;
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 9px 18px; border-bottom-color: transparent;
+  }
+  tr.section-row td.rowlabel { background: var(--g-lav-purple); color: var(--white); border-right-color: transparent; }
+  td.value { color: #2e2735; }
+  td.value .blank { color: rgba(162, 134, 185, 0.6); }
+  tbody tr:hover td.value, tbody tr:hover td.rowlabel { background: rgba(158, 185, 216, 0.1); }
+
+  .note { text-align: center; color: var(--meta); font-size: 0.85rem; font-weight: 500; padding: calc(var(--u) * 3) 0 0; }
+  footer {
+    margin-top: calc(var(--u) * 9); padding: calc(var(--u) * 4) 0;
+    text-align: center; color: var(--meta); font-size: 0.8rem; font-weight: 500;
+  }
+  footer::before {
+    content: ''; display: block; height: 1px; max-width: 1140px; margin: 0 auto calc(var(--u) * 4);
+    background: var(--g-blue-lav); opacity: 0.35;
+  }
+
+  /* ─── Benchmark section ─── */
+  .bench-wrap { background: var(--white); border: var(--card-border); border-radius: var(--radius); box-shadow: var(--card-shadow); padding: calc(var(--u) * 3); margin-bottom: calc(var(--u) * 3); overflow-x: auto; }
+  .bench-wrap canvas { display: block; margin: 0 auto; }
+
+  table.bench { border-collapse: collapse; width: 100%; min-width: 720px; font-variant-numeric: tabular-nums; }
+  table.bench th { font-family: 'Clash Display', sans-serif; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--meta); text-align: left; padding: 10px 14px; border-bottom: 2px solid rgba(162,134,185,0.3); white-space: nowrap; }
+  table.bench td { padding: 10px 14px; border-bottom: 1px solid rgba(162,134,185,0.12); font-size: 0.84rem; vertical-align: top; }
+  table.bench tr:last-child td { border-bottom: none; }
+  table.bench .prov { font-weight: 600; white-space: nowrap; }
+  table.bench .dtx { background: rgba(76,46,118,0.06); font-weight: 500; }
+  table.bench .dtx .prov { color: var(--purple); }
+  table.bench td.value.dtx { background: rgba(76,46,118,0.06); }
+  .src { font-size: 0.68rem; vertical-align: super; text-decoration: none; color: var(--lavender); font-weight: 600; }
+  .src:hover { color: var(--purple); }
+
+  .bench-insights { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: calc(var(--u) * 2); margin-top: calc(var(--u) * 3); }
+  .bi-card { background: var(--off-white); border-radius: 12px; padding: calc(var(--u) * 2.5); border-left: 3px solid var(--lavender); }
+  .bi-card h3 { font-family: 'Clash Display', sans-serif; font-size: 0.88rem; font-weight: 600; margin: 0 0 4px; }
+  .bi-card p { font-size: 0.8rem; color: var(--meta); line-height: 1.5; margin: 0; }
+  .bench-foot { font-size: 0.72rem; color: var(--meta); text-align: center; margin-top: calc(var(--u) * 2); line-height: 1.6; }
+  .bench-foot a { color: var(--lavender); text-decoration: none; }
+  .bench-foot a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+  <header class="wrap">
+    <span class="eyebrow">Dattivox pricing</span>
+    <h1>Stop losing the calls you never hear</h1>
+    <p class="sub">Every missed call is a customer who rang someone else. Dattivox answers them all — day, night, lunch hour and holiday — and turns them into appointments, leads and jobs you would have lost.</p>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ─── Tiers ─── -->
+    <section class="cards">
+
+      <div class="pcard">
+        <div class="pc-name">Starter</div>
+        <div class="pc-persona">Support on small company · 3 people SMEs</div>
+        <div class="pc-price"><span class="cur">€</span><span class="amt">86</span><span class="per">/ month</span></div>
+        <div class="pc-mins">
+          <span class="big">110 minutes</span> included each month
+          <div class="pc-extra">Extra minutes €2,00 / min</div>
+        </div>
+        <div class="pc-split">
+          <div class="pc-split-item pc-split-full">
+            <div class="pc-split-label">Setup</div>
+            <div class="pc-split-val">€450</div>
+            <div class="pc-split-note">one-off &middot; First Journey 1 day</div>
+          </div>
+        </div>
+        <div class="cta"><a href="#">Choose Starter</a></div>
+      </div>
+
+      <div class="pcard">
+        <div class="pc-name">Pro</div>
+        <div class="pc-persona">Small law firm · 20 people SME</div>
+        <div class="pc-price"><span class="cur">€</span><span class="amt">97</span><span class="per">/ month</span></div>
+        <div class="pc-mins">
+          <span class="big">300 minutes</span> included each month
+          <div class="pc-extra">Extra minutes €2,00 / min</div>
+        </div>
+        <div class="pc-split">
+          <div class="pc-split-item pc-split-full">
+            <div class="pc-split-label">Setup</div>
+            <div class="pc-split-val">€450</div>
+            <div class="pc-split-note">one-off &middot; First Journey 2 days</div>
+          </div>
+        </div>
+        <div class="cta"><a href="#">Choose Pro</a></div>
+      </div>
+
+      <div class="pcard featured">
+        <span class="ribbon">Most popular</span>
+        <div class="pc-name">Business</div>
+        <div class="pc-persona">Garage / Dentistry / Commune · High intensity SME, 200+</div>
+        <div class="pc-price"><span class="cur">€</span><span class="amt">178,50</span><span class="per">/ month</span></div>
+        <div class="pc-mins">
+          <span class="big">750 minutes</span> included each month
+          <div class="pc-extra">Extra minutes €2,00 / min</div>
+        </div>
+        <div class="pc-split">
+          <div class="pc-split-item pc-split-full">
+            <div class="pc-split-label">Setup</div>
+            <div class="pc-split-val">€900</div>
+            <div class="pc-split-note">one-off &middot; First Journey 2 days</div>
+          </div>
+        </div>
+        <div class="cta"><a href="#">Choose Business</a></div>
+      </div>
+
+      <div class="pcard">
+        <div class="pc-name">Scale</div>
+        <div class="pc-persona">Clinics / Ministery · Intense</div>
+        <div class="pc-price"><span class="cur">€</span><span class="amt">2.711,30</span><span class="per">/ month</span></div>
+        <div class="pc-mins">
+          <span class="big">1 800 minutes</span> included each month
+          <div class="pc-extra">Extra minutes €2,00 / min</div>
+        </div>
+        <div class="pc-split">
+          <div class="pc-split-item pc-split-full">
+            <div class="pc-split-label">Setup</div>
+            <div class="pc-split-val">€2.430,56</div>
+            <div class="pc-split-note">one-off &middot; dedicated change consultant</div>
+          </div>
+        </div>
+        <div class="cta"><a href="#">Choose Scale</a></div>
+      </div>
+
+      <div class="pcard">
+        <div class="pc-name">Enterprise</div>
+        <div class="pc-persona">Entreprise with SOPs</div>
+        <div class="pc-price"><span class="cur">€</span><span class="amt">3.501,39</span><span class="per">/ month</span></div>
+        <div class="pc-mins">
+          <span class="big">6 000 minutes</span> included each month
+          <div class="pc-extra">Extra minutes €2,00 / min</div>
+        </div>
+        <div class="pc-split">
+          <div class="pc-split-item pc-split-full">
+            <div class="pc-split-label">Setup</div>
+            <div class="pc-split-val">€7.291,67</div>
+            <div class="pc-split-note">one-off &middot; dedicated change consultant</div>
+          </div>
+        </div>
+        <div class="cta"><a href="#">Talk to sales</a></div>
+      </div>
+
+      <div class="pcard">
+        <div class="pc-name">Enterprise+</div>
+        <div class="pc-persona">Above 6 000 minutes a month, or anything bespoke</div>
+        <div class="pc-custom">Custom</div>
+        <div class="pc-mins">
+          <span class="big">Unlimited minutes</span>
+          <div class="pc-extra">Rate agreed with your deal</div>
+        </div>
+        <div class="pc-split">
+          <div class="pc-split-item pc-split-full">
+            <div class="pc-split-label">Setup</div>
+            <div class="pc-split-val">Scoped</div>
+            <div class="pc-split-note">Onboarding and integration scoped to your estate</div>
+          </div>
+        </div>
+        <div class="cta"><a class="ghost" href="#">Talk to us</a></div>
+      </div>
+
+    </section>
+
+    <!-- ─── First Journey ─── -->
+    <section class="section">
+      <h2>The First Journey</h2>
+      <p class="section-sub">Getting this right is what makes everything else work.</p>
+      <div class="rules">
+        <ul>
+          <li>A Dattico business lead works alongside you to map how your calls actually flow today &mdash; who answers what, what gets missed, and what a good outcome sounds like.</li>
+          <li>We configure Dattivox around that, connect it to your phone system, and stay with you through the first live calls until it answers the way you would.</li>
+          <li>Included on Business, Scale and Enterprise on a 12-month term. On Starter and Pro it is a fixed one-off, so you pay only for the time it takes.</li>
+          <li>Need deeper accompaniment than your package covers? Extra days can be added to any plan.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── Minute bundles ─── -->
+    <section class="section">
+      <h2>Need more minutes?</h2>
+      <p class="section-sub">Top up any package with prepaid minutes — the more you buy, the less each one costs.</p>
+
+      <div class="bundles">
+        <div class="bcard">
+          <div class="b-min">20</div>
+          <div class="b-label">minutes</div>
+          <div class="b-price">€2,00</div>
+          <div class="b-rate">€0,10 / min</div>
+        </div>
+        <div class="bcard">
+          <div class="b-min">50</div>
+          <div class="b-label">minutes</div>
+          <div class="b-price">€5,00</div>
+          <div class="b-rate">€0,10 / min</div>
+        </div>
+        <div class="bcard">
+          <div class="b-min">100</div>
+          <div class="b-label">minutes</div>
+          <div class="b-price">€10,00</div>
+          <div class="b-rate">€0,10 / min</div>
+        </div>
+        <div class="bcard">
+          <div class="b-min">250</div>
+          <div class="b-label">minutes</div>
+          <div class="b-price">€25,00</div>
+          <div class="b-rate">€0,10 / min</div>
+        </div>
+        <div class="bcard">
+          <div class="b-min">500</div>
+          <div class="b-label">minutes</div>
+          <div class="b-price">€50,00</div>
+          <div class="b-rate">€0,10 / min</div>
+        </div>
+        <div class="bcard">
+          <div class="b-min">1 000</div>
+          <div class="b-label">minutes</div>
+          <div class="b-price">€100,00</div>
+          <div class="b-rate">€0,10 / min</div>
+        </div>
+      </div>
+
+      <div class="rules">
+        <ul>
+          <li>Your package minutes are always used first — bundles only start counting once those run out.</li>
+          <li>Bundle minutes stay valid for 12 months from purchase.</li>
+          <li>Bundles sit on top of your subscription and can be bought on any package.</li>
+        </ul>
+      </div>
+      <p class="note">Bundle rates shown are indicative and confirmed on your quote.</p>
+    </section>
+
+    <!-- ─── Competitive positioning ─── -->
+    <section class="section">
+      <h2>How we compare</h2>
+      <p class="section-sub">Most AI voice platforms sell minutes. Dattivox delivers a working call operation.</p>
+
+      <!-- What you're actually buying -->
+      <div class="table-shell" style="margin-bottom:calc(var(--u)*3)">
+        <div class="scroll">
+          <table class="bench">
+            <thead>
+              <tr>
+                <th style="min-width:180px">Capability</th>
+                <th style="min-width:90px">Dattivox</th>
+                <th>Famulor <a class="src" href="https://www.famulor.io/pricing" target="_blank" rel="noopener">*</a></th>
+                <th>Elora <a class="src" href="https://www.mixvoip.com/cloudpbx/integrations/elora/" target="_blank" rel="noopener">*</a></th>
+                <th>ElevenLabs <a class="src" href="https://costbench.com/software/voice-ai-agents/elevenlabs-conversational/" target="_blank" rel="noopener">*</a></th>
+                <th>Rosie <a class="src" href="https://toolradar.com/tools/rosie/pricing" target="_blank" rel="noopener">*</a></th>
+                <th>Goodcall <a class="src" href="https://dialzara.com/compare/goodcall-vs-smith-ai" target="_blank" rel="noopener">*</a></th>
+                <th>Smith.ai <a class="src" href="https://www.getmacha.com/blog/smith-ai-pricing-explained" target="_blank" rel="noopener">*</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="section-row"><td class="rowlabel" colspan="8">What the caller gets</td></tr>
+              <tr>
+                <td class="rowlabel">AI answers calls 24/7</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">schedule</span> Business hrs</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Languages</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> NL&thinsp;/&thinsp;FR&thinsp;/&thinsp;EN&thinsp;/&thinsp;DE</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> 45+</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Any</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> 74</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span> EN/ES</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span> EN</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span> EN/ES</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Appointment booking</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> All tiers</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span> Build it</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">lock</span> $149+</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+              </tr>
+
+              <tr class="section-row"><td class="rowlabel" colspan="8">What your team gets</td></tr>
+              <tr>
+                <td class="rowlabel">CRM integration (Odoo, Dynamics&hellip;)</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Native</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="blank">&mdash;</span> API only</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">lock</span> $299+</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Call lands in CRM automatically</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">AI call analysis &amp; sentiment</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Automatic follow-up proposals</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Mobile app with caller context</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+
+              <tr class="section-row"><td class="rowlabel" colspan="8">Getting started</td></tr>
+              <tr>
+                <td class="rowlabel">Guided setup (First Journey)</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Included or one-off</td>
+                <td class="value"><span class="blank">&mdash;</span> Self-serve</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">help</span> Via Mixvoip</td>
+                <td class="value"><span class="blank">&mdash;</span> Developer docs</td>
+                <td class="value"><span class="blank">&mdash;</span> Self-serve</td>
+                <td class="value"><span class="blank">&mdash;</span> Self-serve</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Works without a developer</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+              </tr>
+
+              <tr class="section-row"><td class="rowlabel" colspan="8">Compliance</td></tr>
+              <tr>
+                <td class="rowlabel">EU-hosted / GDPR</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">EU AI Act ready</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">help</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">help</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">do_not_disturb_on</span></td>
+              </tr>
+
+              <tr class="section-row"><td class="rowlabel" colspan="8">SLA &amp; Enterprise</td></tr>
+              <tr>
+                <td class="rowlabel">Published uptime SLA</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> 99,9%</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> 99,9%</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Via Mixvoip</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">SLA credits on breach</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Via Mixvoip</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Dedicated account manager</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Scale+</td>
+                <td class="value"><span class="blank">&mdash;</span> Contact sales</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">help</span></td>
+                <td class="value"><span class="blank">&mdash;</span> Enterprise</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span> Enterprise</td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Custom API integrations</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Scale+</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">help</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> All tiers</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span> Enterprise</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Change consultant / onboarding team</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Scale+</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">lock</span> $299</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Model training on your call history</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Scale+</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">SSO / SAML</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> Scale+</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">help</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">lock</span> Enterprise</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Data retention policy</td>
+                <td class="value dtx"><span class="material-symbols-outlined" style="color:var(--purple)">check_circle</span> 3–24 mo</td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="material-symbols-outlined" style="color:var(--meta)">help</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+                <td class="value"><span class="blank">&mdash;</span></td>
+              </tr>
+
+              <tr class="section-row"><td class="rowlabel" colspan="8">Pricing</td></tr>
+              <tr>
+                <td class="rowlabel">Entry price</td>
+                <td class="value dtx" style="font-weight:600">€86/mo</td>
+                <td class="value">€27/mo</td>
+                <td class="value">Quote</td>
+                <td class="value">$6/mo</td>
+                <td class="value">$49/mo</td>
+                <td class="value">$79/mo</td>
+                <td class="value">$150/mo</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Mid-market (~750 min)</td>
+                <td class="value dtx" style="font-weight:600">€178,50/mo</td>
+                <td class="value">~€116/mo</td>
+                <td class="value">Quote</td>
+                <td class="value">~$153/mo</td>
+                <td class="value">$149/mo</td>
+                <td class="value">$129/mo</td>
+                <td class="value">$500/mo</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Scale (~1.800 min)</td>
+                <td class="value dtx" style="font-weight:600">€2.711/mo</td>
+                <td class="value">~€232/mo</td>
+                <td class="value">Quote</td>
+                <td class="value">~$930/mo</td>
+                <td class="value">$299/mo</td>
+                <td class="value">$249/mo</td>
+                <td class="value">$800+/mo</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Billing model</td>
+                <td class="value dtx">Flat monthly</td>
+                <td class="value">Per-second</td>
+                <td class="value">Negotiated</td>
+                <td class="value">Credits + usage</td>
+                <td class="value">Per-minute plan</td>
+                <td class="value">Per-caller</td>
+                <td class="value">Per-call</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Positioning insights -->
+      <div class="bench-insights">
+        <div class="bi-card">
+          <h3>Not just voice minutes</h3>
+          <p>Most competitors sell AI minutes. Dattivox delivers a call operation: every call lands in your CRM, gets analysed, and proposes a follow-up. That back-office work is what you're not hiring for.</p>
+        </div>
+        <div class="bi-card">
+          <h3>The First Journey matters</h3>
+          <p>A business person maps how your calls actually flow and configures Dattivox around that. Self-serve platforms leave this to you and your team, which is where most AI voice projects stall.</p>
+        </div>
+        <div class="bi-card">
+          <h3>EU compliance is not optional</h3>
+          <p>Dattivox, Famulor and Elora are EU-hosted and GDPR-ready by default. US platforms require extra configuration or enterprise contracts for EU data residency and the AI Act.</p>
+        </div>
+        <div class="bi-card">
+          <h3>Scale pricing reflects scale service</h3>
+          <p>At Scale and Enterprise, Dattivox includes a dedicated change consultant, custom API integrations, model training on your call history, SSO and a 99,9% uptime SLA with credits. Most competitors don't publish an SLA at all.</p>
+        </div>
+      </div>
+
+      <p class="bench-foot">
+        Prices from vendor sites and third-party comparisons, October 2026. Competitor prices in USD; Dattivox in EUR.<br>
+        <a href="https://www.famulor.io/pricing">Famulor</a> · <a href="https://www.mixvoip.com/cloudpbx/integrations/elora/">Elora</a> · <a href="https://costbench.com/software/voice-ai-agents/elevenlabs-conversational/">ElevenLabs</a> · <a href="https://toolradar.com/tools/rosie/pricing">Rosie</a> · <a href="https://dialzara.com/compare/goodcall-vs-smith-ai">Goodcall</a> · <a href="https://www.getmacha.com/blog/smith-ai-pricing-explained">Smith.ai</a>
+      </p>
+    </section>
+
+    <!-- ─── Comparison ─── -->
+    <section class="section">
+      <h2>What is in each package</h2>
+      <p class="section-sub">Everything below is included at no extra cost.</p>
+
+      <div class="table-shell">
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th class="rowlabel">Examples of existing company</th>
+                <th>
+                  <span class="company">Support on small company</span>
+                  <span class="descr">3 people SMEs</span>
+                  <span class="pkg">Starter</span>
+                </th>
+                <th>
+                  <span class="company">Small Law Firm</span>
+                  <span class="descr">20 people SME</span>
+                  <span class="pkg">Pro</span>
+                </th>
+                <th>
+                  <span class="company">Garage / Dentistry / Commune</span>
+                  <span class="descr">High Intensity SME - 200+</span>
+                  <span class="pkg">Business</span>
+                </th>
+                <th>
+                  <span class="company">Clinics / Ministery</span>
+                  <span class="descr">Intense</span>
+                  <span class="pkg">Scale</span>
+                </th>
+                <th>
+                  <span class="company">D'ieteren /</span>
+                  <span class="descr">Entreprise with SOPs</span>
+                  <span class="pkg">Enterprise</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="section-row"><td class="rowlabel">Setup</td><td></td><td></td><td></td><td></td><td></td></tr>
+
+              <tr>
+                <td class="rowlabel">Journey</td>
+                <td class="value">First Journey — 1 day</td>
+                <td class="value">First Journey — 2 days</td>
+                <td class="value">First Journey on us</td>
+                <td class="value">Change consultant</td>
+                <td class="value">Change consultant</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">SIP Integration</td>
+                <td class="value">We assist on SIP</td>
+                <td class="value">We assist on SIP</td>
+                <td class="value">Hotline</td>
+                <td class="value">Hotline</td>
+                <td class="value">Hotline</td>
+              </tr>
+
+              <tr class="section-row"><td class="rowlabel">Features</td><td></td><td></td><td></td><td></td><td></td></tr>
+
+              <tr>
+                <td class="rowlabel">API features</td>
+                <td class="value">No API</td>
+                <td class="value">Odoo - Crossuite, etc</td>
+                <td class="value">Odoo - Crossuite, etc</td>
+                <td class="value">We build your API (on T&amp;M)</td>
+                <td class="value">We build your API (on T&amp;M)</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">AI Analysis</td>
+                <td class="value"><span class="blank">—</span></td>
+                <td class="value">Sentiment</td>
+                <td class="value">Sentiment</td>
+                <td class="value">Sentiment</td>
+                <td class="value">Sentiment</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Training AI</td>
+                <td class="value"><span class="blank">—</span></td>
+                <td class="value"><span class="blank">—</span></td>
+                <td class="value"><span class="blank">—</span></td>
+                <td class="value">Improve Model w/ history</td>
+                <td class="value">Improve Model w/ history</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Single Sign On</td>
+                <td class="value">SSO optional</td>
+                <td class="value">SSO optional</td>
+                <td class="value">SSO optional</td>
+                <td class="value">SSO included</td>
+                <td class="value">SSO included</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">EU AI Act</td>
+                <td class="value">EU Hosted</td>
+                <td class="value">EU Hosted</td>
+                <td class="value">EU Hosted</td>
+                <td class="value">EU Hosted</td>
+                <td class="value">Optional</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">Data Retention</td>
+                <td class="value">3 months</td>
+                <td class="value">3 months</td>
+                <td class="value">3 months</td>
+                <td class="value">12 months</td>
+                <td class="value">24 months</td>
+              </tr>
+
+              <tr class="section-row"><td class="rowlabel">Support</td><td></td><td></td><td></td><td></td><td></td></tr>
+
+              <tr>
+                <td class="rowlabel">Support</td>
+                <td class="value">Email response</td>
+                <td class="value">Email response</td>
+                <td class="value">Hotline</td>
+                <td class="value">Hotline</td>
+                <td class="value">SLA</td>
+              </tr>
+              <tr>
+                <td class="rowlabel">SLA</td>
+                <td class="value">3 business days</td>
+                <td class="value">Next Business Day</td>
+                <td class="value">Working hours</td>
+                <td class="value">Working hours</td>
+                <td class="value">Working hours</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p class="note">All prices in EUR, excluding VAT. Hosted in the EU.</p>
+    </section>
+
+  </main>
+
+  <footer>Dattivox &middot; BrewBuddy by Dattico</footer>
+
+</body>
+</html>

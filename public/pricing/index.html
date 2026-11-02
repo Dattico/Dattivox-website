@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing · Dattivox</title>
+<meta name="description" content="Dattivox packages, what each one includes, and extra minute bundles. Starter from €86 per month." />
+<link rel="canonical" href="https://dattivox.com/pricing" />
+<link rel="icon" type="image/svg+xml" href="/Dattivox - logo.svg" />
+
+<!--
+  PUBLIC pricing page ("from" pricing). Shows only Starter/Pro prices, a "from"
+  price for Business and "Talk to us" for Scale/Enterprise. Scale/Enterprise
+  prices, setup fees and minute-bundle prices stay in proposals — keep them out
+  of this file. The full internal grid is src/utils/pricing.html.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" />
+
+<style>
+  :root {
+    /* Dattico brand — docs/style-guide.md */
+    --black: #000000;
+    --white: #ffffff;
+    --off-white: #f3f3ef;
+    --lavender: #a286b9;
+    --purple: #4c2e76;
+    --meta: #6b6b6b;
+    --g-blue-lav: linear-gradient(135deg, #9eb9d8, #a286b9);
+    --g-lav-purple: linear-gradient(135deg, #a286b9, #4c2e76);
+    --line: rgba(162, 134, 185, 0.25);
+    --card-shadow: 0 4px 40px rgba(162, 134, 185, 0.12);
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    background: var(--off-white); color: var(--black);
+    -webkit-font-smoothing: antialiased; line-height: 1.55;
+  }
+  h1, h2, .tier-name, .price { font-family: 'Clash Display', 'Montserrat', system-ui, sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  .topbar { padding: 20px 0; }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .topbar img { height: 34px; display: block; }
+  .topbar a.back { color: var(--purple); font-weight: 600; font-size: 0.9rem; text-decoration: none; }
+
+  header { padding: 40px 0 32px; text-align: center; }
+  h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; line-height: 1.15; margin: 0 0 12px;
+    background: var(--g-blue-lav); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub { color: var(--meta); font-size: 1.05rem; font-weight: 500; max-width: 560px; margin: 0 auto; }
+
+  section { padding-top: 56px; }
+  h2 { font-size: 1.6rem; font-weight: 700; margin: 0 0 6px; text-align: center; }
+  .section-sub { text-align: center; color: var(--meta); font-weight: 500; margin: 0 0 28px; }
+
+  /* Packages */
+  .tiers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .tiers { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .tiers { grid-template-columns: 1fr; } }
+  .tier {
+    background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--card-shadow); padding: 22px 18px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .tier-name { font-size: 1.1rem; font-weight: 600; color: var(--purple); }
+  .price { font-size: 1.7rem; font-weight: 700; line-height: 1.2; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .price small { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 500; color: var(--meta); }
+  .mins { color: var(--meta); font-size: 0.88rem; font-weight: 500; }
+  .tier a {
+    margin-top: auto; padding-top: 16px; text-decoration: none;
+  }
+  .tier a span {
+    display: flex; justify-content: center; align-items: center; height: 42px; border-radius: 6px;
+    background: var(--g-lav-purple); color: var(--white); font-weight: 600; font-size: 0.9rem;
+  }
+  .tier a.ghost span { background: transparent; color: var(--purple); border: 1px solid var(--lavender); }
+
+  /* Features table */
+  .shell { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--card-shadow); overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.9rem; }
+  th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line); }
+  thead th { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); background: var(--off-white); }
+  tbody th { font-weight: 600; position: sticky; left: 0; background: var(--white); min-width: 170px; }
+  tr:last-child th, tr:last-child td { border-bottom: none; }
+  .y { color: var(--purple); font-weight: 700; }
+  .n { color: var(--meta); }
+
+  /* Extra minutes */
+  .bundles { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .bundle {
+    background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 20px; font-weight: 700; color: var(--purple);
+  }
+  .rules { max-width: 520px; margin: 24px auto 0; padding-left: 20px; display: grid; gap: 6px; }
+  .rules li::marker { color: var(--lavender); }
+
+  .note { text-align: center; color: var(--meta); font-size: 0.85rem; font-weight: 500; margin-top: 24px; }
+  footer { margin-top: 72px; padding: 32px 0; text-align: center; color: var(--meta); font-size: 0.8rem; font-weight: 500; }
+  a:focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <a href="/"><img src="/Dattivox - logo.svg" alt="Dattivox" /></a>
+      <a class="back" href="/">← Back to dattivox.com</a>
+    </div>
+  </div>
+
+  <header class="wrap">
+    <h1>Pricing</h1>
+    <p class="sub">Pick the package that fits your call volume. Need more minutes later? Add a bundle at any time.</p>
+  </header>
+
+  <main class="wrap">
+
+    <section style="padding-top:0" aria-labelledby="packages">
+      <h2 id="packages" hidden>Packages</h2>
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-name">Starter</div>
+          <div class="price">€86 <small>/ month</small></div>
+          <div class="mins">110 minutes included</div>
+          <a href="/#contact-section"><span>Get started</span></a>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Pro</div>
+          <div class="price">€97 <small>/ month</small></div>
+          <div class="mins">300 minutes included</div>
+          <a href="/#contact-section"><span>Get started</span></a>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Business</div>
+          <div class="price"><small>from</small> €178,50 <small>/ month</small></div>
+          <div class="mins">750 minutes included</div>
+          <a href="/#contact-section"><span>Get a quote</span></a>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Scale</div>
+          <div class="price">Talk to us</div>
+          <div class="mins">1 800 minutes included</div>
+          <a class="ghost" href="/#contact-section"><span>Book a call</span></a>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Enterprise</div>
+          <div class="price">Talk to us</div>
+          <div class="mins">6 000 minutes included</div>
+          <a class="ghost" href="/#contact-section"><span>Book a call</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="features">
+      <h2 id="features">What is in each package</h2>
+      <p class="section-sub">Every package answers your calls 24/7 in Dutch, French, English and German.</p>
+      <div class="shell">
+        <table>
+          <thead><tr><th><span hidden>Feature</span></th><th>Starter</th><th>Pro</th><th>Business</th><th>Scale</th><th>Enterprise</th></tr></thead>
+          <tbody>
+            <tr><th>AI answers calls 24/7</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+            <tr><th>Appointment booking</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+            <tr><th>CRM integration</th><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+            <tr><th>Sentiment analysis</th><td class="n">—</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+            <tr><th>AI trained on your calls</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+            <tr><th>Single Sign-On</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+            <tr><th>Account manager</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+            <tr><th>Data kept for</th><td>3 months</td><td>3 months</td><td>3 months</td><td>12 months</td><td>24 months</td></tr>
+            <tr><th>Support</th><td>Email</td><td>Email</td><td>Hotline</td><td>Hotline</td><td>SLA</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="minutes">
+      <h2 id="minutes">Need more minutes? Buy a bundle.</h2>
+      <p class="section-sub">Bundles can be added to any package. They add minutes only.</p>
+      <div class="bundles">
+        <span class="bundle">20 min</span><span class="bundle">50 min</span><span class="bundle">100 min</span>
+        <span class="bundle">250 min</span><span class="bundle">500 min</span><span class="bundle">1 000 min</span>
+      </div>
+      <ul class="rules">
+        <li>Your package's own minutes are used first.</li>
+        <li>Bundle minutes are valid for 12 months.</li>
+        <li>Without a bundle, extra minutes cost €2,00 each.</li>
+        <li>Bundle prices are included in your quote.</li>
+      </ul>
+      <p class="note">All prices in EUR, excluding VAT. Hosted in the EU.</p>
+    </section>
+
+  </main>
+
+  <footer>Dattivox &middot; by Dattico</footer>
+
+</body>
+</html>

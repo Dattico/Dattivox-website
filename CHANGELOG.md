@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+- Public pricing page at `/pricing` (`public/pricing/index.html`) using "from" pricing: Starter and Pro prices, "from €178,50" for Business, "Talk to us" for Scale/Enterprise, a ✓/— feature table per package, and extra minute bundles (sizes only; prices go in the quote). Scale/Enterprise prices, setup fees and bundle prices stay out of the public page and in proposals.
+- "Pricing" link in the header nav (`MunicipalityDemo.jsx`, `brand.nav.pricing` in en/fr/nl) and a sitemap entry for the page.
+
 ### Changed
 - Team section now loads the team from www.dattico.com (`/api/team`, via new `src/hooks/useTeam.js`) instead of hardcoding it, so the team is maintained only in the dattico-website repo (`src/data/team.json`). Cards show only the dattico avatar, name and role (no quotes or bios), in a compact centered layout — one row of five on desktop, two per row on phones (`MunicipalityDemo.jsx`/`.css`). If the feed can't be reached, only the section title and subtitle are shown. The feed URL can be overridden with `VITE_TEAM_URL`.
 

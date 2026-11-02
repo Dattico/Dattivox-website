@@ -607,6 +607,7 @@ const MunicipalityDemo = () => {
             <button className="brand-nav-link" onClick={() => scrollToSection('journey')}>{t('brand.nav.product')}</button>
             <button className="brand-nav-link" onClick={() => scrollToSection('industries')}>{t('brand.nav.industries')}</button>
             <button className="brand-nav-link" onClick={() => scrollToSection('journey-proof')}>{t('brand.nav.customers')}</button>
+            <a className="brand-nav-link" href="/pricing">{t('brand.nav.pricing')}</a>
             <a className="brand-nav-link" href="#">{t('brand.nav.resources')}</a>
             <button className="brand-nav-link" onClick={() => scrollToSection('about')}>{t('brand.nav.about')}</button>
           </nav>
