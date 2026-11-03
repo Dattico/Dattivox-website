@@ -153,18 +153,20 @@ const OctoplanDemo = forwardRef((props, ref) => {
     let isPlayingAudio = false;
     let nextPlayTime = 0;
     let currentAudioNode = null; // Référence locale au node audio en cours
+    const scheduledNodes = new Set(); // Chunks programmés et pas encore terminés
 
       // ✅ Fonction pour arrêter la lecture audio (interruption)
       const stopAudioPlayback = () => {
-        if (currentAudioNodeRef.current) {
+        for (const node of scheduledNodes) {
           try {
-            currentAudioNodeRef.current.stop();
-            currentAudioNodeRef.current.disconnect();
-            currentAudioNodeRef.current = null;
+            node.stop();
+            node.disconnect();
           } catch (error) {
             // Le node peut déjà être arrêté, ignorer l'erreur
           }
         }
+        scheduledNodes.clear();
+        currentAudioNodeRef.current = null;
         // Vider la queue
         audioQueueRef.current = [];
         isPlayingAudioRef.current = false;
@@ -245,6 +247,8 @@ const OctoplanDemo = forwardRef((props, ref) => {
       // const wsUrl = `wss://35.158.76.206:3000/demo?lang=${language}`;
 
       socket = new WebSocket(wsUrl);
+      // ArrayBuffer, not Blob: awaiting Blob.arrayBuffer() per message can reorder the chunks.
+      socket.binaryType = 'arraybuffer';
       socketRef.current = socket; // Stocker dans ref
       
       // Mettre à jour l'état
@@ -284,46 +288,44 @@ const OctoplanDemo = forwardRef((props, ref) => {
       };
 
       // ✅ Fonction pour jouer la queue audio séquentiellement
+      // Each chunk is scheduled on the audio clock as soon as it arrives, right after the
+      // previous one. Waiting for onended before starting the next left a gap at every chunk.
       const playAudioQueue = () => {
-        // Si on est déjà en train de jouer ou si la queue est vide, ne rien faire
-        if (isPlayingAudioRef.current || audioQueueRef.current.length === 0) {
-          return;
+        while (audioQueueRef.current.length > 0) {
+          const audioBuffer = audioQueueRef.current.shift(); // Prendre le premier élément de la queue
+
+          const playNode = audioContext.createBufferSource();
+          playNode.buffer = audioBuffer;
+
+          // Créer un GainNode pour contrôler le volume
+          const gainNode = audioContext.createGain();
+          gainNode.gain.value = 1.0; // Volume à 100%
+
+          playNode.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+
+          // Enchaîner sans trou; au redémarrage, une petite avance absorbe la gigue réseau
+          const currentTime = audioContext.currentTime;
+          const startTime = nextPlayTime > currentTime ? nextPlayTime : currentTime + 0.05;
+
+          playNode.start(startTime);
+
+          // Mettre à jour le temps de la prochaine lecture
+          nextPlayTime = startTime + audioBuffer.duration;
+
+          // ✅ Stocker la référence au node audio pour pouvoir l'arrêter
+          scheduledNodes.add(playNode);
+          currentAudioNodeRef.current = playNode;
+          isPlayingAudioRef.current = true;
+
+          playNode.onended = () => {
+            scheduledNodes.delete(playNode);
+            if (scheduledNodes.size === 0) {
+              isPlayingAudioRef.current = false;
+              currentAudioNodeRef.current = null; // ✅ Nettoyer la référence
+            }
+          };
         }
-
-        isPlayingAudioRef.current = true;
-        const audioBuffer = audioQueueRef.current.shift(); // Prendre le premier élément de la queue
-
-        const playNode = audioContext.createBufferSource();
-        playNode.buffer = audioBuffer;
-
-        // ✅ Stocker la référence au node audio pour pouvoir l'arrêter
-        currentAudioNodeRef.current = playNode;
-
-        // Créer un GainNode pour contrôler le volume
-        const gainNode = audioContext.createGain();
-        gainNode.gain.value = 1.0; // Volume à 100%
-
-        playNode.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-
-        // Calculer le temps de début (enchaîner les chunks)
-        const currentTime = audioContext.currentTime;
-        const startTime = Math.max(currentTime, nextPlayTime);
-
-        playNode.start(startTime);
-
-        // Mettre à jour le temps de la prochaine lecture
-        nextPlayTime = startTime + audioBuffer.duration;
-
-        // Quand ce chunk est terminé, jouer le suivant
-        playNode.onended = () => {
-          isPlayingAudioRef.current = false;
-          currentAudioNodeRef.current = null; // ✅ Nettoyer la référence
-          // Jouer le chunk suivant s'il y en a un
-          if (audioQueueRef.current.length > 0) {
-            playAudioQueue();
-          }
-        };
       };
 
       // When server sends back audio (binary PCM) or test messages
@@ -399,15 +401,7 @@ const OctoplanDemo = forwardRef((props, ref) => {
         }
 
         // ✅ Nettoyer la queue audio
-        if (currentAudioNodeRef.current) {
-          try {
-            currentAudioNodeRef.current.stop();
-            currentAudioNodeRef.current.disconnect();
-          } catch (e) {}
-          currentAudioNodeRef.current = null;
-        }
-        audioQueueRef.current = [];
-        isPlayingAudioRef.current = false;
+        stopAudioPlayback();
       };
     } catch (error) {
       // Audio setup failed
