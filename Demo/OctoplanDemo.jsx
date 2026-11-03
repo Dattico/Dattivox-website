@@ -173,15 +173,6 @@ const OctoplanDemo = forwardRef((props, ref) => {
         nextPlayTime = 0;
       };
 
-    // ✅ Fonction pour calculer le volume RMS (détection de voix)
-    const calculateRMS = (audioData) => {
-      let sum = 0;
-      for (let i = 0; i < audioData.length; i++) {
-        sum += audioData[i] * audioData[i];
-      }
-      return Math.sqrt(sum / audioData.length);
-    };
-
     try {
       // 1. Ask politely for mic access
       mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -203,15 +194,8 @@ const OctoplanDemo = forwardRef((props, ref) => {
           // Récupérer les données audio (Float32Array, valeurs entre -1 et 1)
           const inputData = e.inputBuffer.getChannelData(0);
 
-          // ✅ Détecter si l'utilisateur parle (interruption)
-          if (isPlayingAudioRef.current) {
-            const rms = calculateRMS(inputData);
-            const voiceThreshold = 0.01; // Seuil de détection de voix (ajustable)
-
-            if (rms > voiceThreshold) {
-              stopAudioPlayback();
-            }
-          }
+          // Interruptions are detected by the server's speech detection, which sends 'clear'.
+          // A mic-level check here also fired on room noise and the bot's own echo.
 
           // Convertir Float32 (-1 à 1) en Int16 PCM (16-bit)
           const pcmData = new Int16Array(inputData.length);
@@ -333,7 +317,10 @@ const OctoplanDemo = forwardRef((props, ref) => {
         // Vérifier si c'est un message de test texte
         if (typeof event.data === 'string' || (event.data instanceof Blob && event.data.size < 100)) {
           const text = typeof event.data === 'string' ? event.data : await event.data.text();
-          if (text === 'CONNECTION_ESTABLISHED' || text === 'test') {
+          if (text === 'clear') {
+            // The caller interrupted: drop everything still queued
+            stopAudioPlayback();
+          } else if (text === 'CONNECTION_ESTABLISHED' || text === 'test') {
             // Server connection confirmed
           }
           return; // Ne pas traiter les messages de test comme de l'audio
