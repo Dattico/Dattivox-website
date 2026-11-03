@@ -4,6 +4,7 @@
 
 ### Changed
 - Pricing page is now unlisted, reachable only by direct link: removed the "Pricing" header nav link (`MunicipalityDemo.jsx`, `brand.nav.pricing` in en/fr/nl), removed `/pricing` from `public/sitemap.xml`, and added `<meta name="robots" content="noindex, nofollow">` to `public/pricing/index.html`.
+- Pricing page now shows the price of each extra-minute bundle (20 min €2,00 … 1 000 min €100,00, €0,10/min), copied exactly from the bundles section of `src/utils/pricing.html`; dropped the "bundle prices are included in your quote" line.
 
 ### Added
 - Public pricing page at `/pricing` (`public/pricing/index.html`) using "from" pricing: Starter and Pro prices, "from €178,50" for Business, "Talk to us" for Scale/Enterprise, a ✓/— feature table per package, and extra minute bundles (sizes only; prices go in the quote). Scale/Enterprise prices, setup fees and bundle prices stay out of the public page and in proposals.
